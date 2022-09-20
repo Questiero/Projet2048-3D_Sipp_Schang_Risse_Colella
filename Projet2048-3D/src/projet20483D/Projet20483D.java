@@ -8,19 +8,19 @@ public class Projet20483D implements Parametres {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         Grille g = new Grille();
         boolean b = g.nouvelleCase();
 
         Scanner sc = new Scanner(System.in);
 
         while (!g.partieFinie()) {
-            
+
             System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), ou Bas (s) ?");
-            
+
             String s = sc.nextLine();
             s.toLowerCase();
-            
+
             if (!(s.equals("d") || s.equals("droite")
                     || s.equals("q") || s.equals("gauche")
                     || s.equals("z") || s.equals("haut")
@@ -29,10 +29,11 @@ public class Projet20483D implements Parametres {
             } else {
                 Direction direction;
                 if (s.equals("d") || s.equals("droite")) {
-                } else if (s.equals("z") || s.equals("haut")) {
                     direction = Direction.RIGHT;
-                } else if (s.equals("q") || s.equals("gauche")) {
+                } else if (s.equals("z") || s.equals("haut")) {
                     direction = Direction.UP;
+
+                } else if (s.equals("q") || s.equals("gauche")) {
                     direction = Direction.LEFT;
                 } else {
                     direction = Direction.DOWN;
@@ -50,9 +51,8 @@ public class Projet20483D implements Parametres {
                 }
             }
         }
-        
+
         g.gameOver();
 
     }
 }
-
