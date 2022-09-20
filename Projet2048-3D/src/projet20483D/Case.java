@@ -62,8 +62,8 @@ public class Case implements Parametres {
         }
     }
 
-    public Case getVoisinDirect(int direction) {
-        if (direction == HAUT) {
+    public Case getVoisinDirect(Direction direction) {
+        if (direction == Direction.UP) {
             for (int i = this.y - 1; i >= 0; i--) {
                 for (Case c : grille.getGrille()) {
                     if (c.getX() == this.x && c.getY() == i) {
@@ -71,7 +71,7 @@ public class Case implements Parametres {
                     }
                 }
             }
-        } else if (direction == BAS) {
+        } else if (direction == Direction.DOWN) {
             for (int i = this.y + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
                     if (c.getX() == this.x && c.getY() == i) {
@@ -79,7 +79,7 @@ public class Case implements Parametres {
                     }
                 }
             }
-        } else if (direction == GAUCHE) {
+        } else if (direction == Direction.LEFT) {
             for (int i = this.x - 1; i >= 0; i--) {
                 for (Case c : grille.getGrille()) {
                     if (c.getX() == i && c.getY() == this.y) {
@@ -87,7 +87,7 @@ public class Case implements Parametres {
                     }
                 }
             }
-        } else if (direction == DROITE) {
+        } else if (direction == Direction.RIGHT) {
             for (int i = this.x + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
                     if (c.getX() == i && c.getY() == this.y) {

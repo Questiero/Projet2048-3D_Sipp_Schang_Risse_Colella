@@ -27,15 +27,15 @@ public class Projet20483D implements Parametres {
                     || s.equals("b") || s.equals("bas"))) {
                 System.out.println("Vous devez écrire d pour Droite, g pour Gauche, h pour Haut ou b pour Bas");
             } else {
-                int direction;
+                Direction direction;
                 if (s.equals("d") || s.equals("droite")) {
-                    direction = DROITE;
+                    direction = Direction.RIGHT;
                 } else if (s.equals("g") || s.equals("gauche")) {
-                    direction = GAUCHE;
+                    direction = Direction.LEFT;
                 } else if (s.equals("h") || s.equals("haut")) {
-                    direction = HAUT;
+                    direction = Direction.UP;
                 } else {
-                    direction = BAS;
+                    direction = Direction.DOWN;
                 }
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {

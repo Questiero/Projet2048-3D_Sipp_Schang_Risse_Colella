@@ -54,9 +54,10 @@ public class Grille implements Parametres {
             return false;
         } else {
             for (Case c : this.grille) {
+                Direction[] directions = {Direction.UP, Direction.RIGHT};
                 for (int i = 1; i <= 2; i++) {
-                    if (c.getVoisinDirect(i) != null) {
-                        if (c.valeurEgale(c.getVoisinDirect(i))) {
+                    if (c.getVoisinDirect(directions[i]) != null) {
+                        if (c.valeurEgale(c.getVoisinDirect(directions[i]))) {
                             return false;
                         }
                     }
@@ -66,21 +67,21 @@ public class Grille implements Parametres {
         return true;
     }
 
-    public boolean lanceurDeplacerCases(int direction) {
+    public boolean lanceurDeplacerCases(Direction direction) {
         Case[] extremites = this.getCasesExtremites(direction);
         deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
         for (int i = 0; i < TAILLE; i++) {
             switch (direction) {
-                case HAUT:
+                case UP:
                     this.deplacerCasesRecursif(extremites, i, direction, 0);
                     break;
-                case BAS:
+                case DOWN:
                     this.deplacerCasesRecursif(extremites, i, direction, 0);
                     break;
-                case GAUCHE:
+                case LEFT:
                     this.deplacerCasesRecursif(extremites, i, direction, 0);
                     break;
-                default:
+                case RIGHT:
                     this.deplacerCasesRecursif(extremites, i, direction, 0);
                     break;
             }
@@ -96,35 +97,35 @@ public class Grille implements Parametres {
         deplacement = true;
     }
 
-    private void deplacerCasesRecursif(Case[] extremites, int rangee, int direction, int compteur) {
+    private void deplacerCasesRecursif(Case[] extremites, int rangee, Direction direction, int compteur) {
         if (extremites[rangee] != null) {
-            if ((direction == HAUT && extremites[rangee].getY() != compteur)
-                    || (direction == BAS && extremites[rangee].getY() != TAILLE - 1 - compteur)
-                    || (direction == GAUCHE && extremites[rangee].getX() != compteur)
-                    || (direction == DROITE && extremites[rangee].getX() != TAILLE - 1 - compteur)) {
+            if ((direction == Direction.UP && extremites[rangee].getY() != compteur)
+                    || (direction == Direction.DOWN && extremites[rangee].getY() != TAILLE - 1 - compteur)
+                    || (direction == Direction.LEFT && extremites[rangee].getX() != compteur)
+                    || (direction == Direction.RIGHT && extremites[rangee].getX() != TAILLE - 1 - compteur)) {
                 this.grille.remove(extremites[rangee]);
                 switch (direction) {
-                    case HAUT:
+                    case UP:
                         extremites[rangee].setY(compteur);
                         break;
-                    case BAS:
+                    case DOWN:
                         extremites[rangee].setY(TAILLE - 1 - compteur);
                         break;
-                    case GAUCHE:
+                    case LEFT:
                         extremites[rangee].setX(compteur);
                         break;
-                    default:
+                    case RIGHT:
                         extremites[rangee].setX(TAILLE - 1 - compteur);
                         break;
                 }
                 this.grille.add(extremites[rangee]);
                 deplacement = true;
             }
-            Case voisin = extremites[rangee].getVoisinDirect(-direction);
+            Case voisin = extremites[rangee].getVoisinDirect(direction.opposite());
             if (voisin != null) {
                 if (extremites[rangee].valeurEgale(voisin)) {
                     this.fusion(extremites[rangee]);
-                    extremites[rangee] = voisin.getVoisinDirect(-direction);
+                    extremites[rangee] = voisin.getVoisinDirect(direction.opposite());
                     this.grille.remove(voisin);
                     this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
                 } else {
@@ -142,26 +143,26 @@ public class Grille implements Parametres {
     * Si direction = GAUCHE : retourne les 4 cases qui sont le plus à gauche (une pour chaque ligne)
     * Attention : le tableau retourné peut contenir des null si les lignes/colonnes sont vides
      */
-    public Case[] getCasesExtremites(int direction) {
+    public Case[] getCasesExtremites(Direction direction) {
         Case[] result = new Case[TAILLE];
         for (Case c : this.grille) {
             switch (direction) {
-                case HAUT:
+                case UP:
                     if ((result[c.getX()] == null) || (result[c.getX()].getY() > c.getY())) { // si on n'avait pas encore de case pour cette rangée ou si on a trouvé un meilleur candidat
                         result[c.getX()] = c;
                     }
                     break;
-                case BAS:
+                case DOWN:
                     if ((result[c.getX()] == null) || (result[c.getX()].getY() < c.getY())) {
                         result[c.getX()] = c;
                     }
                     break;
-                case GAUCHE:
+                case LEFT:
                     if ((result[c.getY()] == null) || (result[c.getY()].getX() > c.getX())) {
                         result[c.getY()] = c;
                     }
                     break;
-                default:
+                case RIGHT:
                     if ((result[c.getY()] == null) || (result[c.getY()].getX() < c.getX())) {
                         result[c.getY()] = c;
                     }
