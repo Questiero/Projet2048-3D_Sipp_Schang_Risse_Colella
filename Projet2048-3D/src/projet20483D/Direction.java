@@ -1,5 +1,7 @@
 package projet20483D;
 
+import java.util.Random;
+
 public enum Direction {
     UP,
     LEFT,
@@ -7,6 +9,7 @@ public enum Direction {
     RIGHT,
     BACK,
     FRONT;
+    
     
     public Direction opposite() {
         
@@ -28,5 +31,31 @@ public enum Direction {
         return null;
         
     }
+    
+    public Direction dirRandom(){
+        Random ra = new Random();
+        int nbRandom = ra.nextInt(6);
+                System.out.println(nbRandom);
+        
+        switch (nbRandom){
+            case 0:
+                return DOWN;
+            case 1:
+                return RIGHT;
+            case 2:
+                return UP;
+            case 3:
+                return LEFT;
+            case 4:
+                return FRONT;
+            case 5:
+                return BACK;
+        }
+
+        return null;
+        
+    }
+    
+    
     
 }
