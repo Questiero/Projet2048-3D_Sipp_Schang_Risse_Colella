@@ -2,12 +2,14 @@ package projet20483D;
 
 public class Case implements Parametres {
 
-    private int x, y, valeur;
+    private int x, y, z, valeur;
     private Grille grille;
+    private Grille3D grille3D;
 
-    public Case(int abs, int ord, int v) {
+    public Case(int abs, int ord, int v, int prof) {
         this.x = abs;
         this.y = ord;
+        this.z = prof;
         this.valeur = v;
     }
 
@@ -23,6 +25,10 @@ public class Case implements Parametres {
         return this.y;
     }
 
+    public int getZ() {
+        return z;
+    }
+    
     public void setX(int x) {
         this.x = x;
     }
@@ -30,6 +36,11 @@ public class Case implements Parametres {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void setZ(int z) {
+        this.z = z;
+    }
+    
 
     public void setValeur(int valeur) {
         this.valeur = valeur;
@@ -95,7 +106,15 @@ public class Case implements Parametres {
                     }
                 }
             }
-        }
+        } /*else if (direction == Direction.FRONT) {
+            for (int i = this.z + 1; i < 3; i++) {
+                for (Grille c : grille3D.getLayers()) {
+                    if (c.getX() == i && c.getY() == this.y) {
+                        return c;
+                    }
+                }
+            }
+        }*/
         return null;
     }
 

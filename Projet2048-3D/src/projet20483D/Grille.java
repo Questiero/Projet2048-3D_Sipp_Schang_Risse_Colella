@@ -23,15 +23,15 @@ public class Grille implements Parametres {
         }
         String result = "";
         for (int i = 0; i < tableau.length; i++) {
-            result+="[";
-            for (int j = 0; j < tableau.length-1; j++) {
-                result += String.format("%4d,", tableau[i][j]); 
+            result += "[";
+            for (int j = 0; j < tableau.length - 1; j++) {
+                result += String.format("%4d,", tableau[i][j]);
             }
-            result += String.format("%4d]\n", tableau[i][tableau.length-1]);
+            result += String.format("%4d]\n", tableau[i][tableau.length - 1]);
         }
         return result;
     }
-    
+
     public String toHTML() {
         int[][] tableau = new int[TAILLE][TAILLE];
         for (Case c : this.grille) {
@@ -194,9 +194,12 @@ public class Grille implements Parametres {
             // on crée toutes les cases encore libres
             for (int x = 0; x < TAILLE; x++) {
                 for (int y = 0; y < TAILLE; y++) {
-                    Case c = new Case(x, y, valeur);
-                    if (!this.grille.contains(c)) { // contains utilise la méthode equals dans Case
-                        casesLibres.add(c);
+                    for (int z = 0; z < 3; z++) {
+                        Case c = new Case(x, y, z, valeur);
+                        if (!this.grille.contains(c)) { // contains utilise la méthode equals dans Case
+                            casesLibres.add(c);
+                        }
+
                     }
                 }
             }
