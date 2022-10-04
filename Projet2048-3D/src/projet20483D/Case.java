@@ -76,7 +76,7 @@ public class Case implements Parametres {
         if (direction == Direction.UP) {
             for (int i = this.y - 1; i >= 0; i--) {
                 for (Case c : grille.getGrille()) {
-                    if (c.getX() == this.x && c.getY() == i) {
+                    if (c.getX() == this.x && c.getY() == i && c.getZ() == this.z) {
                         return c;
                     }
                 }
@@ -84,7 +84,7 @@ public class Case implements Parametres {
         } else if (direction == Direction.DOWN) {
             for (int i = this.y + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
-                    if (c.getX() == this.x && c.getY() == i) {
+                    if (c.getX() == this.x && c.getY() == i && c.getZ() == this.z) {
                         return c;
                     }
                 }
@@ -92,7 +92,7 @@ public class Case implements Parametres {
         } else if (direction == Direction.LEFT) {
             for (int i = this.x - 1; i >= 0; i--) {
                 for (Case c : grille.getGrille()) {
-                    if (c.getX() == i && c.getY() == this.y) {
+                    if (c.getX() == i && c.getY() == this.y && c.getZ() == this.z) {
                         return c;
                     }
                 }
@@ -100,7 +100,7 @@ public class Case implements Parametres {
         } else if (direction == Direction.RIGHT) {
             for (int i = this.x + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
-                    if (c.getX() == i && c.getY() == this.y) {
+                    if (c.getX() == i && c.getY() == this.y && c.getZ() == this.z) {
                         return c;
                     }
                 }
@@ -108,7 +108,7 @@ public class Case implements Parametres {
         } else if (direction == Direction.FRONT) {
             for (int i = this.z + 1; i >= 0; i--) {
                 for (Case c : grille.getGrille()) {
-                    if (c.getZ() == i && c.getZ() == this.z) {
+                    if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
                         return c;
                     }
                 }
@@ -116,7 +116,7 @@ public class Case implements Parametres {
         } else if (direction == Direction.BACK) {
             for (int i = this.z + 1; i < ETAGES; i++) {
                 for (Case c : grille.getGrille()) {
-                    if (c.getZ() == i && c.getZ() == this.z) {
+                   if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
                         return c;
                     }
                 }
