@@ -35,13 +35,31 @@ public class Grille3D implements Parametres {
     }
 
     public boolean partieFinie() {
-        //TODO
+        // Pas sûr sûr que ça marche, si il y a des bugs c'est sûrement ici
+        if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
+            return false;
+        } else {
+            for (Case c : this.grille) {
+                Direction[] directions = {Direction.UP, Direction.RIGHT};
+                for (int i = 1; i <= 2; i++) {
+                    if (c.getVoisinDirect(directions[i]) != null) {
+                        if (c.valeurEgale(c.getVoisinDirect(directions[i]))) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
         return true;
     }
 
     public boolean lanceurDeplacerCases(Direction direction) {
-        //TODO
-        return true;
+        Case[][] extremites = this.getCasesExtremites(direction);
+        deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
+        for (int i = 0; i < TAILLE; i++) {
+            this.deplacerCasesRecursif(extremites, i, direction, 0);
+        }
+        return deplacement;
     }
 
     private void fusion(Case c) {
@@ -52,13 +70,47 @@ public class Grille3D implements Parametres {
         deplacement = true;
     }
 
-    private void deplacerCasesRecursif(Case[] extremites, int rangee, Direction direction, int compteur) {
+    private void deplacerCasesRecursif(Case[][] extremites, int rangee, Direction direction, int compteur) {
         //TODO
     }
 
-    public Case[] getCasesExtremites(Direction direction) {
-        //TODO
-        return null;
+    public Case[][] getCasesExtremites(Direction direction) {
+        Case[][] result = new Case[TAILLE][TAILLE];
+        for (Case c : this.grille) {
+            switch (direction) {
+                case UP:
+                    if ((result[c.getX()][c.getZ()] == null) || (result[c.getX()][c.getZ()].getY() > c.getY())) { // si on n'avait pas encore de case pour cette rangée ou si on a trouvé un meilleur candidat
+                        result[c.getX()][c.getZ()] = c;
+                    }
+                    break;
+                case DOWN:
+                    if ((result[c.getX()][c.getZ()] == null) || (result[c.getX()][c.getZ()].getY() < c.getY())) {
+                        result[c.getX()][c.getZ()] = c;
+                    }
+                    break;
+                case LEFT:
+                    if ((result[c.getY()][c.getZ()] == null) || (result[c.getY()][c.getZ()].getX() > c.getX())) {
+                        result[c.getY()][c.getZ()] = c;
+                    }
+                    break;
+                case RIGHT:
+                    if ((result[c.getY()][c.getZ()] == null) || (result[c.getY()][c.getZ()].getX() < c.getX())) {
+                        result[c.getY()][c.getZ()] = c;
+                    }
+                    break;
+                case FRONT:
+                    if ((result[c.getX()][c.getY()] == null) || (result[c.getX()][c.getY()].getZ() > c.getZ())) {
+                        result[c.getX()][c.getY()] = c;
+                    }
+                    break;
+                case BACK:
+                    if ((result[c.getX()][c.getY()] == null) || (result[c.getX()][c.getY()].getZ() < c.getZ())) {
+                        result[c.getX()][c.getY()] = c;
+                    }
+                    break;
+            }
+        }
+        return result;
     }
 
     public void victory() {
