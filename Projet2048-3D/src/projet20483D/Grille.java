@@ -23,10 +23,11 @@ public class Grille implements Parametres {
         }
         String result = "";
         for (int i = 0; i < tableau.length; i++) {
-            for (int j = 0; j < tableau.length; j++) {
-                result += String.format("[%5d", tableau[i][j]) + "]"; 
+            result+="[";
+            for (int j = 0; j < tableau.length-1; j++) {
+                result += String.format("%4d,", tableau[i][j]); 
             }
-            result += "\n";
+            result += String.format("%4d]\n", tableau[i][tableau.length-1]);
         }
         return result;
     }
