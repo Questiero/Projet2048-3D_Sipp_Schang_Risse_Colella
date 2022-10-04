@@ -3,8 +3,7 @@ package projet20483D;
 public class Case implements Parametres {
 
     private int x, y, z, valeur;
-    private Grille grille;
-    private Grille3D grille3D;
+    private Grille3D grille;
 
     public Case(int abs, int ord, int v, int prof) {
         this.x = abs;
@@ -13,7 +12,7 @@ public class Case implements Parametres {
         this.valeur = v;
     }
 
-    public void setGrille(Grille g) {
+    public void setGrille(Grille3D g) {
         this.grille = g;
     }
 
@@ -26,7 +25,7 @@ public class Case implements Parametres {
     }
 
     public int getZ() {
-        return z;
+        return this.z;
     }
     
     public void setX(int x) {
@@ -54,7 +53,7 @@ public class Case implements Parametres {
     public boolean equals(Object obj) { // la méthode equals est utilisée lors de l'ajout d'une case à un ensemble pour vérifier qu'il n'y a pas de doublons (teste parmi tous les candidats qui ont le même hashcode)
         if (obj instanceof Case) {
             Case c = (Case) obj;
-            return (this.x == c.x && this.y == c.y);
+            return (this.x == c.x && this.y == c.y && this.z == c.z);
         } else {
             return false;
         }
@@ -62,7 +61,7 @@ public class Case implements Parametres {
 
     @Override
     public int hashCode() { // détermine le hashcode
-        return this.x * 7 + this.y * 13;
+        return this.x * 7 + this.y * 13 + this.z * 29;
     }
 
     public boolean valeurEgale(Case c) {
@@ -106,21 +105,29 @@ public class Case implements Parametres {
                     }
                 }
             }
-        } /*else if (direction == Direction.FRONT) {
-            for (int i = this.z + 1; i < 3; i++) {
-                for (Grille c : grille3D.getLayers()) {
-                    if (c.getX() == i && c.getY() == this.y) {
+        } else if (direction == Direction.FRONT) {
+            for (int i = this.z + 1; i >= 0; i--) {
+                for (Case c : grille.getGrille()) {
+                    if (c.getZ() == i && c.getZ() == this.z) {
                         return c;
                     }
                 }
             }
-        }*/
+        } else if (direction == Direction.BACK) {
+            for (int i = this.z + 1; i < ETAGES; i++) {
+                for (Case c : grille.getGrille()) {
+                    if (c.getZ() == i && c.getZ() == this.z) {
+                        return c;
+                    }
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public String toString() {
-        return "Case(" + this.x + "," + this.y + "," + this.valeur + ")";
+        return "Case(" + this.x + "," + this.y + "," + this.z + "," + this.valeur + ")";
     }
 
 }

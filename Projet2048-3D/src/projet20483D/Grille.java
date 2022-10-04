@@ -205,7 +205,7 @@ public class Grille implements Parametres {
             }
             // on en choisit une au hasard et on l'ajoute à la grille
             Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
-            ajout.setGrille(this);
+            ajout.setGrille(new Grille3D());
             System.out.println(ajout);
             this.grille.add(ajout);
             if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
