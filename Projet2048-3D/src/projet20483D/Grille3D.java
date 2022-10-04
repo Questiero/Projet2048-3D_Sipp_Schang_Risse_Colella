@@ -17,8 +17,24 @@ public class Grille3D implements Parametres {
 
     @Override
     public String toString() {
-        //TODO
-        return null;
+
+        int[][][] tableau = new int[TAILLE][TAILLE][ETAGES];
+        for (Case c : this.grille) {
+            tableau[c.getY()][c.getX()][c.getZ()] = c.getValeur();
+        }
+        String result = "";
+        for (int k = 0; k < ETAGES; k++) {
+            result += "--------------\n";
+            for (int i = 0; i < TAILLE; i++) {
+                result += "[";
+                for (int j = 0; j < TAILLE - 1; j++) {
+                    result += String.format("%4d,", tableau[i][j][k]);
+                }
+                result += String.format("%4d]\n", tableau[i][tableau.length - 1][k]);
+            }
+        }
+
+        return result;
     }
 
     public String toHTML() {
@@ -144,7 +160,6 @@ public class Grille3D implements Parametres {
             // on en choisit une au hasard et on l'ajoute à la grille
             Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
             ajout.setGrille(this);
-            System.out.println(ajout);
             this.grille.add(ajout);
             if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
                 this.valeurMax = ajout.getValeur();

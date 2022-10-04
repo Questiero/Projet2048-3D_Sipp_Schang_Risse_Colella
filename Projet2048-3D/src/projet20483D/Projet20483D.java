@@ -9,7 +9,7 @@ public class Projet20483D implements Parametres {
      */
     public static void main(String[] args) {
 
-        Grille g = new Grille();
+        Grille3D g = new Grille3D();
         boolean b = g.nouvelleCase();
 
         Scanner sc = new Scanner(System.in);
