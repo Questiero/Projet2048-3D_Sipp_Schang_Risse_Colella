@@ -5,11 +5,11 @@ public class Case implements Parametres {
     private int x, y, z, valeur;
     private Grille3D grille;
 
-    public Case(int abs, int ord, int v, int prof) {
+    public Case(int abs, int ord, int prof, int val) {
         this.x = abs;
         this.y = ord;
         this.z = prof;
-        this.valeur = v;
+        this.valeur = val;
     }
 
     public void setGrille(Grille3D g) {
