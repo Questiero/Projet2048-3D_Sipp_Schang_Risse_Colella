@@ -32,7 +32,7 @@ public enum Direction {
         
     }
     
-    public Direction dirRandom(){
+    public static Direction random(){
         Random ra = new Random();
         int nbRandom = ra.nextInt(6);
                 System.out.println(nbRandom);

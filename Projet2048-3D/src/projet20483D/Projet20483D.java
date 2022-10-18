@@ -47,7 +47,7 @@ public class Projet20483D implements Parametres {
                 } else if (s.equals("r") || s.equals("descendre")){
                     direction = Direction.BACK;
                 } else {
-                    direction = direction.dirRandom(); 
+                    direction = Direction.random(); 
                 }
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {
