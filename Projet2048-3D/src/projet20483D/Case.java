@@ -106,7 +106,7 @@ public class Case implements Parametres {
                 }
             }
         } else if (direction == Direction.FRONT) {
-            for (int i = this.z + 1; i > 0; i--) {
+            for (int i = this.z - 1; i >= 0; i--) {
                 for (Case c : grille.getGrille()) {
                     if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
                         return c;
