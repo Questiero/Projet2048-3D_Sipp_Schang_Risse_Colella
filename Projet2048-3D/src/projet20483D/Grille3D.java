@@ -84,7 +84,13 @@ public class Grille3D implements Parametres {
         Case[][] extremites = this.getCasesExtremites(direction);
         deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
         for (int i = 0; i < TAILLE; i++) {
-            this.deplacerCasesRecursif(extremites, i, direction, 0);
+            int secondD = ETAGES;
+            if (direction == Direction.FRONT || direction == Direction.BACK) {
+                secondD = TAILLE;
+            }
+            for (int j = 0; j < secondD; j++) {
+                this.deplacerCasesRecursif(extremites, i, j, direction, 0);
+            }
         }
         return deplacement;
     }
@@ -97,12 +103,64 @@ public class Grille3D implements Parametres {
         deplacement = true;
     }
 
-    private void deplacerCasesRecursif(Case[][] extremites, int rangee, Direction direction, int compteur) {
-        //TODO
+    private void deplacerCasesRecursif(Case[][] extremites, int firstD, int secondD, Direction direction, int compteur) {
+        if (extremites[firstD][secondD] != null) {
+            if ((direction == Direction.UP && extremites[firstD][secondD].getY() != compteur)
+                    || (direction == Direction.DOWN && extremites[firstD][secondD].getY() != TAILLE - 1 - compteur)
+                    || (direction == Direction.LEFT && extremites[firstD][secondD].getX() != compteur)
+                    || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
+                    || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
+                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur) ) {
+                this.grille.remove(extremites[firstD][secondD]);
+                switch (direction) {
+                    case UP:
+                        extremites[firstD][secondD].setY(compteur);
+                        break;
+                    case DOWN:
+                        extremites[firstD][secondD].setY(TAILLE - 1 - compteur);
+                        break;
+                    case LEFT:
+                        extremites[firstD][secondD].setX(compteur);
+                        break;
+                    case RIGHT:
+                        extremites[firstD][secondD].setX(TAILLE - 1 - compteur);
+                        break;
+                    case FRONT:
+                        extremites[firstD][secondD].setZ(compteur);
+                        break;
+                    case BACK:
+                        extremites[firstD][secondD].setZ(ETAGES - 1 - compteur);
+                        break;
+                }
+                this.grille.add(extremites[firstD][secondD]);
+                deplacement = true;
+            }
+            Case voisin = extremites[firstD][secondD].getVoisinDirect(direction.opposite());
+            if (voisin != null) {
+                if (extremites[firstD][secondD].valeurEgale(voisin)) {
+                    this.fusion(extremites[firstD][secondD]);
+                    extremites[firstD][secondD] = voisin.getVoisinDirect(direction.opposite());
+                    this.grille.remove(voisin);
+                    this.deplacerCasesRecursif(extremites, firstD, secondD, direction, compteur + 1);
+                } else {
+                    extremites[firstD][secondD] = voisin;
+                    this.deplacerCasesRecursif(extremites, firstD, secondD, direction, compteur + 1);
+                }
+            }
+        }
     }
 
     public Case[][] getCasesExtremites(Direction direction) {
-        Case[][] result = new Case[TAILLE][TAILLE];
+
+        Case[][] result = null;
+
+        if (direction == Direction.FRONT || direction == Direction.BACK) {
+            result = new Case[TAILLE][TAILLE];
+        } else {
+            result = new Case[TAILLE][ETAGES];
+        }
+
+        int compteur = 0;
         for (Case c : this.grille) {
             switch (direction) {
                 case UP:
