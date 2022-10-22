@@ -35,7 +35,6 @@ public enum Direction {
     public static Direction random(){
         Random ra = new Random();
         int nbRandom = ra.nextInt(6);
-                System.out.println(nbRandom);
         
         switch (nbRandom){
             case 0:

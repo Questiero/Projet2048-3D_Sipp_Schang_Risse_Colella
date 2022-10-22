@@ -23,14 +23,25 @@ public class Grille3D implements Parametres {
             tableau[c.getY()][c.getX()][c.getZ()] = c.getValeur();
         }
         String result = "";
-        for (int k = 0; k < ETAGES; k++) {
-            result += "--------------\n";
-            for (int i = 0; i < TAILLE; i++) {
+
+        for (int i = 0; i < TAILLE; i++) {
+            if (i != 0) {
+                result += "\n";
+
+            }
+            for (int k = 0; k < ETAGES; k++) {
                 result += "[";
                 for (int j = 0; j < TAILLE - 1; j++) {
                     result += String.format("%4d,", tableau[i][j][k]);
+
                 }
-                result += String.format("%4d]\n", tableau[i][tableau.length - 1][k]);
+                if (k == ETAGES - 1) {
+                    result += String.format("%4d]", tableau[i][tableau.length - 1][k]);
+                } else {
+                    result += String.format("%4d]\t\t", tableau[i][tableau.length - 1][k]);
+
+                }
+
             }
         }
 

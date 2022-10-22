@@ -18,7 +18,7 @@ public class Projet20483D implements Parametres {
             
             
 
-            System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter (f) ou Descendre (r)?\nDirection Aléatoire (a)");
+            System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (f) ou Descendre/Back (r), direction Aléatoire (a)");
 
             String s = sc.nextLine();
             s.toLowerCase();
@@ -56,7 +56,7 @@ public class Projet20483D implements Parametres {
                         g.gameOver();
                     }
                 }
-                System.out.println(g);
+                System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
                 if (g.getValeurMax() >= OBJECTIF) {
                     g.victory();
                 }
