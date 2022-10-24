@@ -8,34 +8,46 @@ public class Projet20483D implements Parametres {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        Grille g = new Grille();
+
+        Grille3D g = new Grille3D();
         boolean b = g.nouvelleCase();
 
         Scanner sc = new Scanner(System.in);
 
         while (!g.partieFinie()) {
             
-            System.out.println("Déplacer vers la Droite (d), Gauche (g), Haut (h), ou Bas (b) ?");
             
+
+            System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (f) ou Descendre/Back (r), direction Aléatoire (a)");
+
             String s = sc.nextLine();
             s.toLowerCase();
-            
+
             if (!(s.equals("d") || s.equals("droite")
-                    || s.equals("g") || s.equals("gauche")
-                    || s.equals("h") || s.equals("haut")
-                    || s.equals("b") || s.equals("bas"))) {
-                System.out.println("Vous devez écrire d pour Droite, g pour Gauche, h pour Haut ou b pour Bas");
+                    || s.equals("q") || s.equals("gauche")
+                    || s.equals("z") || s.equals("haut")
+                    || s.equals("r") || s.equals("monter")
+                    || s.equals("f") || s.equals("descendre")
+                    || s.equals("a") || s.equals("aléatoire") || s.equals("aleatoire")
+                    || s.equals("s") || s.equals("bas"))) {
+                System.out.println("Vous devez écrire d pour Droite, q pour Gauche, z pour Haut, s pour Bas, f pour Monter, r pour Descendre ou a pour Aleatoire");
             } else {
-                int direction;
+                Direction direction = Direction.RIGHT;
                 if (s.equals("d") || s.equals("droite")) {
-                    direction = DROITE;
-                } else if (s.equals("g") || s.equals("gauche")) {
-                    direction = GAUCHE;
-                } else if (s.equals("h") || s.equals("haut")) {
-                    direction = HAUT;
+                    direction = Direction.RIGHT;
+                } else if (s.equals("z") || s.equals("haut")) {
+                    direction = Direction.UP;
+
+                } else if (s.equals("q") || s.equals("gauche")) {
+                    direction = Direction.LEFT;
+                } else if (s.equals("s") || s.equals("bas")){
+                    direction = Direction.DOWN;
+                } else if (s.equals("r") || s.equals("monter")){
+                    direction = Direction.FRONT;
+                } else if (s.equals("f") || s.equals("descendre")){
+                    direction = Direction.BACK;
                 } else {
-                    direction = BAS;
+                    direction = Direction.random(); 
                 }
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {
@@ -44,15 +56,14 @@ public class Projet20483D implements Parametres {
                         g.gameOver();
                     }
                 }
-                System.out.println(g);
+                System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
                 if (g.getValeurMax() >= OBJECTIF) {
                     g.victory();
                 }
             }
         }
-        
+
         g.gameOver();
 
     }
 }
-
