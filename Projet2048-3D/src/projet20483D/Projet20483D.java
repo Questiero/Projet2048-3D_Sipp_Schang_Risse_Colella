@@ -15,8 +15,6 @@ public class Projet20483D implements Parametres {
         Scanner sc = new Scanner(System.in);
 
         while (!g.partieFinie()) {
-            
-            
 
             System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (f) ou Descendre/Back (r), direction Aléatoire (a)");
 
