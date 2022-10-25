@@ -6,6 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.FXMLController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="projet20483D.FXMLController">
+   <children>
+      <Button fx:id="test" layoutX="154.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#cliquer" text="Button" />
+   </children>
 </AnchorPane>
