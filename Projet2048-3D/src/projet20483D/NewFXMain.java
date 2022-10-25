@@ -11,10 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author questiero
- */
 public class NewFXMain extends Application {
 
     @Override
