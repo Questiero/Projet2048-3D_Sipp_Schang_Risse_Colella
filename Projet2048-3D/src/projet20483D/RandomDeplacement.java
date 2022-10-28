@@ -9,6 +9,6 @@ public class RandomDeplacement implements DeplacementStrategy {
     public Direction next() {
         Direction[] directionspossibles = Direction.values();
         Random ra = new Random();
-        return directionspossibles[ra.nextInt(4)];
+        return directionspossibles[ra.nextInt(6)];
     }
 }
