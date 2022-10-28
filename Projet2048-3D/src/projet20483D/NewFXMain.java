@@ -5,6 +5,7 @@
 package projet20483D;
 
 import java.io.IOException;
+import java.util.Set;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +24,7 @@ public class NewFXMain extends Application {
         boolean add = scene.getStylesheets().add("css/styles.css");
         stage.setScene(scene);
         stage.show();
+        
     }
 
     public static void main(String[] args) {
