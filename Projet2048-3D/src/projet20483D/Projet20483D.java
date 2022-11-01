@@ -1,6 +1,8 @@
 package projet20483D;
 
+import projet20483D.strategies.deplacements.RandomDeplacementStrategy;
 import java.util.Scanner;
+import projet20483D.strategies.deplacements.DeplacementContext;
 
 public class Projet20483D implements Parametres {
 
@@ -13,7 +15,7 @@ public class Projet20483D implements Parametres {
         boolean b = g.nouvelleCase();
 
         Scanner sc = new Scanner(System.in);
-        RandomDeplacement directionRandom = new RandomDeplacement();    //appel à la méthode next() 
+        DeplacementContext context = new DeplacementContext(new RandomDeplacementStrategy());
 
         while (!g.partieFinie()) {
 
@@ -46,7 +48,7 @@ public class Projet20483D implements Parametres {
                 } else if (s.equals("f") || s.equals("descendre")) {
                     direction = Direction.BACK;
                 } else {
-                    direction = directionRandom.next();
+                    direction = context.executeStrategy();
                 }
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {
