@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.PageJeuController">
+   <children>
+      <Pane id="fondPageJeu" prefHeight="873.0" prefWidth="1394.0">
+         <children>
+            <Button id="rightButton" layoutX="1157.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
+            <Button id="upButton" layoutX="1025.0" layoutY="452.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="▲" />
+            <Button id="leftButton" layoutX="893.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
+            <Button id="bottomButton" layoutX="1025.0" layoutY="703.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
+            <Button layoutX="1025.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="🔀">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button id="backButton" layoutX="935.0" layoutY="652.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -135;" text="▲" />
+            <Button id="frontButton" layoutX="1115.0" layoutY="494.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 45;" text="▲" />
+         </children></Pane>
+   </children>
+</AnchorPane>

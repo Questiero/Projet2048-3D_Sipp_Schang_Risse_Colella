@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="1394.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.FXMLController">
+   <children>
+      <Pane id="fondAccueil" prefHeight="873.0" prefWidth="1394.0">
+         <children>
+            <Button layoutX="583.0" layoutY="290.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="JOUER">
+               <font>
+                  <Font name="Consolas" size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="583.0" layoutY="399.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="CHARGER PARTIE">
+               <font>
+                  <Font size="25.0" />
+               </font></Button>
+            <Button layoutX="583.0" layoutY="516.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="PARAMETRES">
+               <font>
+                  <Font size="25.0" />
+               </font></Button>
+            <TextField layoutX="589.0" layoutY="123.0" prefHeight="79.0" prefWidth="216.0" style="-fx-text-fill: #776E65;" text="JEU 2048 3D">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </TextField>
+            <Button layoutX="583.0" layoutY="640.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="QUITTER">
+               <font>
+                  <Font name="Consolas" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
