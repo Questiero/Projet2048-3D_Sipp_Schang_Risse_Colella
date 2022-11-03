@@ -18,8 +18,9 @@ import javafx.stage.Stage;
  */
 public class NewFXMain extends Application {
 
+    @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageAccueil.fxml"));
         Scene scene = new Scene(root);
         boolean add = scene.getStylesheets().add("css/styles.css");
         stage.setScene(scene);
