@@ -42,7 +42,7 @@ public class PageAccueilController implements Initializable {
 
         //AJOUTER UNE PAGE DE REGLAGES DE LA PARTIE AVANT
         stage = (Stage) boutonJouer.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("pageJeu.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageJeu.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -56,7 +56,7 @@ public class PageAccueilController implements Initializable {
         Parent root;
 
         stage = (Stage) boutonQuitter.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageAccueil.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.close();
@@ -71,7 +71,7 @@ public class PageAccueilController implements Initializable {
         //A MODIF EN CREANT NOUVELLE PAGES POUR PARAMETTRE
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         stage = (Stage) boutonParametres.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageAccueil.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
