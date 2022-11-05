@@ -1,8 +1,10 @@
 package projet20483D;
 
-import projet20483D.strategies.deplacements.RandomDeplacementStrategy;
+import projet20483D.strategies.deplacements.RandomDeplacement;
 import java.util.Scanner;
 import projet20483D.strategies.deplacements.DeplacementContext;
+import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
+import projet20483D.strategies.deplacements.PMCTSDeplacement;
 
 public class Projet20483D implements Parametres {
 
@@ -11,15 +13,27 @@ public class Projet20483D implements Parametres {
      */
     public static void main(String[] args) {
 
-        Grille3D g = new Grille3D();
-        boolean b = g.nouvelleCase();
+        long initTime = System.currentTimeMillis();
 
         Scanner sc = new Scanner(System.in);
-        DeplacementContext context = new DeplacementContext(new RandomDeplacementStrategy());
 
-        while (!g.partieFinie()) {
+        int sumOfScores = 0;
+        int nbrOfWins = 0;
 
-            System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (f) ou Descendre/Back (r), direction Aléatoire (a)");
+        for (int i = 0; i < 1000; i++) {
+
+            Grille3D g = new Grille3D();
+            boolean b = g.nouvelleCase();
+
+            // DeplacementContext context = new DeplacementContext(new RandomDeplacement());
+            // DeplacementContext context = new DeplacementContext(new PMCTSDeplacement(g, 10));
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g));
+
+            int n = 0;
+
+            while (!g.partieFinie()) {
+
+                System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (r) ou Descendre/Back (f), direction Aléatoire (a)");
 
             String s = sc.nextLine();
             s.toLowerCase();
@@ -53,18 +67,33 @@ public class Projet20483D implements Parametres {
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {
                     b = g.nouvelleCase();
-                    if (!b) {
-                        g.gameOver();
-                    }
+                } else {
+                    System.out.println("Non");
                 }
                 System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
-                if (g.getValeurMax() >= OBJECTIF) {
-                    g.victory();
-                }
             }
+                /*Direction dir = context.executeStrategy();
+                boolean b2 = g.lanceurDeplacerCases(dir);
+                System.out.println("-----------");
+                System.out.println(g);
+                System.out.println(dir);
+                if (b2) {
+                    b = g.nouvelleCase();
+                    //System.out.println(g.getScore());
+                    n++;
+                }*/
+
+            }
+
+            /*System.out.println("[" + ((System.currentTimeMillis() - initTime)) + "ms | " + (i + 1) + "/1000 | n = " + n + "] " + g.gameOverMessage());
+            sumOfScores += g.getScore();
+            if (g.isVictory()) {
+                nbrOfWins++;
+            }*/
+
         }
 
-        g.gameOver();
+        //System.out.println("Score moyen: " + sumOfScores / 1000 + " | Nombre de victoires: " + nbrOfWins + "/1000");
 
     }
 }

@@ -1,15 +1,23 @@
 package projet20483D;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import static projet20483D.Parametres.TAILLE;
 
-public class Grille3D implements Parametres {
+public class Grille3D implements Serializable, Parametres {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
+    private int score = 0;
     private boolean deplacement;
+    private boolean victory = false;
 
     public Grille3D() {
         this.grille = new HashSet<Case>();
@@ -61,14 +69,25 @@ public class Grille3D implements Parametres {
         return valeurMax;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public boolean isVictory() {
+        return victory;
+    }
+
     public boolean partieFinie() {
-        // Pas sûr sûr que ça marche, si il y a des bugs c'est sûrement ici
-        if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
+
+        if (this.valeurMax >= OBJECTIF) {
+            victory = true;
+            return true;
+        } else if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
             return false;
         } else {
             for (Case c : this.grille) {
-                Direction[] directions = {Direction.UP, Direction.RIGHT};
-                for (int i = 1; i <= 2; i++) {
+                Direction[] directions = Direction.values();
+                for (int i = 0; i < directions.length; i++) {
                     if (c.getVoisinDirect(directions[i]) != null) {
                         if (c.valeurEgale(c.getVoisinDirect(directions[i]))) {
                             return false;
@@ -77,7 +96,9 @@ public class Grille3D implements Parametres {
                 }
             }
         }
+
         return true;
+
     }
 
     public boolean lanceurDeplacerCases(Direction direction) {
@@ -97,10 +118,12 @@ public class Grille3D implements Parametres {
 
     private void fusion(Case c) {
         c.setValeur(c.getValeur() * 2);
+        this.score += c.getValeur();
         if (this.valeurMax < c.getValeur()) {
             this.valeurMax = c.getValeur();
         }
         deplacement = true;
+        //System.out.println("Score: " + this.score);
     }
 
     private void deplacerCasesRecursif(Case[][] extremites, int firstD, int secondD, Direction direction, int compteur) {
@@ -110,7 +133,7 @@ public class Grille3D implements Parametres {
                     || (direction == Direction.LEFT && extremites[firstD][secondD].getX() != compteur)
                     || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
                     || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
-                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur) ) {
+                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur)) {
                 this.grille.remove(extremites[firstD][secondD]);
                 switch (direction) {
                     case UP:
@@ -160,7 +183,6 @@ public class Grille3D implements Parametres {
             result = new Case[TAILLE][ETAGES];
         }
 
-        int compteur = 0;
         for (Case c : this.grille) {
             switch (direction) {
                 case UP:
@@ -198,14 +220,12 @@ public class Grille3D implements Parametres {
         return result;
     }
 
-    public void victory() {
-        System.out.println("Bravo ! Vous avez atteint " + this.valeurMax);
-        System.exit(0);
-    }
-
-    public void gameOver() {
-        System.out.println("La partie est finie. Votre score est " + this.valeurMax);
-        System.exit(1);
+    public String gameOverMessage() {
+        if (this.victory) {
+            return "Bravo ! Vous avez atteint " + this.valeurMax + " avec un score de " + this.score;
+        } else {
+            return "La partie est finie. Vous avez atteint " + this.valeurMax + " avec un score de " + this.score;
+        }
     }
 
     public boolean nouvelleCase() {
@@ -227,16 +247,38 @@ public class Grille3D implements Parametres {
                 }
             }
             // on en choisit une au hasard et on l'ajoute à la grille
-            Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
-            ajout.setGrille(this);
-            this.grille.add(ajout);
-            if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
-                this.valeurMax = ajout.getValeur();
+            for (int i = 0; i < 4; i++) {
+                Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
+                this.addCase(ajout);
             }
             return true;
         } else {
             return false;
         }
+
+    }
+
+    public void addCase(Case ajout) {
+        ajout.setGrille(this);
+        this.grille.add(ajout);
+        if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
+            this.valeurMax = ajout.getValeur();
+        }
+    }
+
+    public Grille3D deepCopy() throws IOException, ClassNotFoundException {
+
+        //Serialization of object
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(this);
+
+        //De-serialization of object
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        Grille3D copy = (Grille3D) ois.readObject();
+
+        return copy;
 
     }
 
