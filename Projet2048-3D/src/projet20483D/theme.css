@@ -1,0 +1,12 @@
+:root{          /*initialisation des valeurs par défaut ?*/ 
+    --themeCouleur1 : black; /*TEST*/
+}
+
+
+.boutons{
+    -fx-background-color: var(--themeCouleur1);
+}
+
+.boutons:hover{
+    -fx-background-color: red;
+}

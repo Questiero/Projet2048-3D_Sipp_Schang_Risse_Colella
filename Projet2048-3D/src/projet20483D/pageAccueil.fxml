@@ -12,7 +12,7 @@
    <children>
       <Pane id="fondAccueil" prefHeight="873.0" prefWidth="1394.0">
          <children>
-            <Button fx:id="boutonJouer" alignment="CENTER" layoutX="583.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonJouer" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="JOUER" textFill="#64523f">
+            <Button fx:id="boutonJouer" alignment="CENTER" layoutX="583.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonJouer" prefHeight="60.0" prefWidth="229.0" styleClass="boutons" text="JOUER" textFill="#64523f">
                <font>
                   <Font name="Consolas Bold" size="25.0" />
                </font>
