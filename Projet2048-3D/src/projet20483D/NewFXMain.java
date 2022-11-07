@@ -5,7 +5,6 @@
 package projet20483D;
 
 import java.io.IOException;
-import java.util.Set;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,10 +21,10 @@ public class NewFXMain extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageAccueil.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/theme.css/stylesheet.css"); //test mais pb? à A REVOIR
+        scene.getStylesheets().add("projet20483D/theme.css"); //test mais pb? à A REVOIR
         //boolean add = scene.getStylesheets().add("css/styles.css");
         stage.setScene(scene);
-        stage.show();
+        stage.show();   
         
     }
 

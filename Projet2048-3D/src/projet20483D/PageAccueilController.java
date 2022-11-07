@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -26,17 +27,17 @@ public class PageAccueilController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
     @FXML
     private Button boutonJouer, boutonQuitter, boutonParametres;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        boutonJouer.getStyleClass().add("boutons");
+    }
+
     @FXML
     private void cliquerBoutonJouer(MouseEvent event) throws IOException {
-       //ouverture nouvelle page
+        //ouverture nouvelle page
         Stage stage;
         Parent root;
 
@@ -46,12 +47,12 @@ public class PageAccueilController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
+
     }
-    
+
     @FXML
     private void cliquerBoutonQuitter(MouseEvent event) throws IOException {
-       //fermeture page
+        //fermeture page
         Stage stage;
         Parent root;
 
@@ -61,10 +62,10 @@ public class PageAccueilController implements Initializable {
         stage.setScene(scene);
         stage.close();
     }
-    
+
     @FXML
     private void cliquerBoutonParametres(MouseEvent event) throws IOException {
-       //fermeture page
+        //fermeture page
         Stage stage;
         Parent root;
 

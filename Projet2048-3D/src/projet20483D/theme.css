@@ -4,7 +4,7 @@
 
 
 .boutons{
-    -fx-background-color: var(--themeCouleur1);
+    -fx-background-color: black;
 }
 
 .boutons:hover{
