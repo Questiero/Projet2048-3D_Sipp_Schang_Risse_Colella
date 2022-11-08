@@ -12,22 +12,75 @@
    <children>
       <Pane id="fondPageJeu" prefHeight="873.0" prefWidth="1394.0">
          <children>
-            <Button id="rightButton" layoutX="1157.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
-            <Button id="upButton" layoutX="1025.0" layoutY="452.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="▲" />
-            <Button id="leftButton" layoutX="893.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
-            <Button id="bottomButton" layoutX="1025.0" layoutY="703.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
-            <Button layoutX="1025.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="🔀">
+            <Button fx:id="boutonRIGHT" layoutX="1300.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
+            <Button fx:id="boutonUP" layoutX="1168.0" layoutY="532.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="▲" />
+            <Button fx:id="boutonLEFT" layoutX="1036.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
+            <Button fx:id="boutonDOWN" layoutX="1168.0" layoutY="783.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
+            <Button fx:id="boutonRANDOM" layoutX="1168.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="🔀">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button id="backButton" layoutX="935.0" layoutY="652.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -135;" text="▲" />
-            <Button id="frontButton" layoutX="1115.0" layoutY="494.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 45;" text="▲" />
+            <Button fx:id="boutonBACK" layoutX="1078.0" layoutY="732.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -135;" text="▲" />
+            <Button fx:id="boutonFRONT" layoutX="1258.0" layoutY="574.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 45;" text="▲" />
             <Button fx:id="boutonRetourPageJeu" layoutX="51.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonRetourPageJeu" prefHeight="60.0" prefWidth="114.0" text="retour">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <GridPane gridLinesVisible="true" layoutX="158.0" layoutY="218.0" prefHeight="300.0" prefWidth="300.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <GridPane gridLinesVisible="true" layoutX="566.0" layoutY="218.0" prefHeight="300.0" prefWidth="300.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane gridLinesVisible="true" layoutX="968.0" layoutY="218.0" prefHeight="300.0" prefWidth="300.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
          </children></Pane>
    </children>
 </AnchorPane>
