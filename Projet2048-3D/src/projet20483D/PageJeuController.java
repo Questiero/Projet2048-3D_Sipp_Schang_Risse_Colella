@@ -43,7 +43,9 @@ public class PageJeuController implements Initializable {
 
         stage = (Stage) boutonRetourPageJeu.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
+        
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("projet20483D/theme.css");
         stage.setScene(scene);
         stage.show();
     }

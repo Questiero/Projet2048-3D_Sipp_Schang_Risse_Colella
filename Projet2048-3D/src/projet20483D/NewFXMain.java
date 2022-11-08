@@ -21,11 +21,11 @@ public class NewFXMain extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageAccueil.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/theme.css"); //test mais pb? à A REVOIR
-        //boolean add = scene.getStylesheets().add("css/styles.css");
-        stage.setScene(scene);
-        stage.show();   
         
+        scene.getStylesheets().add("projet20483D/theme.css"); 
+        //stage.setMaximized(true);
+        stage.setScene(scene);
+        stage.show();           
     }
 
     public static void main(String[] args) {

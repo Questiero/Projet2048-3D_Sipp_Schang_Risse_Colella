@@ -43,13 +43,15 @@ public class PageAccueilController implements Initializable {
     @FXML
     private void cliquerBoutonJouer(MouseEvent event) throws IOException {
         //ouverture nouvelle page
-        Stage stage;
-        Parent root;
+        
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageJeu.fxml"));
+        Stage stage = (Stage) boutonJouer.getScene().getWindow();
 
         //AJOUTER UNE PAGE DE REGLAGES DE LA PARTIE AVANT
-        stage = (Stage) boutonJouer.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageJeu.fxml"));
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root); 
+        scene.getStylesheets().add("projet20483D/theme.css");
+        
+        
         stage.setScene(scene);
         stage.show();
 
