@@ -28,11 +28,15 @@ public class PageAccueilController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonJouer, boutonQuitter, boutonParametres;
+    private Button boutonJouer, boutonQuitter, boutonParametres, boutonCharger;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         boutonJouer.getStyleClass().add("boutons");
+        boutonCharger.getStyleClass().add("boutons");
+        boutonParametres.getStyleClass().add("boutons");
+        boutonQuitter.getStyleClass().add("boutons");
+
     }
 
     @FXML

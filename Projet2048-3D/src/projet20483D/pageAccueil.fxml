@@ -20,7 +20,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" layoutX="583.0" layoutY="377.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="CHARGER" textFill="#64523f">
+            <Button fx:id="boutonCharger" alignment="CENTER" layoutX="583.0" layoutY="377.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="229.0" style="-fx-background-color: #F2B179;" text="CHARGER" textFill="#64523f">
                <font>
                   <Font name="Consolas Bold" size="25.0" />
                </font>
