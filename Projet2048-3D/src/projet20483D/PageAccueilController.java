@@ -54,6 +54,8 @@ public class PageAccueilController implements Initializable {
         
         stage.setScene(scene);
         stage.show();
+        
+        
 
     }
 

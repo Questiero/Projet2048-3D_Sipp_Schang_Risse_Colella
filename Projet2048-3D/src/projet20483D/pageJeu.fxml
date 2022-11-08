@@ -13,7 +13,7 @@
       <Pane id="fondPageJeu" prefHeight="873.0" prefWidth="1394.0">
          <children>
             <Button fx:id="boutonRIGHT" layoutX="1300.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
-            <Button fx:id="boutonUP" layoutX="1168.0" layoutY="532.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="▲" />
+            <Button fx:id="boutonUP" layoutX="1168.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#testCouleur" prefHeight="60" prefWidth="60" text="▲" />
             <Button fx:id="boutonLEFT" layoutX="1036.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
             <Button fx:id="boutonDOWN" layoutX="1168.0" layoutY="783.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
             <Button fx:id="boutonRANDOM" layoutX="1168.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="🔀">
@@ -28,19 +28,30 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <GridPane gridLinesVisible="true" layoutX="158.0" layoutY="218.0" prefHeight="300.0" prefWidth="300.0">
+            <GridPane fx:id="grille0" gridLinesVisible="true" layoutX="136.0" layoutY="226.0" prefHeight="300.0" prefWidth="300.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <children>
+                  <Pane fx:id="pane0" prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <GridPane gridLinesVisible="true" layoutX="547.0" layoutY="226.0" prefHeight="300.0" prefWidth="300.0">
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
@@ -52,30 +63,35 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
-            </GridPane>
-            <GridPane gridLinesVisible="true" layoutX="566.0" layoutY="218.0" prefHeight="300.0" prefWidth="300.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <GridPane gridLinesVisible="true" layoutX="968.0" layoutY="218.0" prefHeight="300.0" prefWidth="300.0">
+            <GridPane gridLinesVisible="true" layoutX="958.0" layoutY="226.0" prefHeight="300.0" prefWidth="300.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
