@@ -11,7 +11,13 @@ public class Originator {
     private Grille3D state;
 
     public void set(Grille3D state) {
-        this.state = state.deepCopy();
+        try {
+            this.state = state.deepCopy();
+        } catch (IOException ex) {
+            Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Object saveToMemento() {
