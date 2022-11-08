@@ -1,15 +1,17 @@
 package projet20483D;
-
-import java.util.*;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*** @author Maxime*/
 public class Originator {
 
-    private String state;
+    private Grille3D state;
 
-    public void set(String state) {
-        System.out.println("Originator: etat affecte a: " + state);
-        this.state = state;
+    public void set(Grille3D state) {
+        this.state = state.deepCopy();
     }
 
     public Object saveToMemento() {
@@ -27,13 +29,19 @@ public class Originator {
 
     private static class Memento { // Classe interne --> permet la sauvegarde
 
-        private String state;
+        private Grille3D state;
 
-        public Memento(String stateToSave) {
-            state = stateToSave;
+        public Memento(Grille3D stateToSave) {
+            try {
+                state = stateToSave.deepCopy();
+            } catch (IOException ex) {
+                Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
-        public String getSavedState() {
+        public Grille3D getSavedState() {
             return state;
         }
     }

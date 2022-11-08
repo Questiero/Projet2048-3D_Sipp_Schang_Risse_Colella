@@ -1,11 +1,17 @@
 package projet20483D;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import static projet20483D.Parametres.TAILLE;
 
-public class Grille3D implements Parametres {
+public class Grille3D implements Parametres, Serializable {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
@@ -110,7 +116,7 @@ public class Grille3D implements Parametres {
                     || (direction == Direction.LEFT && extremites[firstD][secondD].getX() != compteur)
                     || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
                     || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
-                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur) ) {
+                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur)) {
                 this.grille.remove(extremites[firstD][secondD]);
                 switch (direction) {
                     case UP:
@@ -237,6 +243,24 @@ public class Grille3D implements Parametres {
         } else {
             return false;
         }
+
+    }
+
+    public Grille3D deepCopy() throws IOException, ClassNotFoundException {
+
+        //Serialization of object
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(this);
+
+        //De-serialization of object
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        Grille3D copy = (Grille3D) ois.readObject();
+
+        return copy;
+        
+    
 
     }
 
