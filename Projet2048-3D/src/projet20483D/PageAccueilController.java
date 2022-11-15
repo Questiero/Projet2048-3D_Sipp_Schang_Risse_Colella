@@ -46,6 +46,8 @@ public class PageAccueilController implements Initializable {
         
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageJeu.fxml"));
         Stage stage = (Stage) boutonJouer.getScene().getWindow();
+        
+        
 
         //AJOUTER UNE PAGE DE REGLAGES DE LA PARTIE AVANT
         Scene scene = new Scene(root); 

@@ -1,4 +1,4 @@
-:root{          /*initialisation des valeurs par défaut ?*/ 
+:root{          /*initialisation des valeurs par défaut ?*/
     --themeCouleur1 : black; /*TEST*/
 }
 
@@ -14,3 +14,5 @@
 .boutons:hover{
     -fx-background-color: #F0945D;
 }
+
+

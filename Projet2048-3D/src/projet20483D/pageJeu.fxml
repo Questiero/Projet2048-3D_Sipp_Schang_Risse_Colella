@@ -13,7 +13,7 @@
       <Pane id="fondPageJeu" prefHeight="873.0" prefWidth="1394.0">
          <children>
             <Button fx:id="boutonRIGHT" layoutX="1300.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
-            <Button fx:id="boutonUP" layoutX="1168.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#testCouleur" prefHeight="60" prefWidth="60" text="▲" />
+            <Button fx:id="boutonUP" layoutX="1168.0" layoutY="532.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="▲" />
             <Button fx:id="boutonLEFT" layoutX="1036.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
             <Button fx:id="boutonDOWN" layoutX="1168.0" layoutY="783.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
             <Button fx:id="boutonRANDOM" layoutX="1168.0" layoutY="654.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="🔀">
@@ -40,15 +40,42 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane fx:id="pane0" prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Pane fx:id="pane0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="label00" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Label fx:id="label10" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <Label fx:id="label20" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="label01" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="label11" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="label21" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label fx:id="label02" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Label fx:id="label12" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <Label fx:id="label22" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                     </children></Pane>
                </children>
             </GridPane>
             <GridPane gridLinesVisible="true" layoutX="547.0" layoutY="226.0" prefHeight="300.0" prefWidth="300.0">
@@ -97,6 +124,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <Button fx:id="boutonTest" layoutX="464.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#testCase" prefHeight="100.0" prefWidth="139.0" text="test" />
          </children></Pane>
    </children>
 </AnchorPane>

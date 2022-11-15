@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -31,15 +32,17 @@ public class PageJeuController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private Button boutonRetourPageJeu, boutonTest;
+    @FXML
+    private Label label00,label10,label20,label01,label11,label21,label02,label12,label22;
+    @FXML
+    private GridPane grille0;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
 
-    @FXML
-    private Button boutonRetourPageJeu, boutonUP;
-    private GridPane grille0;
-    private Pane pane0;
+    }
 
     @FXML
     private void cliquerBoutonRetourPageJeu(MouseEvent event) throws IOException {
@@ -57,27 +60,18 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void testCouleur(MouseEvent event) {
-        Grille3D g = new Grille3D();
-        g.nouvelleCase();
-
-        HashSet<Case> grille = g.getGrille();
-
+    private void testCase(MouseEvent event) throws IOException {       
+        
+        int i = 0;
         for (Node node : grille0.getChildren()){
-            if (node instanceof Pane){
-                ((Pane) node).setStyle("-fx-background-color:red;");
+            
+            if (node instanceof Label){
+                i++;
+                ((Label) node).setText(""+i);
             }
         }
         
-        
-        
-        /*for (Case c : grille) {
-            c.getValeur();
-            grille0.
-        }*/
-        
+
     }
-    
-    
 
 }
