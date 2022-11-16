@@ -40,39 +40,39 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane fx:id="pane0" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="pane00_G0" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Label fx:id="label00" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                  <Pane fx:id="pane10_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
                         <Label fx:id="label10" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                  <Pane fx:id="pane20_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
                         <Label fx:id="label20" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <Pane fx:id="pane01_G0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label fx:id="label01" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Pane fx:id="pane11_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label fx:id="label11" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Pane fx:id="pane21_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
                         <Label fx:id="label21" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                  <Pane fx:id="pane02_G0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
                         <Label fx:id="label02" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Pane fx:id="pane12_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Label fx:id="label12" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Pane fx:id="pane22_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <Label fx:id="label22" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
                      </children></Pane>

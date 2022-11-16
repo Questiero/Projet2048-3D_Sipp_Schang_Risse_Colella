@@ -6,6 +6,7 @@ package projet20483D;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -35,9 +36,11 @@ public class PageJeuController implements Initializable {
     @FXML
     private Button boutonRetourPageJeu, boutonTest;
     @FXML
-    private Label label00,label10,label20,label01,label11,label21,label02,label12,label22;
+    private Label label00, label10, label20, label01, label11, label21, label02, label12, label22;
     @FXML
     private GridPane grille0;
+    @FXML
+    private Pane pane00_G0, pane10_G0, pane20_G0, pane01_G0, pane11_G0, pane21_G0, pane02_G0, pane12_G0, pane22_G0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,18 +63,34 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void testCase(MouseEvent event) throws IOException {       
-        
-        int i = 0;
-        for (Node node : grille0.getChildren()){
-            
-            if (node instanceof Label){
-                i++;
-                ((Label) node).setText(""+i);
+    private void testCase(MouseEvent event) throws IOException {
+
+        ArrayList<Pane> listePaneGrille0 = new ArrayList<>();
+        listePaneGrille0.add(pane00_G0);
+        listePaneGrille0.add(pane00_G0);
+        listePaneGrille0.add(pane10_G0);
+        listePaneGrille0.add(pane20_G0);
+        listePaneGrille0.add(pane01_G0);
+        listePaneGrille0.add(pane11_G0);
+        listePaneGrille0.add(pane21_G0);
+        listePaneGrille0.add(pane02_G0);
+        listePaneGrille0.add(pane12_G0);
+        listePaneGrille0.add(pane22_G0);
+
+        for (Pane pane : listePaneGrille0) {
+            for (Node node : pane.getChildren()) {
+                if (node instanceof Label) {
+                    ((Label) node).setText("A");
+                }
             }
+            /*for (Node node : grille0.getChildren()){
+            
+            if (node instanceof Pane){
+                ((Label) node).setText("A");
+            }
+        }*/
+
         }
-        
 
     }
-
 }
