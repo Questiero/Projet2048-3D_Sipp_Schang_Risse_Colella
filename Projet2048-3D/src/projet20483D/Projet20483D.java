@@ -1,16 +1,30 @@
 package projet20483D;
 
 import java.util.Scanner;
+import java.util.*;
 
 public class Projet20483D implements Parametres {
 
     /**
      * @param args the command line arguments
      */
+    private ArrayList savedStates = new ArrayList();
+
+    public void addMemento(Object m) {      //add de l'objet dans la liste de saves
+        savedStates.add(m);
+    }
+
+    public Object getMemento(int index) {   //getter pour avoir notre objet
+        return savedStates.get(index);
+    }
+    
     public static void main(String[] args) {
 
         Grille3D g = new Grille3D();
         boolean b = g.nouvelleCase();
+        
+        Originator originator = new Originator();
+        Caretaker caretaker = new Caretaker();
 
         Scanner sc = new Scanner(System.in);
         RandomDeplacement directionRandom = new RandomDeplacement();    //appel à la méthode next() 
