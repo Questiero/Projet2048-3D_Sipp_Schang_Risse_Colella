@@ -39,11 +39,11 @@ public class PageJeuController implements Initializable {
     @FXML
     private Button boutonRetourPageJeu, boutonTest;
     @FXML
-    private Label label00, label10, label20, label01, label11, label21, label02, label12, label22;
+    private Label label00_G0, label10_G0, label20_G0, label01_G0, label11_G0, label21_G0, label02_G0, label12_G0, label22_G0;
     @FXML
-    private GridPane grille0;
+    private Label label00_G1, label10_G1, label20_G1, label01_G1, label11_G1, label21_G1, label02_G1, label12_G1, label22_G1;
     @FXML
-    private Pane pane00_G0, pane10_G0, pane20_G0, pane01_G0, pane11_G0, pane21_G0, pane02_G0, pane12_G0, pane22_G0;
+    private Label label00_G2, label10_G2, label20_G2, label01_G2, label11_G2, label21_G2, label02_G2, label12_G2, label22_G2;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,95 +68,64 @@ public class PageJeuController implements Initializable {
     @FXML
     private void testCase(MouseEvent event) throws IOException {
 
+        //création du début du jeu (grilles)
         Grille3D g0 = new Grille3D();
         g0.nouvelleCase();
         System.out.println(g0);
 
+        //mise dans un tableau des valeurs des grilles
         int[][][] tab = new int[TAILLE][TAILLE][TAILLE];
         for (Case c : g0.getGrille()) {
             tab[c.getY()][c.getX()][c.getZ()] = c.getValeur();
         }
-        for (int i = 0; i < TAILLE; i++) {
-            for (int j = 0; j < TAILLE; j++) {
-                for (int k = 0; k < TAILLE; k++) {
-                    System.out.println(Integer.toString(tab[i][j][k]));     //le tableau fonctionne
-                }
 
-            }
-        }
+        //création d'une liste pour les labels de nos grilles
+        ArrayList<Label> listeLabels = new ArrayList<>();
 
-        ArrayList<Pane> listePaneGrille0 = new ArrayList<>();
+        //ajouts des labels dans la liste
+        listeLabels.add(label00_G0);
+        listeLabels.add(label10_G0);
+        listeLabels.add(label20_G0);
+        listeLabels.add(label01_G0);
+        listeLabels.add(label11_G0);
+        listeLabels.add(label21_G0);
+        listeLabels.add(label02_G0);
+        listeLabels.add(label12_G0);
+        listeLabels.add(label22_G0);
 
-        listePaneGrille0.add(pane00_G0);
+        listeLabels.add(label00_G1);
+        listeLabels.add(label10_G1);
+        listeLabels.add(label20_G1);
+        listeLabels.add(label01_G1);
+        listeLabels.add(label11_G1);
+        listeLabels.add(label21_G1);
+        listeLabels.add(label02_G1);
+        listeLabels.add(label12_G1);
+        listeLabels.add(label22_G1);
 
-        listePaneGrille0.add(pane00_G0);
+        listeLabels.add(label00_G2);
+        listeLabels.add(label10_G2);
+        listeLabels.add(label20_G2);
+        listeLabels.add(label01_G2);
+        listeLabels.add(label11_G2);
+        listeLabels.add(label21_G2);
+        listeLabels.add(label02_G2);
+        listeLabels.add(label12_G2);
+        listeLabels.add(label22_G2);
 
-        listePaneGrille0.add(pane10_G0);
+        //écriture des valeurs du tableau (=grille3D) dans nos labels
+        ArrayList<Label> listeLabelsCopie = new ArrayList<>();
+        for (int k = 0; k < TAILLE; k++) {
+            for (int i = 0; i < TAILLE; i++) {
+                for (int j = 0; j < TAILLE; j++) {
+                    listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));
+                    listeLabelsCopie.remove(0);
 
-        listePaneGrille0.add(pane20_G0);
-
-        listePaneGrille0.add(pane01_G0);
-
-        listePaneGrille0.add(pane11_G0);
-
-        listePaneGrille0.add(pane21_G0);
-
-        listePaneGrille0.add(pane02_G0);
-
-        listePaneGrille0.add(pane12_G0);
-
-        listePaneGrille0.add(pane22_G0);
-
-        for (int j = 0; j < TAILLE; j++) {
-
-            int i = 0;
-            while (i < 3) {
-                for (Pane pane : listePaneGrille0) {
-                    for (Node node : pane.getChildren()) {
-                        //for (int i = 0; i < TAILLE; i++) {              //i doit s'incrémenter en meme temps que pane et label
-                        if (node instanceof Label) {
-                            //System.out.println(Integer.toString(tab[i][j][0]));
-
-                            ((Label) node).setText(Integer.toString(tab[i][j][0]));     //pb surement ici dans l'ordre des boubles
-                            i++;
-                        }
-                    }
-                }
-
-            }
-        }
-
-        /*for (Case b : g0.getGrille()) {
-            if (b.getValeur() == 0) {
-                System.out.println("0");
-            } else {
-                System.out.println(b.getValeur());
-            }
-        }
-
-        /*HashSet<Case> casesG0 = new HashSet<Case>();
-        casesG0 = g0.getGrille();
-        for (Case a : casesG0){
-            System.out.println(a.getValeur());
-        }*/
- /*for (Pane pane : listePaneGrille0) {
-            for (Node node : pane.getChildren()) {
-                if (node instanceof Label) {
-                    //((Label) node).setText("A");
-                    for (int i = 0; i < 9; i++) {
-                        for (Case c : casesG0) {
-                            ((Label) node).setText(Integer.toString(c.getValeur()));
-                        }
-                    }
                 }
             }
-            for (Node node : grille0.getChildren()){
-            
-            if (node instanceof Pane){
-                ((Label) node).setText("A");
-            }
-        }*/
+
+        }
+
     }
-
 
 }
