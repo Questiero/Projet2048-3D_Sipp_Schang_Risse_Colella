@@ -21,6 +21,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
         this.grille = grille;
 
         this.depth = 2;
+        
     }
 
     public ExpectimaxDeplacement(Grille3D grille, int depth) {
@@ -53,9 +54,12 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
         protected double selfEvaluate() {
 
+            double poidsVide = 3.;
+            double poidsMax = 1.;
+            
             //Heuristic, TODO
             //System.out.println(this.grille.getScore());
-            return this.grille.getScore();
+            return poidsVide * (TAILLE*TAILLE*TAILLE-this.grille.getGrille().size()) + poidsMax * this.grille.getValeurMax();
 
         }
 
@@ -205,7 +209,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
                 for (int valeur = 2; valeur <= 4; valeur += 2) {
                     for (int x = 0; x < TAILLE; x++) {
                         for (int y = 0; y < TAILLE; y++) {
-                            for (int z = 0; z < ETAGES; z++) {
+                            for (int z = 0; z < TAILLE; z++) {
 
                                 Case c = new Case(x, y, z, valeur);
 

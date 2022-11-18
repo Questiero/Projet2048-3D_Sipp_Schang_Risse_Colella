@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-import static projet20483D.Parametres.TAILLE;
 
 public class Grille3D implements Serializable, Parametres {
 
@@ -26,7 +25,7 @@ public class Grille3D implements Serializable, Parametres {
     @Override
     public String toString() {
 
-        int[][][] tableau = new int[TAILLE][TAILLE][ETAGES];
+        int[][][] tableau = new int[TAILLE][TAILLE][TAILLE];
         for (Case c : this.grille) {
             tableau[c.getY()][c.getX()][c.getZ()] = c.getValeur();
         }
@@ -37,13 +36,13 @@ public class Grille3D implements Serializable, Parametres {
                 result += "\n";
 
             }
-            for (int k = 0; k < ETAGES; k++) {
+            for (int k = 0; k < TAILLE; k++) {
                 result += "[";
                 for (int j = 0; j < TAILLE - 1; j++) {
                     result += String.format("%4d,", tableau[i][j][k]);
 
                 }
-                if (k == ETAGES - 1) {
+                if (k == TAILLE - 1) {
                     result += String.format("%4d]", tableau[i][tableau.length - 1][k]);
                 } else {
                     result += String.format("%4d]\t\t", tableau[i][tableau.length - 1][k]);
@@ -82,7 +81,7 @@ public class Grille3D implements Serializable, Parametres {
         if (this.valeurMax >= OBJECTIF) {
             victory = true;
             return true;
-        } else if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
+        } else if (this.grille.size() < TAILLE * TAILLE * TAILLE) {
             return false;
         } else {
             for (Case c : this.grille) {
@@ -105,10 +104,7 @@ public class Grille3D implements Serializable, Parametres {
         Case[][] extremites = this.getCasesExtremites(direction);
         deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
         for (int i = 0; i < TAILLE; i++) {
-            int secondD = ETAGES;
-            if (direction == Direction.FRONT || direction == Direction.BACK) {
-                secondD = TAILLE;
-            }
+            int secondD = TAILLE;
             for (int j = 0; j < secondD; j++) {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
@@ -133,7 +129,7 @@ public class Grille3D implements Serializable, Parametres {
                     || (direction == Direction.LEFT && extremites[firstD][secondD].getX() != compteur)
                     || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
                     || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
-                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur)) {
+                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != TAILLE - 1 - compteur)) {
                 this.grille.remove(extremites[firstD][secondD]);
                 switch (direction) {
                     case UP:
@@ -152,7 +148,7 @@ public class Grille3D implements Serializable, Parametres {
                         extremites[firstD][secondD].setZ(compteur);
                         break;
                     case BACK:
-                        extremites[firstD][secondD].setZ(ETAGES - 1 - compteur);
+                        extremites[firstD][secondD].setZ(TAILLE - 1 - compteur);
                         break;
                 }
                 this.grille.add(extremites[firstD][secondD]);
@@ -175,13 +171,7 @@ public class Grille3D implements Serializable, Parametres {
 
     public Case[][] getCasesExtremites(Direction direction) {
 
-        Case[][] result = null;
-
-        if (direction == Direction.FRONT || direction == Direction.BACK) {
-            result = new Case[TAILLE][TAILLE];
-        } else {
-            result = new Case[TAILLE][ETAGES];
-        }
+        Case[][] result = new Case[TAILLE][TAILLE];
 
         for (Case c : this.grille) {
             switch (direction) {
@@ -230,14 +220,14 @@ public class Grille3D implements Serializable, Parametres {
 
     public boolean nouvelleCase() {
 
-        if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
+        if (this.grille.size() < TAILLE * TAILLE * TAILLE) {
             ArrayList<Case> casesLibres = new ArrayList<>();
             Random ra = new Random();
             int valeur = (1 + ra.nextInt(2)) * 2;
             // on crée toutes les cases encore libres
             for (int x = 0; x < TAILLE; x++) {
                 for (int y = 0; y < TAILLE; y++) {
-                    for (int z = 0; z < ETAGES; z++) {
+                    for (int z = 0; z < TAILLE; z++) {
                         Case c = new Case(x, y, z, valeur);
                         if (!this.grille.contains(c)) { // contains utilise la méthode equals dans Case
                             casesLibres.add(c);
@@ -247,10 +237,8 @@ public class Grille3D implements Serializable, Parametres {
                 }
             }
             // on en choisit une au hasard et on l'ajoute à la grille
-            for (int i = 0; i < 4; i++) {
-                Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
-                this.addCase(ajout);
-            }
+            Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
+            this.addCase(ajout);
             return true;
         } else {
             return false;
