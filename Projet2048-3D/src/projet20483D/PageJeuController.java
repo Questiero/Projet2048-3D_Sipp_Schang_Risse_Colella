@@ -59,8 +59,6 @@ public class PageJeuController implements Initializable {
         boutonBACK.getStyleClass().add("boutons");
         boutonRANDOM.getStyleClass().add("boutons");
         boutonCommentJouer.getStyleClass().add("boutons");
-        
-        
 
     }
 
@@ -128,12 +126,13 @@ public class PageJeuController implements Initializable {
         listeLabels.add(label22_G2);
 
         //écriture des valeurs du tableau (=grille3D) dans nos labels
-        ArrayList<Label> listeLabelsCopie = new ArrayList<>();
+        ArrayList<Label> listeLabelsCopie = new ArrayList<Label>(listeLabels);  //copie de la liste
+
         for (int k = 0; k < TAILLE; k++) {
             for (int i = 0; i < TAILLE; i++) {
                 for (int j = 0; j < TAILLE; j++) {
-                    listeLabels.get(0).setText(Integer.toString(tab[i][j][k]));
-                    listeLabels.remove(0);
+                    listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie                    
+                    listeLabelsCopie.remove(0);
 
                 }
             }
@@ -142,8 +141,6 @@ public class PageJeuController implements Initializable {
 
         boutonJouerJeu.setVisible(false);
         boutonJouerJeu.setDisable(true);
-        
-        
 
     }
 
