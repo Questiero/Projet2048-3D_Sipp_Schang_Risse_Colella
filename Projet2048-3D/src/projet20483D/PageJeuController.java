@@ -37,16 +37,30 @@ public class PageJeuController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonRetourPageJeu, boutonTest;
+    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonCommentJouer;
     @FXML
     private Label label00_G0, label10_G0, label20_G0, label01_G0, label11_G0, label21_G0, label02_G0, label12_G0, label22_G0;
     @FXML
     private Label label00_G1, label10_G1, label20_G1, label01_G1, label11_G1, label21_G1, label02_G1, label12_G1, label22_G1;
     @FXML
     private Label label00_G2, label10_G2, label20_G2, label01_G2, label11_G2, label21_G2, label02_G2, label12_G2, label22_G2;
+    @FXML
+    private GridPane grille0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        boutonJouerJeu.getStyleClass().add("boutons");
+        boutonRetourPageJeu.getStyleClass().add("boutons");
+        boutonUP.getStyleClass().add("boutons");
+        boutonDOWN.getStyleClass().add("boutons");
+        boutonLEFT.getStyleClass().add("boutons");
+        boutonRIGHT.getStyleClass().add("boutons");
+        boutonFRONT.getStyleClass().add("boutons");
+        boutonBACK.getStyleClass().add("boutons");
+        boutonRANDOM.getStyleClass().add("boutons");
+        boutonCommentJouer.getStyleClass().add("boutons");
+        
+        
 
     }
 
@@ -66,7 +80,7 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void testCase(MouseEvent event) throws IOException {
+    private void lancerPartie(MouseEvent event) throws IOException {
 
         //création du début du jeu (grilles)
         Grille3D g0 = new Grille3D();
@@ -118,13 +132,18 @@ public class PageJeuController implements Initializable {
         for (int k = 0; k < TAILLE; k++) {
             for (int i = 0; i < TAILLE; i++) {
                 for (int j = 0; j < TAILLE; j++) {
-                    listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));
-                    listeLabelsCopie.remove(0);
+                    listeLabels.get(0).setText(Integer.toString(tab[i][j][k]));
+                    listeLabels.remove(0);
 
                 }
             }
 
         }
+
+        boutonJouerJeu.setVisible(false);
+        boutonJouerJeu.setDisable(true);
+        
+        
 
     }
 
