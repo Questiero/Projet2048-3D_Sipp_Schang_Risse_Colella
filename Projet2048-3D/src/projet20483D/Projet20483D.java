@@ -23,9 +23,8 @@ public class Projet20483D implements Parametres {
         Grille3D g = new Grille3D();
         boolean b = g.nouvelleCase();
         
-        Originator originator = new Originator();
-        Caretaker caretaker = new Caretaker();
-
+        Grille3D originator = new Grille3D();
+        
         Scanner sc = new Scanner(System.in);
         RandomDeplacement directionRandom = new RandomDeplacement();    //appel à la méthode next() 
 

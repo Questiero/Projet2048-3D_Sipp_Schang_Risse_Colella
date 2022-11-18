@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static projet20483D.Parametres.TAILLE;
 
 public class Grille3D implements Parametres, Serializable {
@@ -261,51 +259,11 @@ public class Grille3D implements Parametres, Serializable {
         Grille3D copy = (Grille3D) ois.readObject();
 
         return copy;
+        
+    
 
     }
     
-     private Grille3D state;
-
-    public void set(Grille3D state) {
-        try {
-            this.state = state.deepCopy();
-        } catch (IOException ex) {
-            Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public Object saveToMemento() {
-        System.out.println("Originator: sauvegarde dans le memento.");
-        return new Memento(state);
-    }
-
-    public void restoreFromMemento(Object m) {
-        if (m instanceof Memento) {
-            Memento memento = (Memento) m;
-            state = memento.getSavedState();
-            System.out.println("Originator: Etat après restauration: " + state);
-        }
-    }
-
-    private static class Memento { // Classe interne --> permet la sauvegarde
-
-        private Grille3D state;
-
-        public Memento(Grille3D stateToSave) {
-            try {
-                state = stateToSave.deepCopy();
-            } catch (IOException ex) {
-                Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        public Grille3D getSavedState() {
-            return state;
-        }
-    }
+    
 
 }
