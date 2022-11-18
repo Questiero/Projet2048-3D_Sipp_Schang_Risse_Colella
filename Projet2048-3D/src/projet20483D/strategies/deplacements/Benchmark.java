@@ -3,6 +3,7 @@ package projet20483D.strategies.deplacements;
 import java.util.Scanner;
 import projet20483D.Direction;
 import projet20483D.Grille3D;
+import projet20483D.strategies.deplacements.ExpectimaxDeplacement.ExpectimaxType;
 
 public class Benchmark {
 
@@ -21,8 +22,7 @@ public class Benchmark {
             boolean b = g.nouvelleCase();
 
             // DeplacementContext context = new DeplacementContext(new RandomDeplacement());
-            // DeplacementContext context = new DeplacementContext(new PMCTSDeplacement(g, 10));
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g));
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxType.NAIVE));
 
             int n = 0;
 

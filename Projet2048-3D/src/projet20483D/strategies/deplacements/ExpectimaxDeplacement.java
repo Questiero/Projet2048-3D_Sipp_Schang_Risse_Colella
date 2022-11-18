@@ -15,20 +15,30 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     private Grille3D grille;
     private final int depth;
+    private final ExpectimaxType type;
 
     public ExpectimaxDeplacement(Grille3D grille) {
 
         this.grille = grille;
-
         this.depth = 2;
-        
+        this.type = ExpectimaxType.NAIVE;
+
     }
 
     public ExpectimaxDeplacement(Grille3D grille, int depth) {
 
         this.grille = grille;
-
         this.depth = depth;
+
+        this.type = ExpectimaxType.NAIVE;
+
+    }
+
+    public ExpectimaxDeplacement(Grille3D grille, int depth, ExpectimaxType type) {
+
+        this.grille = grille;
+        this.depth = depth;
+        this.type = ExpectimaxType.NAIVE;
 
     }
 
@@ -56,211 +66,225 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
             double poidsVide = 3.;
             double poidsMax = 1.;
-            
-            //Heuristic, TODO
-            //System.out.println(this.grille.getScore());
-            return poidsVide * (TAILLE*TAILLE*TAILLE-this.grille.getGrille().size()) + poidsMax * this.grille.getValeurMax();
 
-        }
+            switch (ExpectimaxDeplacement.this.type) {
+
+                case NAIVE:
+                    return this.grille.getScore();
+                case EMPTYONLY:
+                    return poidsVide * (TAILLE * TAILLE * TAILLE - this.grille.getGrille().size()) + poidsMax * this.grille.getValeurMax();
+                case POGGIEWOGGIES:
+                    return 69420;
+            }
+
+            return 0;
 
     }
 
-    private final class MaxNode extends Node {
+}
 
-        public MaxNode(Grille3D grille, int depth) {
+private final class MaxNode extends Node {
 
-            this.grille = grille;
-            this.depth = depth;
+    public MaxNode(Grille3D grille, int depth) {
 
-            this.generateChildren();
+        this.grille = grille;
+        this.depth = depth;
 
-        }
+        this.generateChildren();
 
-        @Override
-        protected void generateChildren() {
+    }
 
-            // Vérification que la profondeur maximale ne soit pas atteinte
-            if (this.depth >= ExpectimaxDeplacement.this.depth) {
-                this.children = null;
-            } else {
+    @Override
+    protected void generateChildren() {
 
-                for (Direction dir : Direction.values()) {
+        // Vérification que la profondeur maximale ne soit pas atteinte
+        if (this.depth >= ExpectimaxDeplacement.this.depth) {
+            this.children = null;
+        } else {
 
-                    // Génération de tout les children possibles en fonction de toutes les diréctions
-                    try {
+            for (Direction dir : Direction.values()) {
 
-                        Grille3D newGrille = this.grille.deepCopy();
+                // Génération de tout les children possibles en fonction de toutes les diréctions
+                try {
 
-                        if (newGrille.lanceurDeplacerCases(dir)) {
-                            this.children.add(new ChanceNode(newGrille, this.depth + 1, dir));
-                        }
+                    Grille3D newGrille = this.grille.deepCopy();
 
-                    } catch (IOException ex) {
-                        Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
+                    if (newGrille.lanceurDeplacerCases(dir)) {
+                        this.children.add(new ChanceNode(newGrille, this.depth + 1, dir));
                     }
 
+                } catch (IOException ex) {
+                    Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
             }
         }
+    }
 
-        @Override
-        protected double evaluateRecursive() {
+    @Override
+    protected double evaluateRecursive() {
 
-            double evaluation = 0;
+        double evaluation = 0;
 
-            if (this.children == null || this.children.isEmpty()) {
+        if (this.children == null || this.children.isEmpty()) {
 
-                evaluation = this.selfEvaluate();
+            evaluation = this.selfEvaluate();
 
-            } else {
+        } else {
 
-                // Get the max of all children
-                evaluation = this.children.get(0).evaluateRecursive();
+            // Get the max of all children
+            evaluation = this.children.get(0).evaluateRecursive();
 
-                for (int i = 1; i < this.children.size(); i++) {
+            for (int i = 1; i < this.children.size(); i++) {
 
-                    double tempEvaluation = this.children.get(i).evaluateRecursive();
-                    if (tempEvaluation > evaluation) {
+                double tempEvaluation = this.children.get(i).evaluateRecursive();
+                if (tempEvaluation > evaluation) {
+                    evaluation = tempEvaluation;
+                } else if (tempEvaluation == evaluation) {
+                    Random ra = new Random();
+                    if (ra.nextInt(2) == 0) {
                         evaluation = tempEvaluation;
-                    } else if (tempEvaluation == evaluation) {
-                        Random ra = new Random();
-                        if (ra.nextInt(2) == 0) {
-                            evaluation = tempEvaluation;
-                        }
                     }
-
                 }
 
             }
 
-            return evaluation;
-
         }
 
-        public Direction getBestDirection() {
+        return evaluation;
 
-            double evaluation = 0;
-            Direction bestDirection = null;
+    }
 
-            if (this.children == null || this.children.isEmpty()) {
+    public Direction getBestDirection() {
 
-                System.out.println("Cheh");
+        double evaluation = 0;
+        Direction bestDirection = null;
 
-            } else {
+        if (this.children == null || this.children.isEmpty()) {
 
-                // Get the max of all children
-                evaluation = this.children.get(0).evaluateRecursive();
-                bestDirection = ((ChanceNode) this.children.get(0)).getDirection();
+            System.out.println("Cheh");
 
-                for (int i = 1; i < this.children.size(); i++) {
+        } else {
 
-                    double tempEvaluation = this.children.get(i).evaluateRecursive();
-                    if (tempEvaluation > evaluation) {
+            // Get the max of all children
+            evaluation = this.children.get(0).evaluateRecursive();
+            bestDirection = ((ChanceNode) this.children.get(0)).getDirection();
+
+            for (int i = 1; i < this.children.size(); i++) {
+
+                double tempEvaluation = this.children.get(i).evaluateRecursive();
+                if (tempEvaluation > evaluation) {
+                    evaluation = tempEvaluation;
+                    bestDirection = ((ChanceNode) this.children.get(i)).getDirection();
+                } else if (tempEvaluation == evaluation) {
+                    Random ra = new Random();
+                    if (ra.nextInt(2) == 0) {
                         evaluation = tempEvaluation;
                         bestDirection = ((ChanceNode) this.children.get(i)).getDirection();
-                    } else if (tempEvaluation == evaluation) {
-                        Random ra = new Random();
-                        if (ra.nextInt(2) == 0) {
-                            evaluation = tempEvaluation;
-                            bestDirection = ((ChanceNode) this.children.get(i)).getDirection();
-                        }
                     }
-
                 }
 
             }
 
-            return bestDirection;
-
         }
+
+        return bestDirection;
 
     }
 
-    private final class ChanceNode extends Node {
+}
 
-        private Direction direction;
+private final class ChanceNode extends Node {
 
-        public ChanceNode(Grille3D grille, int depth, Direction direction) {
+    private Direction direction;
 
-            this.grille = grille;
-            this.depth = depth;
+    public ChanceNode(Grille3D grille, int depth, Direction direction) {
 
-            this.direction = direction;
+        this.grille = grille;
+        this.depth = depth;
 
-            this.generateChildren();
+        this.direction = direction;
 
-        }
+        this.generateChildren();
 
-        public Direction getDirection() {
-            return this.direction;
-        }
+    }
 
-        @Override
-        protected void generateChildren() {
+    public Direction getDirection() {
+        return this.direction;
+    }
 
-            // Vérification que la profondeur maximale ne soit pas atteinte
-            if (this.depth >= ExpectimaxDeplacement.this.depth) {
-                this.children = null;
-            } else {
+    @Override
+    protected void generateChildren() {
 
-                //Génération de tout les children possibles en fonction de toutes les possibilités aléatoires pour les nouvelles cases
-                for (int valeur = 2; valeur <= 4; valeur += 2) {
-                    for (int x = 0; x < TAILLE; x++) {
-                        for (int y = 0; y < TAILLE; y++) {
-                            for (int z = 0; z < TAILLE; z++) {
+        // Vérification que la profondeur maximale ne soit pas atteinte
+        if (this.depth >= ExpectimaxDeplacement.this.depth) {
+            this.children = null;
+        } else {
 
-                                Case c = new Case(x, y, z, valeur);
+            //Génération de tout les children possibles en fonction de toutes les possibilités aléatoires pour les nouvelles cases
+            for (int valeur = 2; valeur <= 4; valeur += 2) {
+                for (int x = 0; x < TAILLE; x++) {
+                    for (int y = 0; y < TAILLE; y++) {
+                        for (int z = 0; z < TAILLE; z++) {
 
-                                if (!this.grille.getGrille().contains(c)) { // contains utilise la méthode equals dans Case
+                            Case c = new Case(x, y, z, valeur);
 
-                                    try {
+                            if (!this.grille.getGrille().contains(c)) { // contains utilise la méthode equals dans Case
 
-                                        Grille3D newGrille = this.grille.deepCopy();
+                                try {
 
-                                        newGrille.addCase(c);
+                                    Grille3D newGrille = this.grille.deepCopy();
 
-                                        this.children.add(new MaxNode(newGrille, this.depth + 1));
+                                    newGrille.addCase(c);
 
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
-                                    } catch (ClassNotFoundException ex) {
-                                        Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
+                                    this.children.add(new MaxNode(newGrille, this.depth + 1));
 
+                                } catch (IOException ex) {
+                                    Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (ClassNotFoundException ex) {
+                                    Logger.getLogger(ExpectimaxDeplacement.class.getName()).log(Level.SEVERE, null, ex);
                                 }
+
                             }
                         }
                     }
                 }
             }
         }
+    }
 
-        @Override
-        protected double evaluateRecursive() {
+    @Override
+    protected double evaluateRecursive() {
 
-            double evaluation = 0;
+        double evaluation = 0;
 
-            if (this.children == null || this.children.isEmpty()) {
+        if (this.children == null || this.children.isEmpty()) {
 
-                evaluation = this.selfEvaluate();
+            evaluation = this.selfEvaluate();
 
-            } else {
+        } else {
 
-                // Get the average of all children
-                for (Node child : this.children) {
-                    evaluation += child.evaluateRecursive();
-                }
-
-                evaluation /= this.children.size();
-
+            // Get the average of all children
+            for (Node child : this.children) {
+                evaluation += child.evaluateRecursive();
             }
 
-            return evaluation;
+            evaluation /= this.children.size();
 
         }
 
+        return evaluation;
+
     }
+
+}
+
+public enum ExpectimaxType {
+    NAIVE,
+    EMPTYONLY,
+    POGGIEWOGGIES
+}
 
 }
