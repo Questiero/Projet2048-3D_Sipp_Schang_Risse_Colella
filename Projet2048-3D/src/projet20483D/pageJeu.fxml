@@ -13,17 +13,17 @@
    <children>
       <Pane id="fondPageJeu" prefHeight="873.0" prefWidth="1394.0">
          <children>
-            <Button fx:id="boutonRIGHT" layoutX="1240.0" layoutY="667.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
-            <Button fx:id="boutonUP" layoutX="1140.0" layoutY="573.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="▲" />
-            <Button fx:id="boutonLEFT" layoutX="1043.0" layoutY="666.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
-            <Button fx:id="boutonDOWN" layoutX="1141.0" layoutY="763.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
+            <Button fx:id="boutonRIGHT" layoutX="1240.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#cliquerRIGHT" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
+            <Button fx:id="boutonUP" layoutX="1140.0" layoutY="573.0" mnemonicParsing="false" onMouseClicked="#cliquerUP" prefHeight="60" prefWidth="60" text="▲" />
+            <Button fx:id="boutonLEFT" layoutX="1043.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#cliquerLEFT" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
+            <Button fx:id="boutonDOWN" layoutX="1141.0" layoutY="763.0" mnemonicParsing="false" onMouseClicked="#cliquerDOWN" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
             <Button fx:id="boutonRANDOM" layoutX="1141.0" layoutY="666.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" text="🔀">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="boutonBACK" layoutX="1056.0" layoutY="748.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" rotate="45.0" style="-fx-rotate: -135;" text="▲" />
-            <Button fx:id="boutonFRONT" layoutX="1227.0" layoutY="583.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" rotate="60.0" style="-fx-rotate: 45;" text="▲" />
+            <Button fx:id="boutonBACK" layoutX="1056.0" layoutY="748.0" mnemonicParsing="false" onMouseClicked="#cliquerBACK" prefHeight="60" prefWidth="60" rotate="45.0" style="-fx-rotate: -135;" text="▲" />
+            <Button fx:id="boutonFRONT" layoutX="1227.0" layoutY="583.0" mnemonicParsing="false" onMouseClicked="#cliquerFRONT" prefHeight="60" prefWidth="60" rotate="60.0" style="-fx-rotate: 45;" text="▲" />
             <Button fx:id="boutonRetourPageJeu" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonRetourPageJeu" prefHeight="52.0" prefWidth="85.0" text="←">
                <cursor>
                   <Cursor fx:constant="HAND" />

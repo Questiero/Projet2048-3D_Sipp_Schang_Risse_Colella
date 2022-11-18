@@ -47,6 +47,11 @@ public class PageJeuController implements Initializable {
     @FXML
     private GridPane grille0;
 
+    private Grille3D g = new Grille3D();
+
+    //création d'une liste pour les labels de nos grilles
+    private ArrayList<Label> listeLabels = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         boutonJouerJeu.getStyleClass().add("boutons");
@@ -59,40 +64,6 @@ public class PageJeuController implements Initializable {
         boutonBACK.getStyleClass().add("boutons");
         boutonRANDOM.getStyleClass().add("boutons");
         boutonCommentJouer.getStyleClass().add("boutons");
-
-    }
-
-    @FXML
-    private void cliquerBoutonRetourPageJeu(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-        Stage stage;
-        Parent root;
-
-        stage = (Stage) boutonRetourPageJeu.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/theme.css");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void lancerPartie(MouseEvent event) throws IOException {
-
-        //création du début du jeu (grilles)
-        Grille3D g0 = new Grille3D();
-        g0.nouvelleCase();
-        System.out.println(g0);
-
-        //mise dans un tableau des valeurs des grilles
-        int[][][] tab = new int[TAILLE][TAILLE][TAILLE];
-        for (Case c : g0.getGrille()) {
-            tab[c.getY()][c.getX()][c.getZ()] = c.getValeur();
-        }
-
-        //création d'une liste pour les labels de nos grilles
-        ArrayList<Label> listeLabels = new ArrayList<>();
 
         //ajouts des labels dans la liste
         listeLabels.add(label00_G0);
@@ -125,23 +96,115 @@ public class PageJeuController implements Initializable {
         listeLabels.add(label12_G2);
         listeLabels.add(label22_G2);
 
+    }
+
+    @FXML
+    private void cliquerBoutonRetourPageJeu(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+        Stage stage;
+        Parent root;
+
+        stage = (Stage) boutonRetourPageJeu.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("projet20483D/theme.css");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void lancerPartie(MouseEvent event) throws IOException {
+
+        //disparition du bouton jouer
+        boutonJouerJeu.setVisible(false);
+        boutonJouerJeu.setDisable(true);
+        //disable boutons déplacements
+
+        g = initialisationGrilles(g);
+
+        //able boutons
+        //if game over
+    }
+
+    @FXML
+    private Grille3D initialisationGrilles(Grille3D g) {
+        //création du début du jeu (grilles)
+
+        g.nouvelleCase();
+        System.out.println(g);
+
+        affichageUpdate(g);
+
+        return (g);
+    }
+
+    @FXML
+    private void affichageUpdate(Grille3D g) {
+        //mise dans un tableau des valeurs des grilles   
+        //tableau des valeurs des grilles
+        int[][][] tab = new int[TAILLE][TAILLE][TAILLE];
+
+        for (Case c : g.getGrille()) {
+            tab[c.getY()][c.getX()][c.getZ()] = c.getValeur();
+        }
+
         //écriture des valeurs du tableau (=grille3D) dans nos labels
         ArrayList<Label> listeLabelsCopie = new ArrayList<Label>(listeLabels);  //copie de la liste
-
         for (int k = 0; k < TAILLE; k++) {
             for (int i = 0; i < TAILLE; i++) {
                 for (int j = 0; j < TAILLE; j++) {
-                    listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie                    
+                    if (tab[i][j][k] == 0) {
+                        listeLabelsCopie.get(0).setText("");    //travail dans la copie                  
+                    } else {
+                        listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie                    
+                    }
+                    
                     listeLabelsCopie.remove(0);
 
                 }
             }
 
         }
+    }
 
-        boutonJouerJeu.setVisible(false);
-        boutonJouerJeu.setDisable(true);
+    @FXML
+    private void deplacer(Direction dir) {
+        if (this.g.lanceurDeplacerCases(dir)) {
+            this.g.nouvelleCase();
+            affichageUpdate(this.g);
+        }
 
+    }
+
+    @FXML
+    private void cliquerUP(MouseEvent event) throws IOException {
+        deplacer(Direction.UP);
+    }
+
+    @FXML
+    private void cliquerDOWN(MouseEvent event) throws IOException {
+        deplacer(Direction.DOWN);
+    }
+
+    @FXML
+    private void cliquerRIGHT(MouseEvent event) throws IOException {
+        deplacer(Direction.RIGHT);
+    }
+
+    @FXML
+    private void cliquerLEFT(MouseEvent event) throws IOException {
+        deplacer(Direction.LEFT);
+    }
+
+    @FXML
+    private void cliquerFRONT(MouseEvent event) throws IOException {
+        deplacer(Direction.FRONT);
+    }
+
+    @FXML
+    private void cliquerBACK(MouseEvent event) throws IOException {
+        deplacer(Direction.BACK);
     }
 
 }
