@@ -1,30 +1,33 @@
 package projet20483D;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Projet20483D implements Parametres {
 
     /**
      * @param args the command line arguments
      */
-    private ArrayList savedStates = new ArrayList();
+    private static ArrayList savedStates = new ArrayList();
 
-    public void addMemento(Object m) {      //add de l'objet dans la liste de saves
+    public static void addMemento(Object m) {      //add de l'objet dans la liste de saves
         savedStates.add(m);
     }
 
-    public Object getMemento(int index) {   //getter pour avoir notre objet
+    public static Object getMemento(int index) {   //getter pour avoir notre objet
         return savedStates.get(index);
     }
-    
+
     public static void main(String[] args) {
 
         Grille3D g = new Grille3D();
         boolean b = g.nouvelleCase();
-        
+
         Grille3D originator = new Grille3D();
-        
+
         Scanner sc = new Scanner(System.in);
         RandomDeplacement directionRandom = new RandomDeplacement();    //appel à la méthode next() 
 
@@ -41,6 +44,7 @@ public class Projet20483D implements Parametres {
                     || s.equals("r") || s.equals("monter")
                     || s.equals("f") || s.equals("descendre")
                     || s.equals("a") || s.equals("aléatoire") || s.equals("aleatoire")
+                    || s.equals("u") || s.equals("undo")
                     || s.equals("s") || s.equals("bas"))) {
                 System.out.println("Vous devez écrire d pour Droite, q pour Gauche, z pour Haut, s pour Bas, f pour Monter, r pour Descendre ou a pour Aleatoire");
             } else {
@@ -58,12 +62,25 @@ public class Projet20483D implements Parametres {
                     direction = Direction.FRONT;
                 } else if (s.equals("f") || s.equals("descendre")) {
                     direction = Direction.BACK;
+                } else if (s.equals("u") || s.equals("undo")) {
+                    originator.restoreFromMemento(getMemento(1));
+
                 } else {
                     direction = directionRandom.next();
                 }
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {
                     b = g.nouvelleCase();
+
+                    originator.set(g);
+                    try {
+                        addMemento(originator.saveToMemento());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Projet20483D.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Projet20483D.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                     if (!b) {
                         g.gameOver();
                     }
