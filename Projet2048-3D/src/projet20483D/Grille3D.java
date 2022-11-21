@@ -92,6 +92,7 @@ public class Grille3D implements Parametres {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
         }
+        
         return deplacement;
     }
 

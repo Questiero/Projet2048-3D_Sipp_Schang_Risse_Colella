@@ -96,6 +96,15 @@ public class PageJeuController implements Initializable {
         listeLabels.add(label12_G2);
         listeLabels.add(label22_G2);
 
+        //Désactivation des boutons de déplacement avant le lancement de la partie
+        boutonUP.setDisable(true);
+        boutonDOWN.setDisable(true);
+        boutonRIGHT.setDisable(true);
+        boutonLEFT.setDisable(true);
+        boutonBACK.setDisable(true);
+        boutonFRONT.setDisable(true);
+        boutonRANDOM.setDisable(true);
+
     }
 
     @FXML
@@ -123,7 +132,14 @@ public class PageJeuController implements Initializable {
 
         g = initialisationGrilles(g);
 
-        //able boutons
+        //activation des boutons de déplacement
+        boutonUP.setDisable(false);
+        boutonDOWN.setDisable(false);
+        boutonRIGHT.setDisable(false);
+        boutonLEFT.setDisable(false);
+        boutonBACK.setDisable(false);
+        boutonFRONT.setDisable(false);
+        boutonRANDOM.setDisable(false);
         //if game over
     }
 
@@ -159,7 +175,7 @@ public class PageJeuController implements Initializable {
                     } else {
                         listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie                    
                     }
-                    
+
                     listeLabelsCopie.remove(0);
 
                 }
@@ -205,6 +221,11 @@ public class PageJeuController implements Initializable {
     @FXML
     private void cliquerBACK(MouseEvent event) throws IOException {
         deplacer(Direction.BACK);
+    }
+    
+    @FXML
+    private void cliquerRANDOM(MouseEvent event) throws IOException {
+        deplacer(Direction.random());
     }
 
 }
