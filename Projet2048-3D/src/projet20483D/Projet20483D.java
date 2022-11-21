@@ -4,7 +4,6 @@ import projet20483D.strategies.deplacements.RandomDeplacement;
 import java.util.Scanner;
 import projet20483D.strategies.deplacements.DeplacementContext;
 import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
-import projet20483D.strategies.deplacements.PMCTSDeplacement;
 
 public class Projet20483D implements Parametres {
 
