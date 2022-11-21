@@ -38,13 +38,15 @@ public class Projet20483D implements Parametres {
             String s = sc.nextLine();
             s.toLowerCase();
 
+            if (s.equals("u") || s.equals("undo")) {
+                originator.restoreFromMemento(getMemento(1));
+            }
             if (!(s.equals("d") || s.equals("droite")
                     || s.equals("q") || s.equals("gauche")
                     || s.equals("z") || s.equals("haut")
                     || s.equals("r") || s.equals("monter")
                     || s.equals("f") || s.equals("descendre")
                     || s.equals("a") || s.equals("aléatoire") || s.equals("aleatoire")
-                    || s.equals("u") || s.equals("undo")
                     || s.equals("s") || s.equals("bas"))) {
                 System.out.println("Vous devez écrire d pour Droite, q pour Gauche, z pour Haut, s pour Bas, f pour Monter, r pour Descendre ou a pour Aleatoire");
             } else {
@@ -53,7 +55,6 @@ public class Projet20483D implements Parametres {
                     direction = Direction.RIGHT;
                 } else if (s.equals("z") || s.equals("haut")) {
                     direction = Direction.UP;
-
                 } else if (s.equals("q") || s.equals("gauche")) {
                     direction = Direction.LEFT;
                 } else if (s.equals("s") || s.equals("bas")) {
@@ -62,8 +63,6 @@ public class Projet20483D implements Parametres {
                     direction = Direction.FRONT;
                 } else if (s.equals("f") || s.equals("descendre")) {
                     direction = Direction.BACK;
-                } else if (s.equals("u") || s.equals("undo")) {
-                    originator.restoreFromMemento(getMemento(1));
 
                 } else {
                     direction = directionRandom.next();
