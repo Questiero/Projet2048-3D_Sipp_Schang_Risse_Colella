@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -11,20 +12,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.PageJeuController">
    <children>
-      <Pane id="fondPageJeu" prefHeight="873.0" prefWidth="1394.0">
+      <Pane id="fondPageJeu" fx:id="panePageJeu" onKeyPressed="#clavierDirection" prefHeight="873.0" prefWidth="1394.0">
          <children>
-            <Button fx:id="boutonRIGHT" layoutX="1240.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#cliquerRIGHT" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" text="▲" />
-            <Button fx:id="boutonUP" layoutX="1140.0" layoutY="573.0" mnemonicParsing="false" onMouseClicked="#cliquerUP" prefHeight="60" prefWidth="60" text="▲" />
-            <Button fx:id="boutonLEFT" layoutX="1043.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#cliquerLEFT" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" text="▲" />
-            <Button fx:id="boutonDOWN" layoutX="1141.0" layoutY="763.0" mnemonicParsing="false" onMouseClicked="#cliquerDOWN" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" text="▲" />
-            <Button fx:id="boutonRANDOM" layoutX="1141.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#cliquerRANDOM" prefHeight="60" prefWidth="60" text="🔀">
+            <Button fx:id="boutonRIGHT" layoutX="1240.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#cliquerRIGHT" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" styleClass="boutons" text="▲" />
+            <Button fx:id="boutonUP" layoutX="1140.0" layoutY="573.0" mnemonicParsing="false" onMouseClicked="#cliquerUP" prefHeight="60" prefWidth="60" styleClass="boutons" text="▲" />
+            <Button fx:id="boutonLEFT" layoutX="1043.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#cliquerLEFT" prefHeight="60" prefWidth="60" style="-fx-rotate: -90;" styleClass="boutons" text="▲" />
+            <Button fx:id="boutonDOWN" layoutX="1141.0" layoutY="763.0" mnemonicParsing="false" onMouseClicked="#cliquerDOWN" prefHeight="60" prefWidth="60" style="-fx-rotate: 180;" styleClass="boutons" text="▲" />
+            <Button fx:id="boutonRANDOM" layoutX="1141.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#cliquerRANDOM" prefHeight="60" prefWidth="60" styleClass="boutons" text="🔀">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="boutonBACK" layoutX="1223.0" layoutY="748.0" mnemonicParsing="false" onMouseClicked="#cliquerBACK" prefHeight="60" prefWidth="60" style="-fx-rotate: 135;" text="▲" />
-            <Button fx:id="boutonFRONT" layoutX="1059.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#cliquerFRONT" prefHeight="60" prefWidth="60" style="-fx-rotate: -45;" text="▲" />
-            <Button fx:id="boutonRetourPageJeu" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonRetourPageJeu" prefHeight="52.0" prefWidth="85.0" text="←">
+            <Button fx:id="boutonBACK" layoutX="1223.0" layoutY="748.0" mnemonicParsing="false" onMouseClicked="#cliquerBACK" prefHeight="60" prefWidth="60" style="-fx-rotate: 135;" styleClass="boutons" text="▲" />
+            <Button fx:id="boutonFRONT" layoutX="1059.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#cliquerFRONT" prefHeight="60" prefWidth="60" style="-fx-rotate: -45;" styleClass="boutons" text="▲" />
+            <Button fx:id="boutonRetourPageJeu" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonRetourPageJeu" prefHeight="52.0" prefWidth="85.0" styleClass="boutons" text="←">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -79,7 +80,7 @@
                      </children></Pane>
                </children>
             </GridPane>
-            <Button fx:id="boutonJouerJeu" layoutX="518.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#lancerPartie" prefHeight="100.0" prefWidth="362.0" text="JOUER" />
+            <Button fx:id="boutonJouerJeu" layoutX="518.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#lancerPartie" prefHeight="100.0" prefWidth="362.0" styleClass="boutons" text="JOUER" />
             <GridPane fx:id="grille1" gridLinesVisible="true" layoutX="547.0" layoutY="226.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #e4dfd7;">
                <children>
                   <Pane fx:id="pane00_G01" prefHeight="200.0" prefWidth="200.0">
@@ -198,6 +199,55 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <TextField editable="false" focusTraversable="false" layoutX="948.0" layoutY="197.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="ARRIERE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </TextField>
+            <Button fx:id="boutonIA" layoutX="136.0" layoutY="667.0" mnemonicParsing="false" prefHeight="60" prefWidth="60" styleClass="boutons" text="IA">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutonANNULER" layoutX="211.0" layoutY="667.0" mnemonicParsing="false" prefHeight="60" prefWidth="225.0" styleClass="boutons" text="ANNULER : 5">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Pane layoutX="952.0" layoutY="81.0" prefHeight="75.0" prefWidth="114.0" style="-fx-background-color: #e4dfd7; -fx-background-radius: 10;">
+               <children>
+                  <TextField fx:id="titreAcceuil1" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="22.0" layoutY="5.0" prefHeight="33.0" prefWidth="69.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="SCORE">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="labelScore" alignment="CENTER" layoutX="6.0" layoutY="38.0" prefHeight="33.0" prefWidth="100.0" style="-fx-text-fill: #64523f;">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="1101.0" layoutY="81.0" prefHeight="75.0" prefWidth="159.0" style="-fx-background-color: #e4dfd7; -fx-background-radius: 10;">
+               <children>
+                  <Label fx:id="labelMeilleurScore" alignment="CENTER" layoutX="19.0" layoutY="38.0" prefHeight="33.0" prefWidth="125.0" style="-fx-text-fill: #64523f;">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="titreAcceuil11" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="9.0" layoutY="5.0" prefHeight="33.0" prefWidth="142.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="MEILLEUR SCORE">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
          </children></Pane>
       <TextField fx:id="titreAcceuil" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="74.0" layoutY="19.0" prefHeight="207.0" prefWidth="702.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="2048 - 3D">
          <cursor>
@@ -207,6 +257,16 @@
             <Font name="System Bold" size="96.0" />
          </font>
       </TextField>
-      <Button fx:id="boutonCommentJouer" layoutX="592.0" layoutY="97.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="48.0" text="?" />
+      <Button fx:id="boutonCommentJouer" layoutX="592.0" layoutY="97.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="48.0" styleClass="boutons" text="?" />
+      <TextField editable="false" focusTraversable="false" layoutX="126.0" layoutY="196.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="AVANT">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TextField>
+      <TextField editable="false" focusTraversable="false" layoutX="536.0" layoutY="196.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="CENTRE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

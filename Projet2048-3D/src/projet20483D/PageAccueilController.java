@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -29,7 +30,10 @@ public class PageAccueilController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonJouer, boutonQuitter, boutonParametres, boutonCharger;
+    private Button boutonJouer, boutonQuitter, boutonParametres, boutonCharger, boutonNouvellePartie, boutonChargerPartie;
+    
+    @FXML
+    private SplitPane splitPaneJouer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -41,12 +45,39 @@ public class PageAccueilController implements Initializable {
     }
 
     @FXML
-    private void cliquerBoutonJouer(MouseEvent event) throws IOException {
+    private void passerBoutonJouer(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+        
+        splitPaneJouer.setVisible(true);        
+    }
+    
+    @FXML
+    private void sortirBoutonJouer(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+        
+        splitPaneJouer.setVisible(false);        
+    }
+    
+    @FXML
+    private void passerSplitJouer(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+        
+        splitPaneJouer.setVisible(true);        
+    }
+    
+    @FXML
+    private void sortirSplitJouer(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+        
+        splitPaneJouer.setVisible(false);        
+    }
+
+    @FXML
+    private void cliquerBoutonNouvellePartie(MouseEvent event) throws IOException {
         //ouverture nouvelle page
         
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageJeu.fxml"));
-        Stage stage = (Stage) boutonJouer.getScene().getWindow();
-        
+        Stage stage = (Stage) boutonJouer.getScene().getWindow();        
         
 
         //AJOUTER UNE PAGE DE REGLAGES DE LA PARTIE AVANT
@@ -60,6 +91,8 @@ public class PageAccueilController implements Initializable {
         
 
     }
+    
+    
 
     @FXML
     private void cliquerBoutonQuitter(MouseEvent event) throws IOException {

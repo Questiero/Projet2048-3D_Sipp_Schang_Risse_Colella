@@ -7,23 +7,20 @@ package projet20483D;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
+import java.awt.event.KeyListener;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import static projet20483D.Parametres.ETAGES;
 import static projet20483D.Parametres.TAILLE;
 
 /**
@@ -37,7 +34,7 @@ public class PageJeuController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonCommentJouer;
+    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonCommentJouer, boutonIA, boutonANNULER;
     @FXML
     private Label label00_G0, label10_G0, label20_G0, label01_G0, label11_G0, label21_G0, label02_G0, label12_G0, label22_G0;
     @FXML
@@ -46,6 +43,8 @@ public class PageJeuController implements Initializable {
     private Label label00_G2, label10_G2, label20_G2, label01_G2, label11_G2, label21_G2, label02_G2, label12_G2, label22_G2;
     @FXML
     private GridPane grille0;
+    @FXML 
+    private Pane panePageJeu;
 
     private Grille3D g = new Grille3D();
 
@@ -54,17 +53,6 @@ public class PageJeuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        boutonJouerJeu.getStyleClass().add("boutons");
-        boutonRetourPageJeu.getStyleClass().add("boutons");
-        boutonUP.getStyleClass().add("boutons");
-        boutonDOWN.getStyleClass().add("boutons");
-        boutonLEFT.getStyleClass().add("boutons");
-        boutonRIGHT.getStyleClass().add("boutons");
-        boutonFRONT.getStyleClass().add("boutons");
-        boutonBACK.getStyleClass().add("boutons");
-        boutonRANDOM.getStyleClass().add("boutons");
-        boutonCommentJouer.getStyleClass().add("boutons");
-
         //ajouts des labels dans la liste
         listeLabels.add(label00_G0);
         listeLabels.add(label10_G0);
@@ -104,6 +92,8 @@ public class PageJeuController implements Initializable {
         boutonBACK.setDisable(true);
         boutonFRONT.setDisable(true);
         boutonRANDOM.setDisable(true);
+        boutonIA.setDisable(true);
+        boutonANNULER.setDisable(true);
 
     }
 
@@ -140,15 +130,16 @@ public class PageJeuController implements Initializable {
         boutonBACK.setDisable(false);
         boutonFRONT.setDisable(false);
         boutonRANDOM.setDisable(false);
+        boutonIA.setDisable(false);
+        boutonANNULER.setDisable(false);
         //if game over
     }
 
     @FXML
     private Grille3D initialisationGrilles(Grille3D g) {
-        //création du début du jeu (grilles)
 
+        //création du début du jeu (grilles)
         g.nouvelleCase();
-        System.out.println(g);
 
         affichageUpdate(g);
 
@@ -199,6 +190,52 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
+    private void clavierDirection(KeyEvent event) {
+        switch (event.getText()) {
+            case "Z", "z":
+                deplacer(Direction.UP);
+                break;
+            case "S", "s":
+                deplacer(Direction.DOWN);
+                break;
+            case "D", "d":
+                deplacer(Direction.RIGHT);
+                break;
+            case "q", "Q":
+                deplacer(Direction.LEFT);
+                break;
+            case "R", "r":
+                deplacer(Direction.FRONT);
+                break;
+            case "F", "f":
+                deplacer(Direction.BACK);
+                break;
+        }
+
+        /*panePageJeu.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case UP:
+                    deplacer(Direction.UP);
+
+                    break;
+                case DOWN:
+                    deplacer(Direction.DOWN);
+
+                    break;
+                case LEFT:
+                    deplacer(Direction.LEFT);
+
+                    break;
+                case RIGHT:
+                    deplacer(Direction.RIGHT);
+
+                    break;
+            }
+        });*/
+
+    }
+
+    @FXML
     private void cliquerDOWN(MouseEvent event) throws IOException {
         deplacer(Direction.DOWN);
     }
@@ -222,7 +259,7 @@ public class PageJeuController implements Initializable {
     private void cliquerBACK(MouseEvent event) throws IOException {
         deplacer(Direction.BACK);
     }
-    
+
     @FXML
     private void cliquerRANDOM(MouseEvent event) throws IOException {
         deplacer(Direction.random());
