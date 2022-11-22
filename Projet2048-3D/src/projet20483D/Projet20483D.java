@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet20483D.Grille3D.Memento;
 import projet20483D.strategies.deplacements.RandomDeplacement;
 import projet20483D.strategies.deplacements.DeplacementContext;
 
@@ -13,22 +14,29 @@ public class Projet20483D implements Parametres {
     /**
      * @param args the command line arguments
      */
-    private static ArrayList savedStates = new ArrayList();
+    private static LinkedList savedStates = new LinkedList();
 
     public static void addMemento(Object m) {      //add de l'objet dans la liste de saves
-        savedStates.add(m);
+        savedStates.addFirst(m);
+        if (savedStates.size() == 6) {
+            savedStates.removeLast();
+        }
     }
 
-    public static Object getMemento(int index) {   //getter pour avoir notre objet
-        return savedStates.get(index);
+    public static Object getMemento() {   //getter pour avoir notre objet
+        Object nan = savedStates.getFirst();
+        savedStates.removeFirst();
+        return nan;
+    }
+
+    public static Grille3D restoreFromMemento(Object memento) {
+        return ((Memento) memento).getSavedState();
     }
 
     public static void main(String[] args) {
 
         Grille3D g = new Grille3D();
         boolean b = g.nouvelleCase();
-
-        Grille3D originator = new Grille3D();
 
         Scanner sc = new Scanner(System.in);
 
@@ -44,7 +52,11 @@ public class Projet20483D implements Parametres {
             s.toLowerCase();
 
             if (s.equals("u") || s.equals("undo")) {
-                originator.restoreFromMemento(getMemento(1));
+                if (savedStates.size() > 0) {
+                    g = restoreFromMemento(getMemento());
+                } else {
+                    System.out.println("Nan");
+                }
             }
             if (!(s.equals("d") || s.equals("droite")
                     || s.equals("q") || s.equals("gauche")
@@ -72,31 +84,25 @@ public class Projet20483D implements Parametres {
                     direction = context.executeStrategy();
                 }
 
+                addMemento(new Memento(g));
+
                 boolean b2 = g.lanceurDeplacerCases(direction);
 
                 if (b2) {
 
                     b = g.nouvelleCase();
 
-                    originator.set(g);
-                    try {
-                        addMemento(originator.saveToMemento());
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Projet20483D.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Projet20483D.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
                 } else {
                     System.out.println("Non");
+                    savedStates.removeFirst();
                 }
                 System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
                 System.out.println("Score: " + g.getScore());
-                
+
             }
 
         }
-        
+
         System.out.println(g.gameOverMessage());
 
     }

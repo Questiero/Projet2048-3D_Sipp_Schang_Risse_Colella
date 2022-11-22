@@ -19,7 +19,7 @@ public class Grille3D implements Serializable, Parametres {
     private int score = 0;
     private boolean deplacement;
     private boolean victory = false;
-    
+
     public Grille3D() {
         this.grille = new HashSet<Case>();
     }
@@ -275,33 +275,39 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
-    private Grille3D state;
+    public int getNumberEmpty() {
+        return TAILLE * TAILLE * TAILLE - this.grille.size();
+    }
 
-    public void set(Grille3D state) {
-        try {
-            this.state = state.deepCopy();
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    public int getMonotony() {
+
+        int monotony = 0;
+
+        for (Case c1 : this.grille) {
+
+            Direction[] directions = Direction.values();
+
+            for (Direction dir : directions) {
+
+                Case c2 = c1.getVoisinDirect(dir);
+                if (c2 != null) {
+                    monotony -= c1.getValeur() - c2.getValeur();
+                }
+
+            }
+
         }
+
+        return monotony;
 
     }
 
     public Object saveToMemento() throws ClassNotFoundException, IOException {
         System.out.println("Originator: sauvegarde dans le memento.");
-        return new Memento(state);
+        return new Memento(this);
     }
 
-    public void restoreFromMemento(Object m) {
-        if (m instanceof Memento) {
-            Memento memento = (Memento) m;
-            state = memento.getSavedState();
-            System.out.println("Originator: Etat après restauration: \n" + state);
-        }
-    }
-
-    private static class Memento { // Classe interne --> permet la sauvegarde
+    public static class Memento { // Classe interne --> permet la sauvegarde
 
         private Grille3D state;
 

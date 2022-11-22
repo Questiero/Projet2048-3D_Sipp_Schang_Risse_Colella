@@ -64,19 +64,30 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
         protected double selfEvaluate() {
 
+            double poidsVide, poidsMax, poidsMonotony;
+
             switch (ExpectimaxDeplacement.this.type) {
 
                 case NAIVE:
                     return this.grille.getScore();
                 case EMPTYONLY:
-                    
-                    double poidsVide = 0;
-                    double poidsMax = 1.;
 
-                    return poidsVide * (TAILLE * TAILLE * TAILLE - this.grille.getGrille().size()) + poidsMax * this.grille.getValeurMax();
-               
-                case POGGIEWOGGIES:
-                    return 69420;
+                    poidsVide = 0;
+                    poidsMax = 2.7;
+
+                    return poidsVide * Math.log(this.grille.getNumberEmpty())
+                            + poidsMax * this.grille.getValeurMax();
+
+                case FULLBLAST:
+
+                    poidsVide = 0;
+                    poidsMax = 2.7;
+                    poidsMonotony = 1.;
+
+                    return poidsVide * Math.log(this.grille.getNumberEmpty())
+                            + poidsMax * this.grille.getValeurMax()
+                            + poidsMonotony * this.grille.getMonotony();
+
             }
 
             return 0;
@@ -286,7 +297,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
     public enum ExpectimaxType {
         NAIVE,
         EMPTYONLY,
-        POGGIEWOGGIES
+        FULLBLAST
     }
 
 }
