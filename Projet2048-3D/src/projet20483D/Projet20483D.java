@@ -40,7 +40,7 @@ public class Projet20483D implements Parametres {
 
             System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (f) ou Descendre/Back (r), direction Aléatoire (a)");
 
-            String s = "a";
+            String s = sc.nextLine();
             s.toLowerCase();
 
             if (s.equals("u") || s.equals("undo")) {
