@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -267,6 +269,52 @@ public class Grille3D implements Serializable, Parametres {
         Grille3D copy = (Grille3D) ois.readObject();
 
         return copy;
+
+    }
+
+    private Grille3D state;
+
+    public void set(Grille3D state) {
+        try {
+            this.state = state.deepCopy();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public Object saveToMemento() throws ClassNotFoundException, IOException {
+        System.out.println("Originator: sauvegarde dans le memento.");
+        return new Memento(state);
+    }
+
+    public void restoreFromMemento(Object m) {
+        if (m instanceof Memento) {
+            Memento memento = (Memento) m;
+            state = memento.getSavedState();
+            System.out.println("Originator: Etat après restauration: \n" + state);
+        }
+    }
+
+    private static class Memento { // Classe interne --> permet la sauvegarde
+
+        private Grille3D state;
+
+        public Memento(Grille3D stateToSave) {
+            try {
+                state = stateToSave.deepCopy();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        }
+
+        public Grille3D getSavedState() {
+            return state;
+        }
 
     }
 

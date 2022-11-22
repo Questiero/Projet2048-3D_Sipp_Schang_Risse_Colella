@@ -2,7 +2,7 @@ package projet20483D;
 
 import java.io.Serializable;
 
-public class Case implements Serializable, Parametres {
+public class Case implements Parametres, Serializable {
 
     private int x, y, z, valeur;
     private Grille3D grille;
