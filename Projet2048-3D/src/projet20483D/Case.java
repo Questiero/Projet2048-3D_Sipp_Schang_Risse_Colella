@@ -116,7 +116,7 @@ public class Case implements Parametres, Serializable {
                 }
             }
         } else if (direction == Direction.BACK) {
-            for (int i = this.z + 1; i < ETAGES; i++) {
+            for (int i = this.z + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
                    if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
                         return c;

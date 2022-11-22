@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet20483D.strategies.deplacements.RandomDeplacement;
+import projet20483D.strategies.deplacements.DeplacementContext;
+import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
 
 public class Projet20483D implements Parametres {
 
@@ -29,7 +32,10 @@ public class Projet20483D implements Parametres {
         Grille3D originator = new Grille3D();
 
         Scanner sc = new Scanner(System.in);
-        RandomDeplacement directionRandom = new RandomDeplacement();    //appel à la méthode next() 
+        
+        DeplacementContext context = new DeplacementContext(new RandomDeplacement());
+        // DeplacementContext context = new DeplacementContext(new PMCTSDeplacement(g, 10));
+        // DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g));
 
         while (!g.partieFinie()) {
 
@@ -48,7 +54,7 @@ public class Projet20483D implements Parametres {
                     || s.equals("f") || s.equals("descendre")
                     || s.equals("a") || s.equals("aléatoire") || s.equals("aleatoire")
                     || s.equals("s") || s.equals("bas"))) {
-                System.out.println("Vous devez écrire d pour Droite, q pour Gauche, z pour Haut, s pour Bas, f pour Monter, r pour Descendre ou a pour Aleatoire");
+                System.out.println("Vous devez écrire d pour Droite, q pour Gauche, z pour Haut, s pour Bas, r pour Monter, f pour Descendre ou a pour Aleatoire");
             } else {
                 Direction direction = Direction.RIGHT;  //initialisation
                 if (s.equals("d") || s.equals("droite")) {
@@ -63,9 +69,8 @@ public class Projet20483D implements Parametres {
                     direction = Direction.FRONT;
                 } else if (s.equals("f") || s.equals("descendre")) {
                     direction = Direction.BACK;
-
                 } else {
-                    direction = directionRandom.next();
+                    direction = context.executeStrategy();
                 }
                 boolean b2 = g.lanceurDeplacerCases(direction);
                 if (b2) {
@@ -83,15 +88,25 @@ public class Projet20483D implements Parametres {
                     if (!b) {
                         g.gameOver();
                     }
+                    boolean b2 = g.lanceurDeplacerCases(direction);
+                    if (b2) {
+                        b = g.nouvelleCase();
+                    } else {
+                        System.out.println("Non");
+                    }
+                    System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
+
+                    if (b2) {
+                        b = g.nouvelleCase();
+                        System.out.println("Score: " + g.getScore());
+                    }
+
                 }
-                System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
-                if (g.getValeurMax() >= OBJECTIF) {
-                    g.victory();
-                }
+
             }
+
         }
 
-        g.gameOver();
-
     }
+
 }
