@@ -1,5 +1,6 @@
 package projet20483D.strategies.deplacements;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import projet20483D.Direction;
 import projet20483D.Grille3D;
@@ -12,11 +13,14 @@ public class Benchmark {
         long initTime = System.currentTimeMillis();
 
         Scanner sc = new Scanner(System.in);
+        DecimalFormat df = new DecimalFormat("0.00");
 
         int sumOfScores = 0;
         int nbrOfWins = 0;
 
-        for (int i = 0; i < 100; i++) {
+        int nbrTests = 1000;
+
+        for (int i = 0; i < nbrTests; i++) {
 
             Grille3D g = new Grille3D();
             boolean b = g.nouvelleCase();
@@ -41,7 +45,7 @@ public class Benchmark {
 
             }
 
-            System.out.println("[" + ((System.currentTimeMillis() - initTime)) + "ms | " + (i + 1) + "/100 | n = " + n + "] " + g.gameOverMessage());
+            System.out.println("[" + ((System.currentTimeMillis() - initTime)) + "ms | " + (i + 1) + "/" + nbrTests + " | n = " + n + " | " + df.format(((double) nbrOfWins) * 100 / (i + 1)) + "% ] " + g.gameOverMessage());
             sumOfScores += g.getScore();
             if (g.isVictory()) {
                 nbrOfWins++;
@@ -49,7 +53,7 @@ public class Benchmark {
 
         }
 
-        System.out.println("Score moyen: " + sumOfScores / 100 + " | Nombre de victoires: " + nbrOfWins + "/100");
+        System.out.println("Score moyen: " + sumOfScores / nbrTests + " | Nombre de victoires: " + nbrOfWins + "/" + nbrTests + " | Pourcentage de victoires: " + df.format(((double) nbrOfWins) * 100 / nbrTests) + "%");
 
     }
 

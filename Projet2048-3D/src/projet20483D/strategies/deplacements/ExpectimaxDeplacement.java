@@ -71,9 +71,12 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
                 case EMPTYONLY:
                     
                     double poidsVide = 0;
-                    double poidsMax = 1.;
+                    double poidsMax = 2.7;
+                    double poidsMonotony = 1.;
 
-                    return poidsVide * (TAILLE * TAILLE * TAILLE - this.grille.getGrille().size()) + poidsMax * this.grille.getValeurMax();
+                    return poidsVide * Math.log(this.grille.getNumberEmpty())
+                            + poidsMax * this.grille.getValeurMax()
+                            + poidsMonotony * this.grille.getMonotony();
                
                 case POGGIEWOGGIES:
                     return 69420;
