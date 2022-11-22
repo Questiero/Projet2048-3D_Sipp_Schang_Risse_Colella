@@ -263,6 +263,10 @@ public class PageJeuController implements Initializable {
             case "F", "f":
                 deplacer(Direction.BACK);
                 break;
+            case "A", "a":
+                deplacer(Direction.random());
+                break;
+            
         }
 
         /*panePageJeu.setOnKeyPressed(e -> {
