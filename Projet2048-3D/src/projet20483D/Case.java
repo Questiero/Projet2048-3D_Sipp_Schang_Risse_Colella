@@ -1,6 +1,8 @@
 package projet20483D;
 
-public class Case implements Parametres {
+import java.io.Serializable;
+
+public class Case implements Parametres, Serializable {
 
     private int x, y, z, valeur;
     private Grille3D grille;
@@ -114,7 +116,7 @@ public class Case implements Parametres {
                 }
             }
         } else if (direction == Direction.BACK) {
-            for (int i = this.z + 1; i < ETAGES; i++) {
+            for (int i = this.z + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
                    if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
                         return c;

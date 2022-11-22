@@ -1,18 +1,25 @@
 package projet20483D;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-import static projet20483D.Parametres.TAILLE;
 
-public class Grille3D implements Parametres {
+public class Grille3D implements Serializable, Parametres {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
-    private boolean deplacement;
     private int score = 0;
-    private int meilleurScore;
-
+    private boolean deplacement;
+    private boolean victory = false;
+    
     public Grille3D() {
         this.grille = new HashSet<Case>();
     }
@@ -20,7 +27,7 @@ public class Grille3D implements Parametres {
     @Override
     public String toString() {
 
-        int[][][] tableau = new int[TAILLE][TAILLE][ETAGES];
+        int[][][] tableau = new int[TAILLE][TAILLE][TAILLE];
         for (Case c : this.grille) {
             tableau[c.getY()][c.getX()][c.getZ()] = c.getValeur();
         }
@@ -31,13 +38,13 @@ public class Grille3D implements Parametres {
                 result += "\n";
 
             }
-            for (int k = 0; k < ETAGES; k++) {
+            for (int k = 0; k < TAILLE; k++) {
                 result += "[";
                 for (int j = 0; j < TAILLE - 1; j++) {
                     result += String.format("%4d,", tableau[i][j][k]);
 
                 }
-                if (k == ETAGES - 1) {
+                if (k == TAILLE - 1) {
                     result += String.format("%4d]", tableau[i][tableau.length - 1][k]);
                 } else {
                     result += String.format("%4d]\t\t", tableau[i][tableau.length - 1][k]);
@@ -63,14 +70,25 @@ public class Grille3D implements Parametres {
         return valeurMax;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public boolean isVictory() {
+        return victory;
+    }
+
     public boolean partieFinie() {
-        // Pas sûr sûr que ça marche, si il y a des bugs c'est sûrement ici
-        if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
+
+        if (this.valeurMax >= OBJECTIF) {
+            victory = true;
+            return true;
+        } else if (this.grille.size() < TAILLE * TAILLE * TAILLE) {
             return false;
         } else {
             for (Case c : this.grille) {
-                Direction[] directions = {Direction.UP, Direction.RIGHT};
-                for (int i = 1; i <= 2; i++) {
+                Direction[] directions = Direction.values();
+                for (int i = 0; i < directions.length; i++) {
                     if (c.getVoisinDirect(directions[i]) != null) {
                         if (c.valeurEgale(c.getVoisinDirect(directions[i]))) {
                             return false;
@@ -79,17 +97,16 @@ public class Grille3D implements Parametres {
                 }
             }
         }
+
         return true;
+
     }
 
     public boolean lanceurDeplacerCases(Direction direction) {
         Case[][] extremites = this.getCasesExtremites(direction);
         deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
         for (int i = 0; i < TAILLE; i++) {
-            int secondD = ETAGES;
-            if (direction == Direction.FRONT || direction == Direction.BACK) {
-                secondD = TAILLE;
-            }
+            int secondD = TAILLE;
             for (int j = 0; j < secondD; j++) {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
@@ -100,14 +117,13 @@ public class Grille3D implements Parametres {
 
     private void fusion(Case c) {
         c.setValeur(c.getValeur() * 2);
+        this.score += c.getValeur();
         if (this.valeurMax < c.getValeur()) {
             this.valeurMax = c.getValeur();
         }
         deplacement = true;
-        score += this.valeurMax;
-        if (score > meilleurScore) {
-            meilleurScore = score;
-        }
+        //System.out.println("Score: " + this.score);
+
     }
 
     private void deplacerCasesRecursif(Case[][] extremites, int firstD, int secondD, Direction direction, int compteur) {
@@ -117,7 +133,8 @@ public class Grille3D implements Parametres {
                     || (direction == Direction.LEFT && extremites[firstD][secondD].getX() != compteur)
                     || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
                     || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
-                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur)) {
+                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != TAILLE - 1 - compteur)) {
+
                 this.grille.remove(extremites[firstD][secondD]);
                 switch (direction) {
                     case UP:
@@ -136,7 +153,7 @@ public class Grille3D implements Parametres {
                         extremites[firstD][secondD].setZ(compteur);
                         break;
                     case BACK:
-                        extremites[firstD][secondD].setZ(ETAGES - 1 - compteur);
+                        extremites[firstD][secondD].setZ(TAILLE - 1 - compteur);
                         break;
                 }
                 this.grille.add(extremites[firstD][secondD]);
@@ -159,15 +176,8 @@ public class Grille3D implements Parametres {
 
     public Case[][] getCasesExtremites(Direction direction) {
 
-        Case[][] result = null;
+        Case[][] result = new Case[TAILLE][TAILLE];
 
-        if (direction == Direction.FRONT || direction == Direction.BACK) {
-            result = new Case[TAILLE][TAILLE];
-        } else {
-            result = new Case[TAILLE][ETAGES];
-        }
-
-        int compteur = 0;
         for (Case c : this.grille) {
             switch (direction) {
                 case UP:
@@ -205,26 +215,24 @@ public class Grille3D implements Parametres {
         return result;
     }
 
-    public void victory() {
-        System.out.println("Bravo ! Vous avez atteint " + this.valeurMax);
-        System.exit(0);
-    }
-
-    public void gameOver() {
-        System.out.println("La partie est finie. Votre score est " + this.valeurMax);
-        System.exit(1);
+    public String gameOverMessage() {
+        if (this.victory) {
+            return "Bravo ! Vous avez atteint " + this.valeurMax + " avec un score de " + this.score;
+        } else {
+            return "La partie est finie. Vous avez atteint " + this.valeurMax + " avec un score de " + this.score;
+        }
     }
 
     public boolean nouvelleCase() {
 
-        if (this.grille.size() < TAILLE * TAILLE * ETAGES) {
+        if (this.grille.size() < TAILLE * TAILLE * TAILLE) {
             ArrayList<Case> casesLibres = new ArrayList<>();
             Random ra = new Random();
             int valeur = (1 + ra.nextInt(2)) * 2;
             // on crée toutes les cases encore libres
             for (int x = 0; x < TAILLE; x++) {
                 for (int y = 0; y < TAILLE; y++) {
-                    for (int z = 0; z < ETAGES; z++) {
+                    for (int z = 0; z < TAILLE; z++) {
                         Case c = new Case(x, y, z, valeur);
                         if (!this.grille.contains(c)) { // contains utilise la méthode equals dans Case
                             casesLibres.add(c);
@@ -235,15 +243,7 @@ public class Grille3D implements Parametres {
             }
             // on en choisit une au hasard et on l'ajoute à la grille
             Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
-            ajout.setGrille(this);
-            this.grille.add(ajout);
-            if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
-                this.valeurMax = ajout.getValeur();
-            }
-            score += valeur;
-            if (score > meilleurScore) {
-                meilleurScore = score;
-            }
+            this.addCase(ajout);
             return true;
         } else {
             return false;
@@ -251,13 +251,74 @@ public class Grille3D implements Parametres {
 
     }
 
-    public int getScore() {
-        return score;
+    public void addCase(Case ajout) {
+        ajout.setGrille(this);
+        this.grille.add(ajout);
+        if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
+            this.valeurMax = ajout.getValeur();
+        }
     }
 
-    public int getMeilleurScore() {
-        return meilleurScore;
+    public Grille3D deepCopy() throws IOException, ClassNotFoundException {
+
+        //Serialization of object
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(this);
+
+        //De-serialization of object
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        Grille3D copy = (Grille3D) ois.readObject();
+
+        return copy;
+
     }
-    
+
+    private Grille3D state;
+
+    public void set(Grille3D state) {
+        try {
+            this.state = state.deepCopy();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public Object saveToMemento() throws ClassNotFoundException, IOException {
+        System.out.println("Originator: sauvegarde dans le memento.");
+        return new Memento(state);
+    }
+
+    public void restoreFromMemento(Object m) {
+        if (m instanceof Memento) {
+            Memento memento = (Memento) m;
+            state = memento.getSavedState();
+            System.out.println("Originator: Etat après restauration: \n" + state);
+        }
+    }
+
+    private static class Memento { // Classe interne --> permet la sauvegarde
+
+        private Grille3D state;
+
+        public Memento(Grille3D stateToSave) {
+            try {
+                state = stateToSave.deepCopy();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(Grille3D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        }
+
+        public Grille3D getSavedState() {
+            return state;
+        }
+
+    }
 
 }
