@@ -10,5 +10,10 @@
     -fx-background-color: #5383B5;
 }
 
+.tuile2{
+    -fx-background-color:black;
+}
 
-
+.tuile4{
+    -fx-background-color:red;
+}

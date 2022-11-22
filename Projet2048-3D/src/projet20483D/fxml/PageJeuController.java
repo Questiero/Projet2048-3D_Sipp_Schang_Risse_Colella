@@ -177,44 +177,48 @@ public class PageJeuController implements Initializable {
                         listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie
 
                     }
-                    listeLabelsCopie.get(0).setStyle("-fx-background-color : transparent;");
-                    switch (tab[i][j][k]) {
+
+                    listeLabelsCopie.get(0).getStyleClass().clear();
+                    listeLabelsCopie.get(0).getStyleClass().add("tuiles");
+
+                    switch (tab[i][j][k]) {         //applique styles en fonction de la valeur de la tuile
                         case 2:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : #EEE4DA;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile2");
                             break;
                         case 4:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : red;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile4");
                             break;
                         case 8:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : blue;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile8");
                             break;
                         case 16:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile16");
                             break;
                         case 32:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile32");
                             break;
                         case 64:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile64");
                             break;
                         case 128:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile128");
                             break;
                         case 256:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile256");
                             break;
                         case 512:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile512");
                             break;
                         case 1024:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile1024");
                             break;
                         case 2048:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            listeLabelsCopie.get(0).getStyleClass().add("tuile2048");
                             break;
-                        default:
-                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
-                            break;
+                    }
+                    if ((tab[i][j][k]) > 2048) {
+                        listeLabelsCopie.get(0).getStyleClass().add("tuilePlus");
+
                     }
 
                     listeLabelsCopie.remove(0);

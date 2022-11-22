@@ -22,7 +22,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="boutonParametres" alignment="CENTER" layoutX="584.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonParametres" prefHeight="60.0" prefWidth="229.0" text="PARAMETRES">
+            <Button fx:id="boutonCredits" alignment="CENTER" layoutX="584.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonCredits" prefHeight="60.0" prefWidth="229.0" text="CREDITS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

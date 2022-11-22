@@ -28,7 +28,7 @@ public class PageAccueilController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonJouer, boutonQuitter, boutonParametres, boutonCharger;
+    private Button boutonJouer, boutonQuitter, boutonCredits, boutonCharger;
     @FXML
     private SplitPane splitPaneJouer;
 
@@ -36,7 +36,7 @@ public class PageAccueilController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         boutonJouer.getStyleClass().add("boutons");
         boutonCharger.getStyleClass().add("boutons");
-        boutonParametres.getStyleClass().add("boutons");
+        boutonCredits.getStyleClass().add("boutons");
         boutonQuitter.getStyleClass().add("boutons");
     }    
 
@@ -73,15 +73,15 @@ public class PageAccueilController implements Initializable {
     }
 
     @FXML
-    private void cliquerBoutonParametres(MouseEvent event) throws IOException {
+    private void cliquerBoutonCredits(MouseEvent event) throws IOException {
         //fermeture page
         Stage stage;
         Parent root;
 
         //A MODIF EN CREANT NOUVELLE PAGES POUR PARAMETTRE
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        stage = (Stage) boutonParametres.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
+        stage = (Stage) boutonCredits.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageCredits.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
