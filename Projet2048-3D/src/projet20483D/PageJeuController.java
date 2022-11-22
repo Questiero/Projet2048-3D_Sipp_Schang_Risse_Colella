@@ -16,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import java.awt.event.KeyListener;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -101,7 +100,7 @@ public class PageJeuController implements Initializable {
         boutonANNULER.setDisable(true);        
         
         //Affichage meilleur score dès le début
-        labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+        // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
 
     }
 
@@ -188,7 +187,7 @@ public class PageJeuController implements Initializable {
             this.g.nouvelleCase();
             affichageUpdate(this.g);
             labelScore.setText(Integer.toString(this.g.getScore()));
-            labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+            // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
         }
     }
 
