@@ -26,7 +26,7 @@ public class Benchmark {
             boolean b = g.nouvelleCase();
 
             // DeplacementContext context = new DeplacementContext(new RandomDeplacement());
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxType.EMPTYONLY));
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxType.FULLBLAST));
 
             int n = 0;
 
