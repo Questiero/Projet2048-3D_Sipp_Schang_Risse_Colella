@@ -1,0 +1,14 @@
+.boutons{
+    -fx-background-color: #649FDB;
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
+    -fx-font-size : 25;
+    -fx-font-weight : bold;
+}
+
+.boutons:hover{
+    -fx-background-color: #5383B5;
+}
+
+
+

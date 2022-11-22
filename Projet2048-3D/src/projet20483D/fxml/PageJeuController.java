@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package projet20483D;
+package projet20483D.fxml;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +21,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import projet20483D.Case;
+import projet20483D.Direction;
+import projet20483D.Grille3D;
 import static projet20483D.Parametres.TAILLE;
 
 /**
@@ -97,11 +100,10 @@ public class PageJeuController implements Initializable {
         boutonFRONT.setDisable(true);
         boutonRANDOM.setDisable(true);
         boutonIA.setDisable(true);
-        boutonANNULER.setDisable(true);        
-        
+        boutonANNULER.setDisable(true);
+
         //Affichage meilleur score dès le début
         // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
-
     }
 
     @FXML
@@ -114,7 +116,7 @@ public class PageJeuController implements Initializable {
         root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/theme.css");
+        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
         stage.setScene(scene);
         stage.show();
     }
@@ -172,7 +174,47 @@ public class PageJeuController implements Initializable {
                     if (tab[i][j][k] == 0) {
                         listeLabelsCopie.get(0).setText("");    //travail dans la copie                  
                     } else {
-                        listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie                    
+                        listeLabelsCopie.get(0).setText(Integer.toString(tab[i][j][k]));    //travail dans la copie
+
+                    }
+                    listeLabelsCopie.get(0).setStyle("-fx-background-color : transparent;");
+                    switch (tab[i][j][k]) {
+                        case 2:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : #EEE4DA;");
+                            break;
+                        case 4:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : red;");
+                            break;
+                        case 8:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : blue;");
+                            break;
+                        case 16:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 32:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 64:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 128:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 256:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 512:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 1024:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        case 2048:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
+                        default:
+                            listeLabelsCopie.get(0).setStyle("-fx-background-color : ;");
+                            break;
                     }
 
                     listeLabelsCopie.remove(0);

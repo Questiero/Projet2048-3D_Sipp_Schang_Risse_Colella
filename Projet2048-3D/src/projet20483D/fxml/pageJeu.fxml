@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="550.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.PageJeuController">
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="549.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.fxml.PageJeuController">
    <children>
       <TextField editable="false" focusTraversable="false" layoutX="536.0" layoutY="196.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="CENTRE">
          <font>
@@ -49,39 +49,43 @@
                <children>
                   <Pane fx:id="pane00_G0" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="label00_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label00_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children></Pane>
                   <Pane fx:id="pane10_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="label10_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label10_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane20_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Label fx:id="label20_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label20_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane01_G0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label01_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label01_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane11_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label11_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label11_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane21_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label21_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label21_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane02_G0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label02_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label02_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane12_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label12_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label12_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                   <Pane fx:id="pane22_G0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label22_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label22_G0" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children></Pane>
                </children>
             </GridPane>
@@ -90,47 +94,47 @@
                <children>
                   <Pane fx:id="pane00_G01" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="label00_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label00_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane10_G01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="label10_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label10_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane20_G01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Label fx:id="label20_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label20_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane01_G01" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label01_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label01_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane11_G01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label11_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label11_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane21_G01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label21_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label21_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane02_G01" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label02_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label02_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane12_G01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label12_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label12_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane22_G01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label22_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label22_G1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                </children>
@@ -149,47 +153,47 @@
                <children>
                   <Pane fx:id="pane00_G02" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="label00_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label00_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane10_G02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="label10_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label10_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane20_G02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Label fx:id="label20_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label20_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane01_G02" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label01_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label01_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane11_G02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label11_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label11_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane21_G02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="label21_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label21_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane02_G02" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label02_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label02_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane12_G02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label12_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label12_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                   <Pane fx:id="pane22_G02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="label22_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                        <Label fx:id="label22_G2" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="tuiles" />
                      </children>
                   </Pane>
                </children>

@@ -1,8 +1,3 @@
-:root{          /*initialisation des valeurs par défaut ?*/
-    --themeCouleur1 : black; /*TEST*/
-}
-
-
 .boutons{
     -fx-background-color: #F2B179;
     -fx-text-fill: #64523f;
@@ -13,6 +8,14 @@
 
 .boutons:hover{
     -fx-background-color: #F0945D;
+}
+
+
+.tuiles{
+    -fx-font-size : 25;
+    -fx-font-weight : bold;
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
 }
 
 
