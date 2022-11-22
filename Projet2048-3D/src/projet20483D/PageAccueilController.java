@@ -30,8 +30,7 @@ public class PageAccueilController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonJouer, boutonQuitter, boutonParametres, boutonCharger, boutonNouvellePartie, boutonChargerPartie;
-    
+    private Button boutonJouer, boutonQuitter, boutonParametres, boutonCharger;
     @FXML
     private SplitPane splitPaneJouer;
 
@@ -41,39 +40,10 @@ public class PageAccueilController implements Initializable {
         boutonCharger.getStyleClass().add("boutons");
         boutonParametres.getStyleClass().add("boutons");
         boutonQuitter.getStyleClass().add("boutons");
-
-    }
-
-    @FXML
-    private void passerBoutonJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-        
-        splitPaneJouer.setVisible(true);        
-    }
-    
-    @FXML
-    private void sortirBoutonJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-        
-        splitPaneJouer.setVisible(false);        
-    }
-    
-    @FXML
-    private void passerSplitJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-        
-        splitPaneJouer.setVisible(true);        
-    }
-    
-    @FXML
-    private void sortirSplitJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-        
-        splitPaneJouer.setVisible(false);        
-    }
+    }    
 
     @FXML
-    private void cliquerBoutonNouvellePartie(MouseEvent event) throws IOException {
+    private void cliquerBoutonJouer(MouseEvent event) throws IOException {
         //ouverture nouvelle page
         
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/pageJeu.fxml"));
@@ -86,10 +56,7 @@ public class PageAccueilController implements Initializable {
         
         
         stage.setScene(scene);
-        stage.show();
-        
-        
-
+        stage.show();  
     }
     
     

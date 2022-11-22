@@ -10,6 +10,8 @@ public class Grille3D implements Parametres {
     private final HashSet<Case> grille;
     private int valeurMax = 0;
     private boolean deplacement;
+    private int score = 0;
+    private int meilleurScore;
 
     public Grille3D() {
         this.grille = new HashSet<Case>();
@@ -92,7 +94,7 @@ public class Grille3D implements Parametres {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
         }
-        
+
         return deplacement;
     }
 
@@ -102,6 +104,10 @@ public class Grille3D implements Parametres {
             this.valeurMax = c.getValeur();
         }
         deplacement = true;
+        score += this.valeurMax;
+        if (score > meilleurScore) {
+            meilleurScore = score;
+        }
     }
 
     private void deplacerCasesRecursif(Case[][] extremites, int firstD, int secondD, Direction direction, int compteur) {
@@ -111,7 +117,7 @@ public class Grille3D implements Parametres {
                     || (direction == Direction.LEFT && extremites[firstD][secondD].getX() != compteur)
                     || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
                     || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
-                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur) ) {
+                    || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != ETAGES - 1 - compteur)) {
                 this.grille.remove(extremites[firstD][secondD]);
                 switch (direction) {
                     case UP:
@@ -234,11 +240,24 @@ public class Grille3D implements Parametres {
             if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
                 this.valeurMax = ajout.getValeur();
             }
+            score += valeur;
+            if (score > meilleurScore) {
+                meilleurScore = score;
+            }
             return true;
         } else {
             return false;
         }
 
     }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getMeilleurScore() {
+        return meilleurScore;
+    }
+    
 
 }

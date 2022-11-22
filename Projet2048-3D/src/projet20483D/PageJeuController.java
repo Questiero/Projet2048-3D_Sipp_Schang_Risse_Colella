@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import java.awt.event.KeyListener;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -42,9 +43,13 @@ public class PageJeuController implements Initializable {
     @FXML
     private Label label00_G2, label10_G2, label20_G2, label01_G2, label11_G2, label21_G2, label02_G2, label12_G2, label22_G2;
     @FXML
+    private Label labelScore, labelMeilleurScore;
+    @FXML
     private GridPane grille0;
-    @FXML 
+    @FXML
     private Pane panePageJeu;
+    @FXML
+    private TextArea texteCommentJouer;
 
     private Grille3D g = new Grille3D();
 
@@ -93,7 +98,10 @@ public class PageJeuController implements Initializable {
         boutonFRONT.setDisable(true);
         boutonRANDOM.setDisable(true);
         boutonIA.setDisable(true);
-        boutonANNULER.setDisable(true);
+        boutonANNULER.setDisable(true);        
+        
+        //Affichage meilleur score dès le début
+        labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
 
     }
 
@@ -142,6 +150,7 @@ public class PageJeuController implements Initializable {
         g.nouvelleCase();
 
         affichageUpdate(g);
+        labelScore.setText(Integer.toString(this.g.getScore()));
 
         return (g);
     }
@@ -168,10 +177,8 @@ public class PageJeuController implements Initializable {
                     }
 
                     listeLabelsCopie.remove(0);
-
                 }
             }
-
         }
     }
 
@@ -180,8 +187,9 @@ public class PageJeuController implements Initializable {
         if (this.g.lanceurDeplacerCases(dir)) {
             this.g.nouvelleCase();
             affichageUpdate(this.g);
+            labelScore.setText(Integer.toString(this.g.getScore()));
+            labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
         }
-
     }
 
     @FXML
@@ -232,7 +240,6 @@ public class PageJeuController implements Initializable {
                     break;
             }
         });*/
-
     }
 
     @FXML
@@ -263,6 +270,20 @@ public class PageJeuController implements Initializable {
     @FXML
     private void cliquerRANDOM(MouseEvent event) throws IOException {
         deplacer(Direction.random());
+    }
+
+    @FXML
+    private void passerCommentJouer(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+
+        texteCommentJouer.setVisible(true);
+    }
+
+    @FXML
+    private void sortirCommentJouer(MouseEvent event) throws IOException {
+        //ouverture nouvelle page
+
+        texteCommentJouer.setVisible(false);
     }
 
 }

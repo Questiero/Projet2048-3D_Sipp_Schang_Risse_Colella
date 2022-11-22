@@ -10,8 +10,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.PageJeuController">
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="550.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.PageJeuController">
    <children>
+      <TextField editable="false" focusTraversable="false" layoutX="536.0" layoutY="196.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="CENTRE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TextField>
       <Pane id="fondPageJeu" fx:id="panePageJeu" onKeyPressed="#clavierDirection" prefHeight="873.0" prefWidth="1394.0">
          <children>
             <Button fx:id="boutonRIGHT" layoutX="1240.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#cliquerRIGHT" prefHeight="60" prefWidth="60" style="-fx-rotate: 90;" styleClass="boutons" text="▲" />
@@ -248,6 +253,7 @@
                   </TextField>
                </children>
             </Pane>
+            <TextArea fx:id="texteCommentJouer" editable="false" layoutX="428.0" layoutY="170.0" prefHeight="245.0" prefWidth="592.0" text="Le 2048 - 3D reprend les règles du 2048 classique :&#10;On fait bouger des nombres qui sont des multiples et puissances de 2. Le but est &#10;d'additionner ceux de même valeur (2+2, 4+4, 8+8) pour atteindre 2048 sur une case,&#10;sans que la grille ne soit bloquée.&#10;&#10;Ici, même principe, mais nous sommes dans un cube, composé de 3 grilles : La grille &#10;avant, la grille du centre ainsi que la grille de l'arrière.&#10;&#10;Pour se déplacer, on utilise les flèches disponibles, mais il est également possible de &#10;se déplacer avec les touches Z (haut), Q (gauche), S (bas), D (droite), R (changer de &#10;couche en allant vers l'avant), F (changer de couche en allant vers l'arrière)" visible="false" />
          </children></Pane>
       <TextField fx:id="titreAcceuil" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="74.0" layoutY="19.0" prefHeight="207.0" prefWidth="702.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="2048 - 3D">
          <cursor>
@@ -257,13 +263,8 @@
             <Font name="System Bold" size="96.0" />
          </font>
       </TextField>
-      <Button fx:id="boutonCommentJouer" layoutX="592.0" layoutY="97.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="48.0" styleClass="boutons" text="?" />
+      <Button fx:id="boutonCommentJouer" layoutX="592.0" layoutY="97.0" mnemonicParsing="false" onMouseEntered="#passerCommentJouer" onMouseExited="#sortirCommentJouer" prefHeight="52.0" prefWidth="48.0" styleClass="boutons" text="?" />
       <TextField editable="false" focusTraversable="false" layoutX="126.0" layoutY="196.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="AVANT">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </TextField>
-      <TextField editable="false" focusTraversable="false" layoutX="536.0" layoutY="196.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="CENTRE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
