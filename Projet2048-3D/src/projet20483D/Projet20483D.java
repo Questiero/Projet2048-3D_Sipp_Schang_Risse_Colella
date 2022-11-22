@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import projet20483D.strategies.deplacements.RandomDeplacement;
 import projet20483D.strategies.deplacements.DeplacementContext;
-import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
 
 public class Projet20483D implements Parametres {
 
@@ -32,7 +31,7 @@ public class Projet20483D implements Parametres {
         Grille3D originator = new Grille3D();
 
         Scanner sc = new Scanner(System.in);
-        
+
         DeplacementContext context = new DeplacementContext(new RandomDeplacement());
         // DeplacementContext context = new DeplacementContext(new PMCTSDeplacement(g, 10));
         // DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g));
@@ -41,7 +40,7 @@ public class Projet20483D implements Parametres {
 
             System.out.println("Déplacer vers la Droite (d), Gauche (q), Haut (z), Bas (s), Monter/Front (f) ou Descendre/Back (r), direction Aléatoire (a)");
 
-            String s = sc.nextLine();
+            String s = "a";
             s.toLowerCase();
 
             if (s.equals("u") || s.equals("undo")) {
@@ -72,8 +71,11 @@ public class Projet20483D implements Parametres {
                 } else {
                     direction = context.executeStrategy();
                 }
+
                 boolean b2 = g.lanceurDeplacerCases(direction);
+
                 if (b2) {
+
                     b = g.nouvelleCase();
 
                     originator.set(g);
@@ -85,27 +87,17 @@ public class Projet20483D implements Parametres {
                         Logger.getLogger(Projet20483D.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                    if (!b) {
-                        g.gameOver();
-                    }
-                    boolean b2 = g.lanceurDeplacerCases(direction);
-                    if (b2) {
-                        b = g.nouvelleCase();
-                    } else {
-                        System.out.println("Non");
-                    }
-                    System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
-
-                    if (b2) {
-                        b = g.nouvelleCase();
-                        System.out.println("Score: " + g.getScore());
-                    }
-
+                } else {
+                    System.out.println("Non");
                 }
-
+                System.out.println(g + "\nVous avez fait le déplacement : " + direction + "\n");
+                System.out.println("Score: " + g.getScore());
+                
             }
 
         }
+        
+        System.out.println(g.gameOverMessage());
 
     }
 
