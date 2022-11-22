@@ -19,7 +19,7 @@ public class Grille3D implements Serializable, Parametres {
     private int score = 0;
     private boolean deplacement;
     private boolean victory = false;
-
+    
     public Grille3D() {
         this.grille = new HashSet<Case>();
     }
@@ -111,6 +111,7 @@ public class Grille3D implements Serializable, Parametres {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
         }
+
         return deplacement;
     }
 
@@ -122,6 +123,7 @@ public class Grille3D implements Serializable, Parametres {
         }
         deplacement = true;
         //System.out.println("Score: " + this.score);
+
     }
 
     private void deplacerCasesRecursif(Case[][] extremites, int firstD, int secondD, Direction direction, int compteur) {
@@ -132,6 +134,7 @@ public class Grille3D implements Serializable, Parametres {
                     || (direction == Direction.RIGHT && extremites[firstD][secondD].getX() != TAILLE - 1 - compteur)
                     || (direction == Direction.FRONT && extremites[firstD][secondD].getZ() != compteur)
                     || (direction == Direction.BACK && extremites[firstD][secondD].getZ() != TAILLE - 1 - compteur)) {
+
                 this.grille.remove(extremites[firstD][secondD]);
                 switch (direction) {
                     case UP:
