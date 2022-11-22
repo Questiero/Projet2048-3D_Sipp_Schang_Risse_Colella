@@ -44,7 +44,7 @@ public class PageAccueilController implements Initializable {
     private void cliquerBoutonJouer(MouseEvent event) throws IOException {
         //ouverture nouvelle page
         
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageJeu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageSetup.fxml"));
         Stage stage = (Stage) boutonJouer.getScene().getWindow();        
         
 

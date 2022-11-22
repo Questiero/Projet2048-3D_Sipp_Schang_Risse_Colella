@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="1394.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.fxml.PageSetupController">
+   <children>
+      <Pane fx:id="fondSetup" prefHeight="873.0" prefWidth="1394.0">
+         <children>
+            <Button fx:id="boutonLancerPartie" layoutX="290.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonLancerPartie" styleClass="boutons" text="LANCER PARTIE" />
+            <ChoiceBox fx:id="choiceBoxTheme" layoutX="140.0" layoutY="81.0" prefWidth="150.0" />
+         </children></Pane>
+   </children>
+</AnchorPane>
