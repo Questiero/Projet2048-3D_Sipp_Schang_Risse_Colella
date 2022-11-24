@@ -291,7 +291,7 @@ public class Grille3D implements Serializable, Parametres {
 
                 Case c2 = c1.getVoisinDirect(dir);
                 if (c2 != null) {
-                    monotony -= c1.getValeur() - c2.getValeur();
+                    monotony -= Math.log(c1.getValeur())/Math.log(2) - Math.log(c2.getValeur())/Math.log(2);
                 }
 
             }
@@ -299,6 +299,31 @@ public class Grille3D implements Serializable, Parametres {
         }
 
         return monotony;
+
+    }
+
+    public int getSmoothness() {
+
+        int smoothness = 0;
+
+        for (Case c1 : this.grille) {
+
+            Direction[] directions = Direction.values();
+
+            for (Direction dir : directions) {
+
+                Case c2 = c1.getVoisinDirect(dir);
+                if (c2 != null) {
+
+                    smoothness -= Math.abs(Math.log(c1.getValeur())/Math.log(2) - Math.log(c2.getValeur())/Math.log(2));
+
+                }
+
+            }
+
+        }
+
+        return smoothness;
 
     }
 

@@ -45,11 +45,12 @@ public class Benchmark {
 
             }
 
-            System.out.println("[" + ((System.currentTimeMillis() - initTime)) + "ms | " + (i + 1) + "/" + nbrTests + " | n = " + n + " | " + df.format(((double) nbrOfWins) * 100 / (i + 1)) + "% ] " + g.gameOverMessage());
             sumOfScores += g.getScore();
             if (g.isVictory()) {
                 nbrOfWins++;
             }
+
+            System.out.println("[" + ((System.currentTimeMillis() - initTime)) + "ms | " + (i + 1) + "/" + nbrTests + " | n = " + n + " | " + df.format(((double) nbrOfWins) * 100 / (i + 1)) + "% ] " + g.gameOverMessage());
 
         }
 

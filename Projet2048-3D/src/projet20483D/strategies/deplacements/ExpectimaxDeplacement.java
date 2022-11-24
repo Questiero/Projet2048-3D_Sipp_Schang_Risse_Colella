@@ -64,7 +64,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
         protected double selfEvaluate() {
 
-            double poidsVide, poidsMax, poidsMonotony;
+            double poidsVide, poidsMax, poidsMonotony, poidsSmoothness;
 
             switch (ExpectimaxDeplacement.this.type) {
 
@@ -83,10 +83,12 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
                     poidsVide = 0;
                     poidsMax = 2.7;
                     poidsMonotony = 1.;
+                    poidsSmoothness = 0.1;
 
                     return poidsVide * Math.log(this.grille.getNumberEmpty())
                             + poidsMax * this.grille.getValeurMax()
-                            + poidsMonotony * this.grille.getMonotony();
+                            + poidsMonotony * this.grille.getMonotony()
+                            + poidsSmoothness * this.grille.getSmoothness();
 
             }
 
