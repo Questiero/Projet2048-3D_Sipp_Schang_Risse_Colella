@@ -34,14 +34,10 @@ public class PageSetupController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         choiceBoxTheme.setItems(FXCollections.observableArrayList("Classique", "Frozen"));
     }
-
-    //selec box pour choix theme
-    //pseudo
-    //si tout ca bon, able bouton lancer
+    
     @FXML
     private void cliquerBoutonLancerPartie(MouseEvent event) throws IOException {
         //ouverture nouvelle page
-
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageJeu.fxml"));
         Stage stage = (Stage) boutonLancerPartie.getScene().getWindow();
 

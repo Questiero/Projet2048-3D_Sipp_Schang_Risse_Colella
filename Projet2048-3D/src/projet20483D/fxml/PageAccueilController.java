@@ -24,9 +24,6 @@ import javafx.stage.Stage;
  */
 public class PageAccueilController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private Button boutonJouer, boutonQuitter, boutonCredits, boutonCharger;
     @FXML
@@ -42,22 +39,16 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-        
+        //ouverture page setup        
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageSetup.fxml"));
-        Stage stage = (Stage) boutonJouer.getScene().getWindow();        
+        Stage stage = (Stage) boutonJouer.getScene().getWindow();      
         
-
-        //AJOUTER UNE PAGE DE REGLAGES DE LA PARTIE AVANT
         Scene scene = new Scene(root); 
         scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
-        
-        
+                
         stage.setScene(scene);
         stage.show();  
-    }
-    
-    
+    } 
 
     @FXML
     private void cliquerBoutonQuitter(MouseEvent event) throws IOException {
@@ -77,9 +68,7 @@ public class PageAccueilController implements Initializable {
         //fermeture page
         Stage stage;
         Parent root;
-
-        //A MODIF EN CREANT NOUVELLE PAGES POUR PARAMETTRE
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
         stage = (Stage) boutonCredits.getScene().getWindow();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageCredits.fxml"));
         Scene scene = new Scene(root);

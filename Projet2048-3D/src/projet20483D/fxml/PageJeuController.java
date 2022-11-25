@@ -39,7 +39,7 @@ public class PageJeuController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonCommentJouer, boutonIA, boutonANNULER;
+    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonIA, boutonANNULER;
     @FXML
     private Label label00_G0, label10_G0, label20_G0, label01_G0, label11_G0, label21_G0, label02_G0, label12_G0, label22_G0;
     @FXML
@@ -49,14 +49,9 @@ public class PageJeuController implements Initializable {
     @FXML
     private Label labelScore, labelMeilleurScore;
     @FXML
-    private GridPane grille0;
-    @FXML
-    private Pane panePageJeu;
-    @FXML
     private TextArea texteCommentJouer;
 
     private Grille3D g = new Grille3D();
-    private int score;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -106,7 +101,7 @@ public class PageJeuController implements Initializable {
         boutonANNULER.setDisable(true);
 
         //Affichage meilleur score dès le début
-        // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+        //labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
     }
 
     @FXML
@@ -130,7 +125,6 @@ public class PageJeuController implements Initializable {
         //disparition du bouton jouer
         boutonJouerJeu.setVisible(false);
         boutonJouerJeu.setDisable(true);
-        //disable boutons déplacements
 
         g = jeu(g);
 
@@ -144,7 +138,6 @@ public class PageJeuController implements Initializable {
         boutonRANDOM.setDisable(false);
         boutonIA.setDisable(false);
         boutonANNULER.setDisable(false);
-        //if game over
     }
 
     @FXML
@@ -152,10 +145,9 @@ public class PageJeuController implements Initializable {
 
         //création du début du jeu (grilles)
         g.nouvelleCase();
-
-        affichageUpdate(g);
-        score = this.g.getScore();
-        labelScore.setText(Integer.toString(score));
+        affichageUpdate(g);  
+        
+        labelScore.setText(Integer.toString(this.g.getScore()));
 
         return (g);
     }
@@ -231,10 +223,6 @@ public class PageJeuController implements Initializable {
         }
     }
 
-    public int getScoreFX() {
-        return score;
-    }
-
     @FXML
     private void deplacer(Direction dir) throws IOException {
 
@@ -244,8 +232,7 @@ public class PageJeuController implements Initializable {
                 this.g.nouvelleCase();
                 affichageUpdate(this.g);
 
-                score = this.g.getScore();
-                labelScore.setText(Integer.toString(score));
+                labelScore.setText(Integer.toString(this.g.getScore()));
                 // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
             }
         }
@@ -256,16 +243,13 @@ public class PageJeuController implements Initializable {
             } else {
                 popupDefaite();
             }
-
         }
-
     }
 
     private void popupDefaite() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("RESULTATS");
 
-        // Header Text: null
         alert.setHeaderText("DEFAITE");
         alert.setContentText("Vous avez perdu, votre score était de : " + Integer.toString(g.getScore()));
 
@@ -282,14 +266,12 @@ public class PageJeuController implements Initializable {
         boutonRANDOM.setDisable(true);
         boutonIA.setDisable(true);
         boutonANNULER.setDisable(true);
-
     }
 
     private void popupVictoire() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("RESULTATS");
-
-        // Header Text: null
+        
         alert.setHeaderText("VICTOIRE");
         alert.setContentText("Vous avez gagné, votre score était de : " + Integer.toString(g.getScore()) + ".\nMais vous pouvez encore continuer à jouer !");
 
@@ -328,6 +310,7 @@ public class PageJeuController implements Initializable {
 
         }
 
+        //déplacements avec flèches directionnelles
         /*panePageJeu.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP:
@@ -382,15 +365,11 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void passerCommentJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-
         texteCommentJouer.setVisible(true);
     }
 
     @FXML
     private void sortirCommentJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-
         texteCommentJouer.setVisible(false);
     }
 

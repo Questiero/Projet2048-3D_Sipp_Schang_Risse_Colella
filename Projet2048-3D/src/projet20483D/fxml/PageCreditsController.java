@@ -15,9 +15,6 @@ import javafx.fxml.Initializable;
  */
 public class PageCreditsController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
