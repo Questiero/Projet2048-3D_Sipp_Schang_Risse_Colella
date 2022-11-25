@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
@@ -54,6 +56,7 @@ public class PageJeuController implements Initializable {
     private TextArea texteCommentJouer;
 
     private Grille3D g = new Grille3D();
+    private int score;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -129,7 +132,7 @@ public class PageJeuController implements Initializable {
         boutonJouerJeu.setDisable(true);
         //disable boutons déplacements
 
-        g = initialisationGrilles(g);
+        g = jeu(g);
 
         //activation des boutons de déplacement
         boutonUP.setDisable(false);
@@ -145,13 +148,14 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private Grille3D initialisationGrilles(Grille3D g) {
+    private Grille3D jeu(Grille3D g) {
 
         //création du début du jeu (grilles)
         g.nouvelleCase();
 
         affichageUpdate(g);
-        labelScore.setText(Integer.toString(this.g.getScore()));
+        score = this.g.getScore();
+        labelScore.setText(Integer.toString(score));
 
         return (g);
     }
@@ -227,14 +231,69 @@ public class PageJeuController implements Initializable {
         }
     }
 
+    public int getScoreFX() {
+        return score;
+    }
+
     @FXML
-    private void deplacer(Direction dir) {
-        if (this.g.lanceurDeplacerCases(dir)) {
-            this.g.nouvelleCase();
-            affichageUpdate(this.g);
-            labelScore.setText(Integer.toString(this.g.getScore()));
-            // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+    private void deplacer(Direction dir) throws IOException {
+
+        if (!g.partieFinie()) {
+
+            if (this.g.lanceurDeplacerCases(dir)) {
+                this.g.nouvelleCase();
+                affichageUpdate(this.g);
+
+                score = this.g.getScore();
+                labelScore.setText(Integer.toString(score));
+                // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+            }
         }
+
+        if (g.partieFinie()) {
+            if (g.isVictory()) {
+                popupVictoire();
+            } else {
+                popupDefaite();
+            }
+
+        }
+
+    }
+
+    private void popupDefaite() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("RESULTATS");
+
+        // Header Text: null
+        alert.setHeaderText("DEFAITE");
+        alert.setContentText("Vous avez perdu, votre score était de : " + Integer.toString(g.getScore()));
+
+        alert.showAndWait();
+
+        boutonIA.setDisable(true);
+        boutonANNULER.setDisable(true);
+        boutonUP.setDisable(true);
+        boutonDOWN.setDisable(true);
+        boutonRIGHT.setDisable(true);
+        boutonLEFT.setDisable(true);
+        boutonBACK.setDisable(true);
+        boutonFRONT.setDisable(true);
+        boutonRANDOM.setDisable(true);
+        boutonIA.setDisable(true);
+        boutonANNULER.setDisable(true);
+
+    }
+
+    private void popupVictoire() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("RESULTATS");
+
+        // Header Text: null
+        alert.setHeaderText("VICTOIRE");
+        alert.setContentText("Vous avez gagné, votre score était de : " + Integer.toString(g.getScore()) + ".\nMais vous pouvez encore continuer à jouer !");
+
+        alert.showAndWait();
     }
 
     @FXML
@@ -243,7 +302,7 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void clavierDirection(KeyEvent event) {
+    private void clavierDirection(KeyEvent event) throws IOException {
         switch (event.getText()) {
             case "Z", "z":
                 deplacer(Direction.UP);
@@ -266,7 +325,7 @@ public class PageJeuController implements Initializable {
             case "A", "a":
                 deplacer(Direction.random());
                 break;
-            
+
         }
 
         /*panePageJeu.setOnKeyPressed(e -> {

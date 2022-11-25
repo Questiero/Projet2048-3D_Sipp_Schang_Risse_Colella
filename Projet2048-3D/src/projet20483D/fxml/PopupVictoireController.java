@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Amandine S
  */
-public class PageParametresController implements Initializable {
+public class PopupVictoireController implements Initializable {
 
     /**
      * Initializes the controller class.
