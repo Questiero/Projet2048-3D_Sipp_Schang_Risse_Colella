@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.TextArea;
@@ -50,6 +52,10 @@ public class PageJeuController implements Initializable {
     private Label labelScore, labelMeilleurScore;
     @FXML
     private TextArea texteCommentJouer;
+    @FXML
+    private Pane paneBoutonsIA;
+    @FXML
+    private ChoiceBox choiceBoxScore;
 
     private Grille3D g = new Grille3D();
 
@@ -102,6 +108,8 @@ public class PageJeuController implements Initializable {
 
         //Affichage meilleur score dès le début
         //labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+        
+        choiceBoxScore.setItems(FXCollections.observableArrayList("POINTS", "TEMPS", "COUPS"));
     }
 
     @FXML
@@ -372,5 +380,18 @@ public class PageJeuController implements Initializable {
     private void sortirCommentJouer(MouseEvent event) throws IOException {
         texteCommentJouer.setVisible(false);
     }
+    
+    @FXML
+    private void passerBoutonIA(MouseEvent event) throws IOException {
+        paneBoutonsIA.setVisible(true);
+    }
+
+    @FXML
+    private void sortirBoutonIA(MouseEvent event) throws IOException {
+        paneBoutonsIA.setVisible(false);
+        
+    }
+    
+    
 
 }

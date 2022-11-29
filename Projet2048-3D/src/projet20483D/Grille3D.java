@@ -17,6 +17,7 @@ public class Grille3D implements Serializable, Parametres {
     private final HashSet<Case> grille;
     private int valeurMax = 0;
     private int score = 0;
+    
     private boolean deplacement;
     private boolean victory = false;
 
