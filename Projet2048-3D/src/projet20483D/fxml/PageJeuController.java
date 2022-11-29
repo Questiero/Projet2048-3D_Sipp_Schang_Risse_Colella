@@ -7,13 +7,18 @@ package projet20483D.fxml;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.TextArea;
@@ -25,6 +30,10 @@ import projet20483D.Case;
 import projet20483D.Direction;
 import projet20483D.Grille3D;
 import static projet20483D.Parametres.TAILLE;
+import projet20483D.Projet20483D;
+import static projet20483D.Projet20483D.addMemento;
+import static projet20483D.Projet20483D.getMemento;
+import static projet20483D.Projet20483D.restoreFromMemento;
 
 /**
  * FXML Controller class
@@ -37,7 +46,7 @@ public class PageJeuController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonCommentJouer, boutonIA, boutonANNULER;
+    private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonIA, boutonANNULER;
     @FXML
     private Label label00_G0, label10_G0, label20_G0, label01_G0, label11_G0, label21_G0, label02_G0, label12_G0, label22_G0;
     @FXML
@@ -47,13 +56,15 @@ public class PageJeuController implements Initializable {
     @FXML
     private Label labelScore, labelMeilleurScore;
     @FXML
-    private GridPane grille0;
-    @FXML
-    private Pane panePageJeu;
-    @FXML
     private TextArea texteCommentJouer;
+    @FXML
+    private Pane paneBoutonsIA;
+    @FXML
+    private ChoiceBox choiceBoxScore;
 
     private Grille3D g = new Grille3D();
+    boolean annuler = true;
+    int nbAnnuler = 5;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -103,7 +114,10 @@ public class PageJeuController implements Initializable {
         boutonANNULER.setDisable(true);
 
         //Affichage meilleur score dès le début
-        // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+        //labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+        choiceBoxScore.setItems(FXCollections.observableArrayList("POINTS", "TEMPS", "COUPS"));
+        choiceBoxScore.getSelectionModel().select(0);
+
     }
 
     @FXML
@@ -127,9 +141,8 @@ public class PageJeuController implements Initializable {
         //disparition du bouton jouer
         boutonJouerJeu.setVisible(false);
         boutonJouerJeu.setDisable(true);
-        //disable boutons déplacements
 
-        g = initialisationGrilles(g);
+        g = jeu(g);
 
         //activation des boutons de déplacement
         boutonUP.setDisable(false);
@@ -141,16 +154,15 @@ public class PageJeuController implements Initializable {
         boutonRANDOM.setDisable(false);
         boutonIA.setDisable(false);
         boutonANNULER.setDisable(false);
-        //if game over
     }
 
     @FXML
-    private Grille3D initialisationGrilles(Grille3D g) {
+    private Grille3D jeu(Grille3D g) {
 
         //création du début du jeu (grilles)
         g.nouvelleCase();
-
         affichageUpdate(g);
+
         labelScore.setText(Integer.toString(this.g.getScore()));
 
         return (g);
@@ -228,13 +240,79 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void deplacer(Direction dir) {
-        if (this.g.lanceurDeplacerCases(dir)) {
-            this.g.nouvelleCase();
-            affichageUpdate(this.g);
-            labelScore.setText(Integer.toString(this.g.getScore()));
-            // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+    private void deplacer(Direction dir) throws IOException {
+
+        if (!g.partieFinie()) {
+
+            addMemento(new Grille3D.Memento(g));
+
+            if (this.g.lanceurDeplacerCases(dir)) {
+                this.g.nouvelleCase();
+                affichageUpdate(this.g);
+
+                Object selectedItems = choiceBoxScore.getSelectionModel().getSelectedItem();
+
+                switch (String.valueOf(selectedItems)) {
+                    case "POINTS":
+                        labelScore.setText(Integer.toString(this.g.getScore()));
+                        break;
+                    case "COUPS":
+                        labelScore.setText(Integer.toString(this.g.getNbCoups()));
+                        break;
+                    default:
+                        labelScore.setText(Integer.toString(this.g.getScore()));
+
+                }
+                // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+            } else {
+                Projet20483D.savedStates.removeFirst();
+            }
+            
+            if (!annuler){
+                boutonANNULER.setDisable(true);
+            }
+
         }
+
+        if (g.partieFinie()) {
+            if (g.isVictory()) {
+                popupVictoire();
+            } else {
+                popupDefaite();
+            }
+        }
+    }
+
+    private void popupDefaite() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("RESULTATS");
+
+        alert.setHeaderText("DEFAITE");
+        alert.setContentText("Vous avez perdu, votre score était de : " + Integer.toString(g.getScore()));
+
+        alert.showAndWait();
+
+        boutonIA.setDisable(true);
+        boutonANNULER.setDisable(true);
+        boutonUP.setDisable(true);
+        boutonDOWN.setDisable(true);
+        boutonRIGHT.setDisable(true);
+        boutonLEFT.setDisable(true);
+        boutonBACK.setDisable(true);
+        boutonFRONT.setDisable(true);
+        boutonRANDOM.setDisable(true);
+        boutonIA.setDisable(true);
+        boutonANNULER.setDisable(true);
+    }
+
+    private void popupVictoire() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("RESULTATS");
+
+        alert.setHeaderText("VICTOIRE");
+        alert.setContentText("Vous avez gagné, votre score était de : " + Integer.toString(g.getScore()) + ".\nMais vous pouvez encore continuer à jouer !");
+
+        alert.showAndWait();
     }
 
     @FXML
@@ -243,7 +321,7 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void clavierDirection(KeyEvent event) {
+    private void clavierDirection(KeyEvent event) throws IOException {
         switch (event.getText()) {
             case "Z", "z":
                 deplacer(Direction.UP);
@@ -266,29 +344,9 @@ public class PageJeuController implements Initializable {
             case "A", "a":
                 deplacer(Direction.random());
                 break;
-            
+
         }
 
-        /*panePageJeu.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case UP:
-                    deplacer(Direction.UP);
-
-                    break;
-                case DOWN:
-                    deplacer(Direction.DOWN);
-
-                    break;
-                case LEFT:
-                    deplacer(Direction.LEFT);
-
-                    break;
-                case RIGHT:
-                    deplacer(Direction.RIGHT);
-
-                    break;
-            }
-        });*/
     }
 
     @FXML
@@ -323,16 +381,42 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void passerCommentJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-
         texteCommentJouer.setVisible(true);
     }
 
     @FXML
     private void sortirCommentJouer(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
-
         texteCommentJouer.setVisible(false);
+    }
+
+    @FXML
+    private void passerBoutonIA(MouseEvent event) throws IOException {
+        paneBoutonsIA.setVisible(true);
+    }
+
+    @FXML
+    private void sortirBoutonIA(MouseEvent event) throws IOException {
+        paneBoutonsIA.setVisible(false);
+    }
+
+    @FXML
+    private void cliquerChoiceBoxScore(MouseEvent event) throws IOException {
+        labelScore.setText("");
+    }
+
+    @FXML
+    private void cliquerBoutonAnnuler(MouseEvent event) throws IOException {
+        if (Projet20483D.savedStates.size() > 0 && nbAnnuler > 0) {
+            g = restoreFromMemento(getMemento());
+            annuler = false;
+            nbAnnuler--;
+            boutonANNULER.setText("ANNULER : "+ nbAnnuler);
+        } 
+        if (nbAnnuler == 0){
+            boutonANNULER.setDisable(true);
+        }
+        affichageUpdate(this.g);
+
     }
 
 }
