@@ -38,7 +38,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
         this.grille = grille;
         this.depth = depth;
-        this.type = ExpectimaxType.NAIVE;
+        this.type = type;
 
     }
 
@@ -72,16 +72,16 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
                     return this.grille.getScore();
                 case EMPTYONLY:
 
-                    poidsVide = 0;
-                    poidsMax = 2.7;
+                    poidsVide = 2.7;
+                    poidsMax = 1;
 
                     return poidsVide * Math.log(this.grille.getNumberEmpty())
                             + poidsMax * this.grille.getValeurMax();
 
                 case FULLBLAST:
 
-                    poidsVide = 0;
-                    poidsMax = 2.7;
+                    poidsVide = 2.7;
+                    poidsMax = 1;
                     poidsMonotony = 1.;
                     poidsSmoothness = 0.1;
 

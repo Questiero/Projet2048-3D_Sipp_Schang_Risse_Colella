@@ -36,7 +36,7 @@ public class Benchmark {
                 boolean b2 = g.lanceurDeplacerCases(dir);
                 /*System.out.println("-----------");
                 System.out.println(g);
-                System.out.println(dir);*/
+                System.out.println(dirdir);*/
                 if (b2) {
                     b = g.nouvelleCase();
                     //System.out.println(g.getScore());
