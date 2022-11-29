@@ -14,7 +14,7 @@ public class Projet20483D implements Parametres {
     /**
      * @param args the command line arguments
      */
-    private static LinkedList savedStates = new LinkedList();
+    public static LinkedList savedStates = new LinkedList();
 
     public static void addMemento(Object m) {      //add de l'objet dans la liste de saves
         savedStates.addFirst(m);
@@ -28,6 +28,8 @@ public class Projet20483D implements Parametres {
         savedStates.removeFirst();
         return nan;
     }
+    
+  
 
     public static Grille3D restoreFromMemento(Object memento) {
         return ((Memento) memento).getSavedState();

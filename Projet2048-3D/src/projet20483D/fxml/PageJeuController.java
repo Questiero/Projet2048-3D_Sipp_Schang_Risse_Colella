@@ -30,6 +30,7 @@ import projet20483D.Case;
 import projet20483D.Direction;
 import projet20483D.Grille3D;
 import static projet20483D.Parametres.TAILLE;
+import projet20483D.Projet20483D;
 import static projet20483D.Projet20483D.addMemento;
 import static projet20483D.Projet20483D.getMemento;
 import static projet20483D.Projet20483D.restoreFromMemento;
@@ -62,7 +63,6 @@ public class PageJeuController implements Initializable {
     private ChoiceBox choiceBoxScore;
 
     private Grille3D g = new Grille3D();
-    private static LinkedList savedStates = new LinkedList();
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -242,6 +242,8 @@ public class PageJeuController implements Initializable {
 
         if (!g.partieFinie()) {
 
+            addMemento(new Grille3D.Memento(g));
+
             if (this.g.lanceurDeplacerCases(dir)) {
                 this.g.nouvelleCase();
                 affichageUpdate(this.g);
@@ -260,10 +262,11 @@ public class PageJeuController implements Initializable {
 
                 }
                 // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+            } else {
+                Projet20483D.savedStates.removeFirst();
             }
-            addMemento(new Grille3D.Memento(g));
-            
-        }        
+
+        }
 
         if (g.partieFinie()) {
             if (g.isVictory()) {
@@ -397,15 +400,11 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void cliquerBoutonAnnuler(MouseEvent event) throws IOException {
-        if (savedStates.size() > 0) {
+        if (Projet20483D.savedStates.size() > 0) {
             g = restoreFromMemento(getMemento());
-            System.out.println(g);
-            System.out.println("y'a qqch dan sla liste");
-        } else {
-            System.out.println("y'a r");
-        }
+        } 
         affichageUpdate(this.g);
-        
+
     }
 
 }
