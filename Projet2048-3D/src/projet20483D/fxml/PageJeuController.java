@@ -63,6 +63,8 @@ public class PageJeuController implements Initializable {
     private ChoiceBox choiceBoxScore;
 
     private Grille3D g = new Grille3D();
+    boolean annuler = true;
+    int nbAnnuler = 5;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -265,6 +267,10 @@ public class PageJeuController implements Initializable {
             } else {
                 Projet20483D.savedStates.removeFirst();
             }
+            
+            if (!annuler){
+                boutonANNULER.setDisable(true);
+            }
 
         }
 
@@ -400,9 +406,15 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void cliquerBoutonAnnuler(MouseEvent event) throws IOException {
-        if (Projet20483D.savedStates.size() > 0) {
+        if (Projet20483D.savedStates.size() > 0 && nbAnnuler > 0) {
             g = restoreFromMemento(getMemento());
+            annuler = false;
+            nbAnnuler--;
+            boutonANNULER.setText("ANNULER : "+ nbAnnuler);
         } 
+        if (nbAnnuler == 0){
+            boutonANNULER.setDisable(true);
+        }
         affichageUpdate(this.g);
 
     }
