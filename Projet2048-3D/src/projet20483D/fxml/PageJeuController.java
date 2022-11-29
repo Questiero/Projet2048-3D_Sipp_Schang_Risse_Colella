@@ -60,7 +60,7 @@ public class PageJeuController implements Initializable {
     @FXML
     private TextArea texteCommentJouer;
     @FXML
-    private Pane paneBoutonsIA;
+    private Pane paneBoutonsIA, panePontVisu;
     @FXML
     private ChoiceBox choiceBoxScore;
 
@@ -243,39 +243,37 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void deplacer(Direction dir) throws IOException {        
+    private void deplacer(Direction dir) throws IOException {
 
-            addMemento(new Grille3D.Memento(g));
+        addMemento(new Grille3D.Memento(g));
 
-            if (this.g.lanceurDeplacerCases(dir)) {
-                this.g.nouvelleCase();
-                affichageUpdate(this.g);
+        if (this.g.lanceurDeplacerCases(dir)) {
+            this.g.nouvelleCase();
+            affichageUpdate(this.g);
 
-                Object selectedItems = choiceBoxScore.getSelectionModel().getSelectedItem();
+            Object selectedItems = choiceBoxScore.getSelectionModel().getSelectedItem();
 
-                switch (String.valueOf(selectedItems)) {
-                    case "POINTS":
-                        labelScore.setText(Integer.toString(this.g.getScore()));
-                        break;
-                    case "COUPS":
-                        labelScore.setText(Integer.toString(this.g.getNbCoups()));
-                        break;
-                    default:
-                        labelScore.setText(Integer.toString(this.g.getScore()));
+            switch (String.valueOf(selectedItems)) {
+                case "POINTS":
+                    labelScore.setText(Integer.toString(this.g.getScore()));
+                    break;
+                case "COUPS":
+                    labelScore.setText(Integer.toString(this.g.getNbCoups()));
+                    break;
+                default:
+                    labelScore.setText(Integer.toString(this.g.getScore()));
 
-                }
-                // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
-            } else {
-                Projet20483D.savedStates.removeFirst();
             }
+            // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
+        } else {
+            Projet20483D.savedStates.removeFirst();
+        }
 
-            if (!annuler) {
-                boutonANNULER.setDisable(true);
-            }
+        if (!annuler) {
+            boutonANNULER.setDisable(true);
+        }
 
-        
-
-        if (g.partieFinie() && continuer==false) {            
+        if (g.partieFinie() && continuer == false) {
             if (g.isVictory()) {
                 popupVictoire();
                 continuer = true;
@@ -394,11 +392,14 @@ public class PageJeuController implements Initializable {
     @FXML
     private void passerBoutonIA(MouseEvent event) throws IOException {
         paneBoutonsIA.setVisible(true);
+        panePontVisu.setVisible(true);
     }
 
     @FXML
     private void sortirBoutonIA(MouseEvent event) throws IOException {
         paneBoutonsIA.setVisible(false);
+        panePontVisu.setVisible(false);
+
     }
 
     @FXML
