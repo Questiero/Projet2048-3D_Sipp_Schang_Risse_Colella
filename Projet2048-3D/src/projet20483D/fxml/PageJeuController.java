@@ -34,6 +34,8 @@ import projet20483D.Projet20483D;
 import static projet20483D.Projet20483D.addMemento;
 import static projet20483D.Projet20483D.getMemento;
 import static projet20483D.Projet20483D.restoreFromMemento;
+import projet20483D.strategies.deplacements.DeplacementContext;
+import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
 
 /**
  * FXML Controller class
@@ -65,6 +67,7 @@ public class PageJeuController implements Initializable {
     private Grille3D g = new Grille3D();
     boolean annuler = true;
     int nbAnnuler = 5;
+    boolean continuer = false;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -240,9 +243,7 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void deplacer(Direction dir) throws IOException {
-
-        if (!g.partieFinie()) {
+    private void deplacer(Direction dir) throws IOException {        
 
             addMemento(new Grille3D.Memento(g));
 
@@ -267,16 +268,17 @@ public class PageJeuController implements Initializable {
             } else {
                 Projet20483D.savedStates.removeFirst();
             }
-            
-            if (!annuler){
+
+            if (!annuler) {
                 boutonANNULER.setDisable(true);
             }
 
-        }
+        
 
-        if (g.partieFinie()) {
+        if (g.partieFinie() && continuer==false) {            
             if (g.isVictory()) {
                 popupVictoire();
+                continuer = true;
             } else {
                 popupDefaite();
             }
@@ -410,12 +412,30 @@ public class PageJeuController implements Initializable {
             g = restoreFromMemento(getMemento());
             annuler = false;
             nbAnnuler--;
-            boutonANNULER.setText("ANNULER : "+ nbAnnuler);
-        } 
-        if (nbAnnuler == 0){
+            boutonANNULER.setText("ANNULER : " + nbAnnuler);
+        }
+        if (nbAnnuler == 0) {
             boutonANNULER.setDisable(true);
         }
         affichageUpdate(this.g);
+
+    }
+
+    @FXML
+    private void cliquerIA_1_PlayStop(MouseEvent event) throws IOException {
+        DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
+        Direction dir = context.executeStrategy();
+        deplacer(dir);
+
+    }
+
+    @FXML
+    private void cliquerIA_1_Entier(MouseEvent event) throws IOException {
+        while (!g.partieFinie()) {
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
+            Direction dir = context.executeStrategy();
+            deplacer(dir);
+        }
 
     }
 
