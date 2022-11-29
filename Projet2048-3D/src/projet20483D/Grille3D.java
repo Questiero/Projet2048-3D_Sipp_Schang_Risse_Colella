@@ -17,7 +17,7 @@ public class Grille3D implements Serializable, Parametres {
     private final HashSet<Case> grille;
     private int valeurMax = 0;
     private int score = 0;
-    
+    private int nbCoups = 0;
     private boolean deplacement;
     private boolean victory = false;
 
@@ -75,6 +75,11 @@ public class Grille3D implements Serializable, Parametres {
         return score;
     }
 
+    public int getNbCoups() {
+        return nbCoups;
+    }
+    
+    
     public boolean isVictory() {
         return victory;
     }
@@ -111,6 +116,9 @@ public class Grille3D implements Serializable, Parametres {
             for (int j = 0; j < secondD; j++) {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
+        }
+        if (deplacement){
+            nbCoups++;
         }
 
         return deplacement;
