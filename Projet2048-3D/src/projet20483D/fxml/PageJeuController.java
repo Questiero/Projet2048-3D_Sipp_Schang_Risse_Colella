@@ -423,7 +423,7 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void cliquerIA_1_PlayStop(MouseEvent event) throws IOException {
+    private void cliquerIA_NAIVE_PlayStop(MouseEvent event) throws IOException {
         DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
         Direction dir = context.executeStrategy();
         deplacer(dir);
@@ -431,9 +431,43 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
-    private void cliquerIA_1_Entier(MouseEvent event) throws IOException {
+    private void cliquerIA_NAIVE_Entier(MouseEvent event) throws IOException {
         while (!g.partieFinie()) {
             DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
+            Direction dir = context.executeStrategy();
+            deplacer(dir);
+        }
+
+    }
+    @FXML
+    private void cliquerIA_EMPTY_PlayStop(MouseEvent event) throws IOException {
+        DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
+        Direction dir = context.executeStrategy();
+        deplacer(dir);
+
+    }
+
+    @FXML
+    private void cliquerIA_EMPTY_Entier(MouseEvent event) throws IOException {
+        while (!g.partieFinie()) {
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
+            Direction dir = context.executeStrategy();
+            deplacer(dir);
+        }
+
+    }
+    @FXML
+    private void cliquerIA_AVANCEE_PlayStop(MouseEvent event) throws IOException {
+        DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
+        Direction dir = context.executeStrategy();
+        deplacer(dir);
+
+    }
+
+    @FXML
+    private void cliquerIA_AVANCEE_Entier(MouseEvent event) throws IOException {
+        while (!g.partieFinie()) {
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
             Direction dir = context.executeStrategy();
             deplacer(dir);
         }

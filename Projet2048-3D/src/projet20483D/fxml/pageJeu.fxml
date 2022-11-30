@@ -252,53 +252,68 @@
                </children>
             </Pane>
             <TextArea fx:id="texteCommentJouer" editable="false" layoutX="428.0" layoutY="170.0" prefHeight="245.0" prefWidth="592.0" text="Le 2048 - 3D reprend les règles du 2048 classique :&#10;On fait bouger des nombres qui sont des multiples et puissances de 2. Le but est &#10;d'additionner ceux de même valeur (2+2, 4+4, 8+8) pour atteindre 2048 sur une case,&#10;sans que la grille ne soit bloquée.&#10;&#10;Ici, même principe, mais nous sommes dans un cube, composé de 3 grilles : La grille &#10;avant, la grille du centre ainsi que la grille de l'arrière.&#10;&#10;Pour se déplacer, on utilise les flèches disponibles, mais il est également possible de &#10;se déplacer avec les touches Z (haut), Q (gauche), S (bas), D (droite), R (changer de &#10;couche en allant vers l'avant), F (changer de couche en allant vers l'arrière)" visible="false" />
-            <Pane fx:id="paneBoutonsIA" layoutX="136.0" layoutY="632.0" onMouseEntered="#passerBoutonIA" onMouseExited="#sortirBoutonIA" prefHeight="170.0" prefWidth="300.0" style="-fx-background-color: e4dfd7; -fx-background-radius: 10;" visible="false">
+            <Pane fx:id="paneBoutonsIA" layoutX="53.0" layoutY="632.0" onMouseEntered="#passerBoutonIA" onMouseExited="#sortirBoutonIA" prefHeight="170.0" prefWidth="383.0" style="-fx-background-color: e4dfd7; -fx-background-radius: 10;" visible="false">
                <children>
-                  <TextField editable="false" focusTraversable="false" layoutX="12.0" layoutY="18.0" prefHeight="41.0" prefWidth="60.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="IA-1">
+                  <TextField editable="false" focusTraversable="false" layoutX="20.0" layoutY="-6.0" prefHeight="41.0" prefWidth="60.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="IA-1">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" focusTraversable="false" layoutX="122.0" layoutY="18.0" prefHeight="41.0" prefWidth="60.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="IA-2">
+                  <TextField editable="false" focusTraversable="false" layoutX="158.0" layoutY="-6.0" prefHeight="41.0" prefWidth="60.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="IA-2">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </TextField>
-                  <TextField editable="false" focusTraversable="false" layoutX="229.0" layoutY="18.0" prefHeight="41.0" prefWidth="60.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="IA-3">
+                  <TextField editable="false" focusTraversable="false" layoutX="303.0" layoutY="-6.0" prefHeight="41.0" prefWidth="60.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="IA-3">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="boutonIA_1_PlayStop" layoutX="12.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_1_PlayStop" prefHeight="33.0" prefWidth="60" styleClass="boutons" text="⏯">
+                  <Button fx:id="boutonIA_NAIVE_PlayStop" layoutX="20.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_NAIVE_PlayStop" prefHeight="33.0" prefWidth="60" styleClass="boutons" text="⏯">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="boutonIA_1_Entier" layoutX="12.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_1_Entier" prefHeight="42.0" prefWidth="60" styleClass="boutons" text="⏩">
+                  <Button fx:id="boutonIA_NAIVE_Entier" layoutX="20.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_NAIVE_Entier" prefHeight="42.0" prefWidth="60" styleClass="boutons" text="⏩">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="boutonIA_2_PlayStop1" layoutX="122.0" layoutY="56.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="60" styleClass="boutons" text="⏯">
+                  <Button fx:id="boutonIA_EMPTY_PlayStop1" layoutX="160.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_EMPTY_PlayStop" prefHeight="33.0" prefWidth="60" styleClass="boutons" text="⏯">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="boutonIA_3_PlayStop2" layoutX="229.0" layoutY="56.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="60" styleClass="boutons" text="⏯">
+                  <Button fx:id="boutonIA_AVANCEE_PlayStop2" layoutX="302.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_AVANCEE_PlayStop" prefHeight="33.0" prefWidth="60" styleClass="boutons" text="⏯">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="boutonIA_2_Entier1" layoutX="122.0" layoutY="110.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="60" styleClass="boutons" text="⏩">
+                  <Button fx:id="boutonIA_EMPTY_Entier1" layoutX="160.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_EMPTY_Entier" prefHeight="42.0" prefWidth="60" styleClass="boutons" text="⏩">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="boutonIA_3_Entier2" layoutX="229.0" layoutY="110.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="60" styleClass="boutons" text="⏩">
+                  <Button fx:id="boutonIA_AVANCEE_Entier2" layoutX="302.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#cliquerIA_AVANCEE_Entier" prefHeight="42.0" prefWidth="60" styleClass="boutons" text="⏩">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
+                  <TextField editable="false" focusTraversable="false" layoutX="10.0" layoutY="18.0" prefHeight="41.0" prefWidth="85.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="NAIVE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField editable="false" focusTraversable="false" layoutX="122.0" layoutY="18.0" prefHeight="41.0" prefWidth="134.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="CASES VIDES">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField editable="false" focusTraversable="false" layoutX="279.0" layoutY="18.0" prefHeight="41.0" prefWidth="107.0" style="-fx-text-fill: #64523f; -fx-border-color: transparent; -fx-background-color: transparent;" text="AVANCEE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </TextField>
                </children>
             </Pane>
          </children></Pane>
