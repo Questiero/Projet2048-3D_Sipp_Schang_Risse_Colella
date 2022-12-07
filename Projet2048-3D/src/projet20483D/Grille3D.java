@@ -2,6 +2,7 @@ package projet20483D;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -78,8 +79,7 @@ public class Grille3D implements Serializable, Parametres {
     public int getNbCoups() {
         return nbCoups;
     }
-    
-    
+
     public boolean isVictory() {
         return victory;
     }
@@ -117,7 +117,7 @@ public class Grille3D implements Serializable, Parametres {
                 this.deplacerCasesRecursif(extremites, i, j, direction, 0);
             }
         }
-        if (deplacement){
+        if (deplacement) {
             nbCoups++;
         }
 
@@ -300,7 +300,7 @@ public class Grille3D implements Serializable, Parametres {
 
                 Case c2 = c1.getVoisinDirect(dir);
                 if (c2 != null) {
-                    monotony -= Math.log(c1.getValeur())/Math.log(2) - Math.log(c2.getValeur())/Math.log(2);
+                    monotony -= Math.log(c1.getValeur()) / Math.log(2) - Math.log(c2.getValeur()) / Math.log(2);
                 }
 
             }
@@ -324,7 +324,7 @@ public class Grille3D implements Serializable, Parametres {
                 Case c2 = c1.getVoisinDirect(dir);
                 if (c2 != null) {
 
-                    smoothness -= Math.abs(Math.log(c1.getValeur())/Math.log(2) - Math.log(c2.getValeur())/Math.log(2));
+                    smoothness -= Math.abs(Math.log(c1.getValeur()) / Math.log(2) - Math.log(c2.getValeur()) / Math.log(2));
 
                 }
 
@@ -359,6 +359,27 @@ public class Grille3D implements Serializable, Parametres {
             return state;
         }
 
+    }
+
+    public void serialisation() {
+        ObjectOutputStream oos = null;
+        try {
+            FileOutputStream fichier = new FileOutputStream("donnees.ser");
+            oos = new ObjectOutputStream(fichier);
+            oos.writeObject(this);
+            oos.flush();
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oos != null) {
+                    oos.flush();
+                    oos.close();
+                }
+            } catch (final IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 }

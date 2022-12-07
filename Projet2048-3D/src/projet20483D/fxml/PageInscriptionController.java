@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import projet20483D.database.Requete;
 
 /**
  * FXML Controller class
@@ -32,6 +33,8 @@ public class PageInscriptionController implements Initializable {
     }
     @FXML
     private Button boutonOkInscription;
+    
+    private Requete requete = new Requete();
 
     @FXML
     private void cliquerBoutonOkInscription(MouseEvent event) throws IOException {
@@ -44,6 +47,9 @@ public class PageInscriptionController implements Initializable {
         scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
+        
+        
+        requete.inscription("chlonii", "123456789", "123456789");
         
     }
 

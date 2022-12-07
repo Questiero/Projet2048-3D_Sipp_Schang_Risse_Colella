@@ -4,7 +4,11 @@
  */
 package projet20483D.fxml;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -70,12 +74,14 @@ public class PageJeuController implements Initializable {
     boolean continuer = false;
     long initTimeScore;
     long minutes = 0;
+    boolean b = false; //utile pour le chrono
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         //ajouts des labels dans la liste
         listeLabels.add(label00_G0);
         listeLabels.add(label10_G0);
@@ -138,10 +144,23 @@ public class PageJeuController implements Initializable {
         scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
         stage.setScene(scene);
         stage.show();
+
+        g.serialisation();
     }
 
     @FXML
     private void lancerPartie(MouseEvent event) throws IOException {
+        try {
+            FileInputStream fichierIn = new FileInputStream("donnees.ser");
+            if (fichierIn.available() != 0) {
+               deserialisation(); 
+            }
+            else{
+                g = jeu(g);
+            } 
+       } catch (java.io.EOFException e) {
+            e.printStackTrace();
+       } 
         //création timer pour score
         initTimeScore = System.currentTimeMillis();
 
@@ -149,7 +168,7 @@ public class PageJeuController implements Initializable {
         boutonJouerJeu.setVisible(false);
         boutonJouerJeu.setDisable(true);
 
-        g = jeu(g);
+        
 
         //activation des boutons de déplacement
         boutonUP.setDisable(false);
@@ -164,10 +183,12 @@ public class PageJeuController implements Initializable {
     }
 
     @FXML
+
     private Grille3D jeu(Grille3D g) {
 
         //création du début du jeu (grilles)
         g.nouvelleCase();
+
         affichageUpdate(g);
 
         labelScore.setText(Integer.toString(this.g.getScore()));
@@ -265,16 +286,20 @@ public class PageJeuController implements Initializable {
                     labelScore.setText(Integer.toString(this.g.getNbCoups()));
                     break;
                 case "TEMPS": //ne s'actualise qu'à chaque mouvement
-                    long scoreTempsSeconde = (System.currentTimeMillis() - initTimeScore) / 1000;
-                    System.out.println("score : " + scoreTempsSeconde);
-                    System.out.println("minutes : " + minutes);
 
-                    if ((scoreTempsSeconde % 60) == 0) {
-                        minutes++;
-                        scoreTempsSeconde -= 60;
-                        System.out.println(scoreTempsSeconde + "-");
+                    long scoreTempsSeconde = ((System.currentTimeMillis() - initTimeScore)) / 1000;
+
+                    if (b) {
+                        scoreTempsSeconde = (((System.currentTimeMillis() - initTimeScore)) / 1000) - minutes * 60;
                     }
 
+                    if (scoreTempsSeconde >= 60) {
+                        minutes++;
+                        scoreTempsSeconde -= 60;
+                        b = true;
+                    }
+
+                    //affichage plus optimisé
                     if (minutes < 10) {
                         if (scoreTempsSeconde < 10) {
                             labelScore.setText("0" + minutes + " : " + "0" + scoreTempsSeconde);
@@ -505,6 +530,42 @@ public class PageJeuController implements Initializable {
             deplacer(dir);
         }
 
+    }
+
+    public void deserialisation() {
+        ObjectInputStream ois = null;
+        try {
+            FileInputStream fichierIn = new FileInputStream("donnees.ser");
+            if (fichierIn.available() != 0) {
+                ois = new ObjectInputStream(fichierIn);
+                Object o = ois.readObject();
+
+                if (o instanceof Grille3D) {
+                    g = (Grille3D) o;
+                    affichageUpdate(g);
+                } else {
+                    g = jeu(g);
+                }
+            } else {
+                System.out.println("NTM");
+                g = jeu(g);
+            }
+
+        } catch (java.io.EOFException e) {
+            e.printStackTrace();
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+        } catch (final ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (final IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 }
