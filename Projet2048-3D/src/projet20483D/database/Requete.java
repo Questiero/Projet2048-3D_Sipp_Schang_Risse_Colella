@@ -17,11 +17,11 @@ public class Requete implements ParamBDD {
         this.con = null;
     }
 
-    public String inscription(String pseudo, String mdp, String mdp2) {
+   /* public String inscription(String pseudo, String mdp, String mdp2) {
         try {
             this.openConnexion();
         }
-    }
+    }*/
 
     private void openConnexion() {
         String connectUrl = "jdbc:mysql://" + this.host + "/" + this.dbname;
@@ -41,6 +41,12 @@ public class Requete implements ParamBDD {
     }
 
     private void closeConnexion() {
-
+        if (this.con != null) {
+            try {
+                this.con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
