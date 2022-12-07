@@ -75,4 +75,31 @@ public class PageAccueilController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    private void cliquerBoutonInscrire(MouseEvent event) throws IOException {
+        //fermeture page
+        Stage stage;
+        Parent root;
+        
+        stage = (Stage) boutonCredits.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageCredits.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void cliquerBoutonSeConnecter(MouseEvent event) throws IOException {
+        //fermeture page
+        Stage stage;
+        Parent root;
+        
+        stage = (Stage) boutonCredits.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageCredits.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
 }

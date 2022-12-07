@@ -68,6 +68,8 @@ public class PageJeuController implements Initializable {
     boolean annuler = true;
     int nbAnnuler = 5;
     boolean continuer = false;
+    long initTimeScore;
+    long minutes = 0;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -140,6 +142,8 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void lancerPartie(MouseEvent event) throws IOException {
+        //création timer pour score
+        initTimeScore = System.currentTimeMillis();
 
         //disparition du bouton jouer
         boutonJouerJeu.setVisible(false);
@@ -260,6 +264,32 @@ public class PageJeuController implements Initializable {
                 case "COUPS":
                     labelScore.setText(Integer.toString(this.g.getNbCoups()));
                     break;
+                case "TEMPS": //ne s'actualise qu'à chaque mouvement
+                    long scoreTempsSeconde = ((System.currentTimeMillis() - initTimeScore) / 1000) - (minutes * 60);
+                    System.out.println("score : " + scoreTempsSeconde);
+                    System.out.println("minutes : " + minutes);
+
+                    if ((scoreTempsSeconde % 60) == 0) {
+                        minutes++;
+                        System.out.println(scoreTempsSeconde + "-");
+                    }
+
+                    if (minutes < 10) {
+                        if (scoreTempsSeconde < 10) {
+                            labelScore.setText("0" + minutes + " : " + "0" + scoreTempsSeconde);
+                        } else {
+                            labelScore.setText("0" + minutes + " : " + scoreTempsSeconde);
+                        }
+                    } else {
+                        if (scoreTempsSeconde < 10) {
+                            labelScore.setText(minutes + " : " + "0" + scoreTempsSeconde);
+                        } else {
+                            labelScore.setText(minutes + " : " + scoreTempsSeconde);
+                        }
+                    }
+
+                    break;
+
                 default:
                     labelScore.setText(Integer.toString(this.g.getScore()));
 
@@ -439,6 +469,7 @@ public class PageJeuController implements Initializable {
         }
 
     }
+
     @FXML
     private void cliquerIA_EMPTY_PlayStop(MouseEvent event) throws IOException {
         DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
@@ -456,6 +487,7 @@ public class PageJeuController implements Initializable {
         }
 
     }
+
     @FXML
     private void cliquerIA_AVANCEE_PlayStop(MouseEvent event) throws IOException {
         DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
