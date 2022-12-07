@@ -4,10 +4,13 @@
  */
 package projet20483D.database;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Requete implements ParamBDD {
 
     private final String host, dbname, username, pwd;
-    private Connexion con = null;
+    private Connection con = null;
 
     public Requete() {
         this.host = HOST;
