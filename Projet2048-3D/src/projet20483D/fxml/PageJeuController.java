@@ -265,12 +265,13 @@ public class PageJeuController implements Initializable {
                     labelScore.setText(Integer.toString(this.g.getNbCoups()));
                     break;
                 case "TEMPS": //ne s'actualise qu'à chaque mouvement
-                    long scoreTempsSeconde = ((System.currentTimeMillis() - initTimeScore) / 1000) - (minutes * 60);
+                    long scoreTempsSeconde = (System.currentTimeMillis() - initTimeScore) / 1000;
                     System.out.println("score : " + scoreTempsSeconde);
                     System.out.println("minutes : " + minutes);
 
                     if ((scoreTempsSeconde % 60) == 0) {
                         minutes++;
+                        scoreTempsSeconde -= 60;
                         System.out.println(scoreTempsSeconde + "-");
                     }
 

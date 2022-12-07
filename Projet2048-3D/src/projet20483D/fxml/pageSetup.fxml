@@ -22,15 +22,6 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </TextField>
-            <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="508.0" layoutY="126.0" prefHeight="66.0" prefWidth="212.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="Pseudo :">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </TextField>
-            <Label fx:id="labelPseudo" layoutX="532.0" layoutY="181.0" prefHeight="31.0" prefWidth="330.0" text="Pseudo à récup" />
             <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="503.0" layoutY="224.0" prefHeight="79.0" prefWidth="337.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="Mode de jeu : ">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />

@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 public class PageAccueilController implements Initializable {
 
     @FXML
-    private Button boutonJouer, boutonQuitter, boutonCredits, boutonCharger;
+    private Button boutonJouer, boutonQuitter, boutonCredits, boutonCharger, boutonInscrire, boutonSeConnecter;
     @FXML
     private SplitPane splitPaneJouer;
 
@@ -78,26 +78,28 @@ public class PageAccueilController implements Initializable {
     
     @FXML
     private void cliquerBoutonInscrire(MouseEvent event) throws IOException {
-        //fermeture page
+       
         Stage stage;
         Parent root;
         
-        stage = (Stage) boutonCredits.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageCredits.fxml"));
+        stage = (Stage) boutonInscrire.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageInscription.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
     }
     
     @FXML
     private void cliquerBoutonSeConnecter(MouseEvent event) throws IOException {
-        //fermeture page
+       
         Stage stage;
         Parent root;
         
-        stage = (Stage) boutonCredits.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageCredits.fxml"));
+        stage = (Stage) boutonSeConnecter.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageConnection.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
     }
