@@ -13,6 +13,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -75,6 +81,8 @@ public class PageJeuController implements Initializable {
     long initTimeScore;
     long minutes = 0;
     boolean b = false; //utile pour le chrono
+    DeplacementContext context;
+    boolean stop = true;
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -153,22 +161,19 @@ public class PageJeuController implements Initializable {
         try {
             FileInputStream fichierIn = new FileInputStream("donnees.ser");
             if (fichierIn.available() != 0) {
-               deserialisation(); 
-            }
-            else{
+                deserialisation();
+            } else {
                 g = jeu(g);
-            } 
-       } catch (java.io.EOFException e) {
+            }
+        } catch (java.io.EOFException e) {
             e.printStackTrace();
-       } 
+        }
         //création timer pour score
         initTimeScore = System.currentTimeMillis();
 
         //disparition du bouton jouer
         boutonJouerJeu.setVisible(false);
         boutonJouerJeu.setDisable(true);
-
-        
 
         //activation des boutons de déplacement
         boutonUP.setDisable(false);
@@ -478,9 +483,51 @@ public class PageJeuController implements Initializable {
 
     }
 
+    private void toggleStop() {
+        stop = !stop;
+    }
+
+    private void createAIThread() {
+
+        // Création d'un Runnable et d'un thread secondaire afin d'obtenir une animation de déplacement du monstre
+        ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+        final Future<?>[] f = {null};
+
+        f[0] = exec.scheduleAtFixedRate(new Runnable() {
+
+            @Override
+            public void run() {
+
+                try {
+                    Direction dir = context.executeStrategy();
+                    deplacer(dir);
+                } catch (IOException ex) {
+                    Logger.getLogger(PageJeuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                if (g.partieFinie() || stop) {
+                    this.cancel();
+                }
+
+            }
+
+            private void cancel() {
+
+                // Arrêt du thread
+                f[0].cancel(false);
+
+                return;
+            }
+
+        }, 0, 100, TimeUnit.MILLISECONDS);
+
+    }
+
     @FXML
     private void cliquerIA_NAIVE_PlayStop(MouseEvent event) throws IOException {
-        DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
+
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
+
         Direction dir = context.executeStrategy();
         deplacer(dir);
 
@@ -488,17 +535,18 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void cliquerIA_NAIVE_Entier(MouseEvent event) throws IOException {
-        while (!g.partieFinie()) {
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
-            Direction dir = context.executeStrategy();
-            deplacer(dir);
-        }
+
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.NAIVE));
+
+        this.toggleStop();
+        this.createAIThread();
 
     }
 
     @FXML
     private void cliquerIA_EMPTY_PlayStop(MouseEvent event) throws IOException {
-        DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
+
         Direction dir = context.executeStrategy();
         deplacer(dir);
 
@@ -506,17 +554,19 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void cliquerIA_EMPTY_Entier(MouseEvent event) throws IOException {
-        while (!g.partieFinie()) {
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
-            Direction dir = context.executeStrategy();
-            deplacer(dir);
-        }
+
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.EMPTYONLY));
+
+        this.toggleStop();
+        this.createAIThread();
 
     }
 
     @FXML
     private void cliquerIA_AVANCEE_PlayStop(MouseEvent event) throws IOException {
-        DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
+
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
+
         Direction dir = context.executeStrategy();
         deplacer(dir);
 
@@ -524,11 +574,11 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void cliquerIA_AVANCEE_Entier(MouseEvent event) throws IOException {
-        while (!g.partieFinie()) {
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
-            Direction dir = context.executeStrategy();
-            deplacer(dir);
-        }
+
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
+
+        this.toggleStop();
+        this.createAIThread();
 
     }
 
