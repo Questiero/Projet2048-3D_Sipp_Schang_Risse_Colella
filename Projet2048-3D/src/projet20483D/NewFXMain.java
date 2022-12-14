@@ -25,7 +25,7 @@ public class NewFXMain extends Application {
         scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
         //stage.setMaximized(true);
         stage.setScene(scene);
-        stage.show();           
+        stage.show();   
     }
 
     public static void main(String[] args) {

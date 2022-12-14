@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import projet20483D.database.Requete;
@@ -33,6 +35,10 @@ public class PageInscriptionController implements Initializable {
     }
     @FXML
     private Button boutonOkInscription;
+    @FXML
+    private PasswordField textFieldMdpInscription, textFieldMdpConfirmation;
+    @FXML
+    private TextField textFieldPseudoInscription;
     
     private Requete requete = new Requete();
 
@@ -49,7 +55,7 @@ public class PageInscriptionController implements Initializable {
         stage.show();
         
         
-        requete.inscription("chlonii", "123456789", "123456789");
+        requete.inscription(textFieldPseudoInscription.getText(), textFieldMdpInscription.getText(), textFieldMdpConfirmation.getText());
         
     }
 

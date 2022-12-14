@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="projet20483D.fxml.PageConnectionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.fxml.PageConnectionController">
    <children>
       <TextField fx:id="textFieldPseudoConnection" layoutX="131.0" layoutY="107.0" styleClass="choiceBox" />
       <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="107.0" layoutY="43.0" prefHeight="56.0" prefWidth="212.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="Pseudo :">
@@ -27,7 +26,8 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </TextField>
-      <Button fx:id="boutonOkConnection" layoutX="133.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonOkConnection" prefHeight="31.0" prefWidth="160.0" styleClass="boutons" text="ok" />
+      <Button fx:id="boutonOkConnection" layoutX="133.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonOkConnection" prefHeight="31.0" prefWidth="160.0" styleClass="boutons" text="ok" />
       <PasswordField fx:id="textFieldMdpConnection" layoutX="131.0" layoutY="212.0" styleClass="choiceBox" />
+      <Label fx:id="labelErreurConnexion" layoutX="131.0" layoutY="254.0" prefHeight="21.0" prefWidth="297.0" text="Le pseudo ou le mot de passe est incorrect." visible="false" />
    </children>
 </AnchorPane>

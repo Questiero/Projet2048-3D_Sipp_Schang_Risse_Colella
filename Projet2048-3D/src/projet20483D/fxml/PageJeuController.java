@@ -44,6 +44,8 @@ import projet20483D.Projet20483D;
 import static projet20483D.Projet20483D.addMemento;
 import static projet20483D.Projet20483D.getMemento;
 import static projet20483D.Projet20483D.restoreFromMemento;
+import projet20483D.database.Requete;
+import static projet20483D.fxml.Utilisateur.u;
 import projet20483D.strategies.deplacements.DeplacementContext;
 import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
 
@@ -81,8 +83,17 @@ public class PageJeuController implements Initializable {
     long initTimeScore;
     long minutes = 0;
     boolean b = false; //utile pour le chrono
+<<<<<<< Updated upstream
     DeplacementContext context;
     boolean stop = true;
+=======
+<<<<<<< HEAD
+    Requete r = new Requete();
+=======
+    DeplacementContext context;
+    boolean stop = true;
+>>>>>>> f1b9b9539096f9f3906da10361094a57bce61203
+>>>>>>> Stashed changes
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -154,6 +165,11 @@ public class PageJeuController implements Initializable {
         stage.show();
 
         g.serialisation();
+        
+        if(g.getScore() > u.getMeilleurScore()){
+            u.setMeilleurScore(g.getScore());
+            r.updateScore(g.getScore());
+        }
     }
 
     @FXML
@@ -274,6 +290,8 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void deplacer(Direction dir) throws IOException {
+        
+       // u.setMeilleurScore(g.getScore());
 
         addMemento(new Grille3D.Memento(g));
 
@@ -286,6 +304,8 @@ public class PageJeuController implements Initializable {
             switch (String.valueOf(selectedItems)) {
                 case "POINTS":
                     labelScore.setText(Integer.toString(this.g.getScore()));
+                    labelMeilleurScore.setText(Integer.toString(u.getMeilleurScore()));
+
                     break;
                 case "COUPS":
                     labelScore.setText(Integer.toString(this.g.getNbCoups()));
@@ -325,7 +345,6 @@ public class PageJeuController implements Initializable {
                     labelScore.setText(Integer.toString(this.g.getScore()));
 
             }
-            // labelMeilleurScore.setText(Integer.toString(this.g.getMeilleurScore()));
         } else {
             Projet20483D.savedStates.removeFirst();
         }
