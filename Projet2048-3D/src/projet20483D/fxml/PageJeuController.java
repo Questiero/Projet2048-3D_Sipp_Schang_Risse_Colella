@@ -19,6 +19,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,17 +84,9 @@ public class PageJeuController implements Initializable {
     long initTimeScore;
     long minutes = 0;
     boolean b = false; //utile pour le chrono
-<<<<<<< Updated upstream
     DeplacementContext context;
     boolean stop = true;
-=======
-<<<<<<< HEAD
     Requete r = new Requete();
-=======
-    DeplacementContext context;
-    boolean stop = true;
->>>>>>> f1b9b9539096f9f3906da10361094a57bce61203
->>>>>>> Stashed changes
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
@@ -165,8 +158,8 @@ public class PageJeuController implements Initializable {
         stage.show();
 
         g.serialisation();
-        
-        if(g.getScore() > u.getMeilleurScore()){
+
+        if (g.getScore() > u.getMeilleurScore()) {
             u.setMeilleurScore(g.getScore());
             r.updateScore(g.getScore());
         }
@@ -290,9 +283,8 @@ public class PageJeuController implements Initializable {
 
     @FXML
     private void deplacer(Direction dir) throws IOException {
-        
-       // u.setMeilleurScore(g.getScore());
 
+        // u.setMeilleurScore(g.getScore());
         addMemento(new Grille3D.Memento(g));
 
         if (this.g.lanceurDeplacerCases(dir)) {
@@ -517,12 +509,18 @@ public class PageJeuController implements Initializable {
             @Override
             public void run() {
 
-                try {
-                    Direction dir = context.executeStrategy();
-                    deplacer(dir);
-                } catch (IOException ex) {
-                    Logger.getLogger(PageJeuController.class.getName()).log(Level.SEVERE, null, ex);
+                Direction dir = context.executeStrategy();
+                Platform.runLater(new Runnable() { // classe anonyme
+                    @Override
+                    public void run() {
+                        try {
+                            deplacer(dir);
+                        } catch (IOException ex) {
+                            Logger.getLogger(PageJeuController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
+                );
 
                 if (g.partieFinie() || stop) {
                     this.cancel();
