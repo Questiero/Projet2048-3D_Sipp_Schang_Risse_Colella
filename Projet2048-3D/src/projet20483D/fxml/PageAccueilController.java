@@ -86,6 +86,9 @@ public class PageAccueilController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.close();
+        
+        System.exit(0);
+        
     }
 
     @FXML
