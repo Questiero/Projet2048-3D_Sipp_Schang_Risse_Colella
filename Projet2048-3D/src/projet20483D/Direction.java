@@ -2,6 +2,9 @@ package projet20483D;
 
 import java.util.Random;
 
+/**
+ * Enumération représentant une direction dans la grille
+ */
 public enum Direction {
     UP,
     LEFT,
@@ -10,6 +13,10 @@ public enum Direction {
     BACK,
     FRONT;
 
+    /**
+     * Retourne la Direction opposée
+     * @return Direction opposée
+     */
     public Direction opposite() {
 
         switch (this) {
@@ -31,6 +38,10 @@ public enum Direction {
 
     }
 
+    /**
+     * Retourne une direction aléatoire
+     * @return Direction aléatoire
+     */
     public static Direction random() {
         Direction[] directionsPossibles = Direction.values();
         Random ra = new Random();
