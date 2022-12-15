@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * Adaptation de la classe @see Grille du TP 2048 de L2 en trois dimensions
+ * Adaptation de la classe Grille du TP 2048 de L2 en trois dimensions
  */
 public class Grille3D implements Serializable, Parametres {
 
