@@ -34,12 +34,12 @@ public class Requete implements ParamBDD {
             this.openConnexion();
             if (pseudo == null) {
                 return "Entrez un pseudo correct";
-                // } else if (pseudoUtilise(pseudo)) {
-                //   return "Ce pseudo existe déjà";
+                 } else if (pseudoUtilise(pseudo)) {
+                   return "Ce pseudo existe déjà";
             } else if (mdp.length() < 8) {
-                return "Mdp trop court";
+                return "MOt de passe trop court";
             } else if (!mdp.equals(mdp2)) {
-                return "les mdp ne sont pas identiques";
+                return "Les mots de passes ne sont pas identiques";
             } else {
 
                 PreparedStatement stmt = connect.prepareStatement("INSERT INTO user (pseudo, mdp) VALUES (?,?)");
@@ -59,13 +59,15 @@ public class Requete implements ParamBDD {
     }
 
     public boolean connexion(String pseudo, String mdp) {
+        
         try {
             this.openConnexion();
+            
+            
 
             PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, mdp FROM user WHERE pseudo like ? AND mdp like ?");
             stmt.setString(1, pseudo);
             stmt.setString(2, mdp);
-            System.out.println("on est passé ici");
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -139,11 +141,11 @@ public class Requete implements ParamBDD {
     private boolean pseudoUtilise(String pseudo) {
         try {
             boolean res = true;
-            PreparedStatement stmt = connect.prepareStatement("SELECT count() FROM user WHERE pseudo like ?");
+            PreparedStatement stmt = connect.prepareStatement("SELECT count(*) FROM user WHERE pseudo like ?");
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
             rs.first();
-            if (rs.getInt("count()") > 0) {
+            if (rs.getInt("count(*)") > 0) {
                 res = true;
             } else {
                 res = false;
