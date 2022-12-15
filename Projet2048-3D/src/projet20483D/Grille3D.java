@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * Adaptation de la classe @see Grille du TP 2048 de L2 en trois dimensions
+ */
 public class Grille3D implements Serializable, Parametres {
 
     private final HashSet<Case> grille;
@@ -22,6 +23,9 @@ public class Grille3D implements Serializable, Parametres {
     private boolean deplacement;
     private boolean victory = false;
 
+    /**
+     * Construit une Grille3D
+     */
     public Grille3D() {
         this.grille = new HashSet<Case>();
     }
@@ -59,31 +63,60 @@ public class Grille3D implements Serializable, Parametres {
         return result;
     }
 
-    public String toHTML() {
-        //TODO
-        return null;
-    }
-
+    /**
+     * Retourne le {@code HashSet<Case> grille}
+     *
+     * @return le {@code HashSet<Case> grille}
+     */
     public HashSet<Case> getGrille() {
         return grille;
     }
 
+    /**
+     * Retourne la valeur de la {@code Case} maximale contenue au sein de la
+     * grille
+     *
+     * @return valeur de la Case maximale contenue au sein de la grille
+     */
     public int getValeurMax() {
         return valeurMax;
     }
 
+    /**
+     * Retourne le score de la partie, augmentant à chaque fusion de la valeur
+     * du nombre fusionné
+     *
+     * @return score
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Retourne le nombre de coups joués dans la partie
+     *
+     * @return nombre de coups
+     */
     public int getNbCoups() {
         return nbCoups;
     }
 
+    /**
+     * Retourne l'état final de la partie, {@code true} si c'est une victoire,
+     * {@code false} sinon
+     *
+     * @return Etat final de la partie
+     */
     public boolean isVictory() {
         return victory;
     }
 
+    /**
+     * Retourne l'état actuel de la partie, {@code true} si elle est finie,
+     * {@code false} false sinon
+     *
+     * @return Etat actuel de la partie
+     */
     public boolean partieFinie() {
 
         if (this.valeurMax >= OBJECTIF) {
@@ -108,6 +141,15 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
+    /**
+     * Essaie de déplacer toutes les cases dans une direction donnée: si au
+     * moins un déplacement est réalisé, retourne {@code true} et ajoute une
+     * nouvelle case aléatoirement. Sinon, retourne {@code false}.
+     *
+     * @param direction La direction dans laquelle on souhaite essayer de
+     * déplacer les cases
+     * @return Etat du déplacement
+     */
     public boolean lanceurDeplacerCases(Direction direction) {
         Case[][] extremites = this.getCasesExtremites(direction);
         deplacement = false; // pour vérifier si on a bougé au moins une case après le déplacement, avant d'en rajouter une nouvelle
@@ -124,6 +166,12 @@ public class Grille3D implements Serializable, Parametres {
         return deplacement;
     }
 
+    /**
+     * Augmente la valeur d'une {@code Case} c, augmente le score et change la
+     * {@code valeurMax} si nécessaire.
+     *
+     * @param c La case fusionnée
+     */
     private void fusion(Case c) {
         c.setValeur(c.getValeur() * 2);
         this.score += c.getValeur();
@@ -135,6 +183,16 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
+    /**
+     * Déplacement récursif des cases de la grille
+     *
+     * @param extremites Cases à l'extrémités de la grille dans la Direction
+     * souhaitée
+     * @param firstD Colonne actuelle
+     * @param secondD Ligne actuelle
+     * @param direction Direction dans laquelle on souhaite déplacer les cases
+     * @param compteur Un compteur
+     */
     private void deplacerCasesRecursif(Case[][] extremites, int firstD, int secondD, Direction direction, int compteur) {
         if (extremites[firstD][secondD] != null) {
             if ((direction == Direction.UP && extremites[firstD][secondD].getY() != compteur)
@@ -183,6 +241,12 @@ public class Grille3D implements Serializable, Parametres {
         }
     }
 
+    /**
+     * Retourne les cases à l'extrémités dans une direction donnée
+     *
+     * @param direction Direction des cases
+     * @return Tableau à deux dimensions des cases à l'extrémités
+     */
     public Case[][] getCasesExtremites(Direction direction) {
 
         Case[][] result = new Case[TAILLE][TAILLE];
@@ -224,6 +288,12 @@ public class Grille3D implements Serializable, Parametres {
         return result;
     }
 
+    /**
+     * Retourne un message de fin de partie personnalisé en fonction de l'état
+     * de la partie
+     *
+     * @return Message de fin de partie
+     */
     public String gameOverMessage() {
         if (this.victory) {
             return "Bravo ! Vous avez atteint " + this.valeurMax + " avec un score de " + this.score;
@@ -232,6 +302,12 @@ public class Grille3D implements Serializable, Parametres {
         }
     }
 
+    /**
+     * Crée une nouvelle Case aléatoirement et l'ajoute dans la grille Si c'est
+     * possible, retourne {@code true}. Sinon, retourne {@code false}.
+     *
+     * @return Etat du déplacement
+     */
     public boolean nouvelleCase() {
 
         if (this.grille.size() < TAILLE * TAILLE * TAILLE) {
@@ -260,6 +336,11 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
+    /**
+     * Ajoute une Case dans la grille
+     *
+     * @param ajout Case à ajouter
+     */
     public void addCase(Case ajout) {
         ajout.setGrille(this);
         this.grille.add(ajout);
@@ -268,6 +349,13 @@ public class Grille3D implements Serializable, Parametres {
         }
     }
 
+    /**
+     * Création d'une copie profonde de l'instance de {@code Grille3D}
+     *
+     * @return Copie profonde de {@code Grille3D}
+     * @throws IOException Si il y a une erreur
+     * @throws ClassNotFoundException Si il y a une erreur
+     */
     public Grille3D deepCopy() throws IOException, ClassNotFoundException {
 
         //Serialization of object
@@ -284,10 +372,22 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
+    /**
+     * Retourne le nombre de cases vides dans la grille
+     *
+     * @return Le nombre de cases vides
+     */
     public int getNumberEmpty() {
         return TAILLE * TAILLE * TAILLE - this.grille.size();
     }
 
+    /**
+     * Retourne la monotonie de la grille, c'est-à-dire une heuristique
+     * indiquant si la grille est composée principalement de cases similaires
+     * côte à côte
+     *
+     * @return Monotonie de la grille
+     */
     public int getMonotony() {
 
         int monotony = 0;
@@ -311,6 +411,13 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
+    /**
+     * Retourne la régularité de la grille, c'est-à-dire une heuristique
+     * indiquant si la grille est composée principalement de cases de valeur
+     * proches côte à côte
+     *
+     * @return Régularité de la grille
+     */
     public int getSmoothness() {
 
         int smoothness = 0;
@@ -336,15 +443,28 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
+    /**
+     * Enregistre l'état actuel d'une grille dans un nouveau Memento
+     * @return Memento
+     * @throws ClassNotFoundException Si erreur
+     * @throws IOException Si erreur
+     */
     public Object saveToMemento() throws ClassNotFoundException, IOException {
         System.out.println("Originator: sauvegarde dans le memento.");
         return new Memento(this);
     }
 
-    public static class Memento { // Classe interne --> permet la sauvegarde
+    /**
+     * Classe permettant la sauvegarde d'une Grille3D en mémoire via un memento
+     */
+    public static class Memento {
 
         private Grille3D state;
 
+        /**
+         * Création d'un nouveau Memento à partir de la Grille3D à sauvegarder
+         * @param stateToSave Grille3D à sauvegarder
+         */
         public Memento(Grille3D stateToSave) {
             try {
                 state = stateToSave.deepCopy();
@@ -355,12 +475,19 @@ public class Grille3D implements Serializable, Parametres {
             }
         }
 
+        /**
+         * Récupère la Grille3D sauvegardée
+         * @return Grille3D sauvegardée
+         */
         public Grille3D getSavedState() {
             return state;
         }
 
     }
 
+    /**
+     * Sérialise la classe dans fichier {@code donnees.ser}
+     */
     public void serialisation() {
         ObjectOutputStream oos = null;
         try {
