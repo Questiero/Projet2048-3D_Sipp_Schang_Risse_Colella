@@ -7,7 +7,13 @@ import java.io.Serializable;
  */
 public class Case implements Parametres, Serializable {
 
+    /**
+     * Coordonnées et valeur
+     */
     private int x, y, z, valeur;
+    /**
+     * Grille à laquelle appartient la Case
+     */
     private Grille3D grille;
 
     /**

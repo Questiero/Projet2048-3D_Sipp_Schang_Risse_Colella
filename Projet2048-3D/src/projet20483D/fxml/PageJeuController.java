@@ -582,7 +582,7 @@ public class PageJeuController implements Initializable {
     @FXML
     private void cliquerIA_AVANCEE_PlayStop(MouseEvent event) throws IOException {
 
-        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.ADVANCED));
 
         Direction dir = context.executeStrategy();
         deplacer(dir);
@@ -592,7 +592,7 @@ public class PageJeuController implements Initializable {
     @FXML
     private void cliquerIA_AVANCEE_Entier(MouseEvent event) throws IOException {
 
-        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.FULLBLAST));
+        context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxDeplacement.ExpectimaxType.ADVANCED));
 
         this.toggleStop();
         this.createAIThread();

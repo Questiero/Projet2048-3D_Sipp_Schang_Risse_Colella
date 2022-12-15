@@ -6,8 +6,15 @@ import projet20483D.Direction;
 import projet20483D.Grille3D;
 import projet20483D.strategies.deplacements.ExpectimaxDeplacement.ExpectimaxType;
 
+/**
+ * Classe permettant l'évaluation des chances de gagner des IA
+ */
 public class Benchmark {
 
+    /**
+     * Des trucs
+     * @param args oui 
+     */
     public static void main(String[] args) {
 
         long initTime = System.currentTimeMillis();
@@ -26,7 +33,7 @@ public class Benchmark {
             boolean b = g.nouvelleCase();
 
             // DeplacementContext context = new DeplacementContext(new RandomDeplacement());
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxType.FULLBLAST));
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxType.ADVANCED));
 
             int n = 0;
 

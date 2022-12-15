@@ -16,11 +16,29 @@ import java.util.Random;
  */
 public class Grille3D implements Serializable, Parametres {
 
+    /**
+     * Grille contenant les Cases
+     */
     private final HashSet<Case> grille;
+    /**
+     * Valeur maximum de la grlle
+     */
     private int valeurMax = 0;
+    /**
+     * Score de la partie
+     */
     private int score = 0;
+    /**
+     * Nombres de coups effectués dans la partie
+     */
     private int nbCoups = 0;
+    /**
+     * Variable permettant de savoir si un déplacement est possible ou non
+     */
     private boolean deplacement;
+    /**
+     * Etat de la fin de partie, savoir si c'est une victoire ou non
+     */
     private boolean victory = false;
 
     /**
@@ -445,6 +463,7 @@ public class Grille3D implements Serializable, Parametres {
 
     /**
      * Enregistre l'état actuel d'une grille dans un nouveau Memento
+     *
      * @return Memento
      * @throws ClassNotFoundException Si erreur
      * @throws IOException Si erreur
@@ -463,6 +482,7 @@ public class Grille3D implements Serializable, Parametres {
 
         /**
          * Création d'un nouveau Memento à partir de la Grille3D à sauvegarder
+         *
          * @param stateToSave Grille3D à sauvegarder
          */
         public Memento(Grille3D stateToSave) {
@@ -477,6 +497,7 @@ public class Grille3D implements Serializable, Parametres {
 
         /**
          * Récupère la Grille3D sauvegardée
+         *
          * @return Grille3D sauvegardée
          */
         public Grille3D getSavedState() {

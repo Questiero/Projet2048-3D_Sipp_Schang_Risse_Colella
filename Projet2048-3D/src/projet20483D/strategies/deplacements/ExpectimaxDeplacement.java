@@ -2,7 +2,6 @@ package projet20483D.strategies.deplacements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,12 +10,21 @@ import projet20483D.Direction;
 import projet20483D.Grille3D;
 import projet20483D.Parametres;
 
+/**
+ * Stratégie de déplacement basée sur le modèle d'Expectimax
+ */
 public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     private Grille3D grille;
     private final int depth;
     private final ExpectimaxType type;
 
+    /**
+     * Crée une stratégie de déplacement basée sur le modèle d'Expectimax sur
+     * une Grille3D avec une profondeur maximum de 2 et un heuristique naif
+     *
+     * @param grille Grille3D
+     */
     public ExpectimaxDeplacement(Grille3D grille) {
 
         this.grille = grille;
@@ -25,6 +33,14 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     }
 
+    /**
+     * Crée une stratégie de déplacement basée sur le modèle d'Expectimax sur
+     * une Grille3D avec une profondeur maximum configurable et un heuristique
+     * naif
+     *
+     * @param grille Grille3D
+     * @param depth Profondeur maximum
+     */
     public ExpectimaxDeplacement(Grille3D grille, int depth) {
 
         this.grille = grille;
@@ -34,6 +50,15 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     }
 
+    /**
+     * Crée une stratégie de déplacement basée sur le modèle d'Expectimax sur
+     * une Grille3D avec une profondeur maximum configurable et un heuristique
+     * choisi entre NAIVE, EMPTYONLY et ADVANCED
+     *
+     * @param grille Grille3D
+     * @param depth Profondeur maximum
+     * @param type Type d'heuristique
+     */
     public ExpectimaxDeplacement(Grille3D grille, int depth, ExpectimaxType type) {
 
         this.grille = grille;
@@ -78,7 +103,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
                     return poidsVide * Math.log(this.grille.getNumberEmpty())
                             + poidsMax * this.grille.getValeurMax();
 
-                case FULLBLAST:
+                case ADVANCED:
 
                     poidsVide = 2.7;
                     poidsMax = 1;
@@ -299,7 +324,7 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
     public enum ExpectimaxType {
         NAIVE,
         EMPTYONLY,
-        FULLBLAST
+        ADVANCED
     }
 
 }
