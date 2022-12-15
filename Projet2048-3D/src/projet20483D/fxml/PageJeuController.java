@@ -53,9 +53,7 @@ import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
  */
 public class PageJeuController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    
     @FXML
     private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonIA, boutonANNULER;
     @FXML

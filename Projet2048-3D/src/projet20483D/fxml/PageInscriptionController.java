@@ -54,6 +54,7 @@ public class PageInscriptionController implements Initializable {
         String erreur = requete.inscription(textFieldPseudoInscription.getText(), textFieldMdpInscription.getText(), textFieldMdpConfirmation.getText());
 
         if (erreur.equals("")) {
+            //ouverture page accueil
             stage = (Stage) boutonOkInscription.getScene().getWindow();
             root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
 

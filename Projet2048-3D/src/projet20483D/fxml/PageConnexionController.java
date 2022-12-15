@@ -54,6 +54,7 @@ public class PageConnexionController implements Initializable {
         boolean b = r.connexion(textFieldPseudoConnection.getText(), textFieldMdpConnection.getText());
         
         if (b) {
+            //ouverture page accueil
             stage = (Stage) boutonOkConnection.getScene().getWindow();
             root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
 
