@@ -4,9 +4,6 @@
  */
 package projet20483D.database;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,6 +27,7 @@ public class Requete implements ParamBDD {
     }
 
     public String inscription(String pseudo, String mdp, String mdp2) {
+        //permet l'inscription d'un nouvel utilisateur dans la BDD, en vérifiant si le mdp existe déjà ou non et en vérifiant le mdp et sa confirmation
         try {
             this.openConnexion();
             if (pseudo == null) {
@@ -59,10 +57,10 @@ public class Requete implements ParamBDD {
     }
 
     public boolean connexion(String pseudo, String mdp) {
+        //permet la connexion d'un utilisateur, en vérifiant si le mdp et le pseudo correspondent
         
         try {
-            this.openConnexion();
-            
+            this.openConnexion();          
             
 
             PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, mdp FROM user WHERE pseudo like ? AND mdp like ?");
@@ -91,6 +89,7 @@ public class Requete implements ParamBDD {
     }
 
     private void openConnexion() {
+        //ouvre la connexion (se connecte à la BDD)
         String connectUrl = "jdbc:mysql://" + this.host + "/" + this.dbname;
         if (this.connect != null) {
             this.closeConnexion();
@@ -107,7 +106,8 @@ public class Requete implements ParamBDD {
         }
     }
 
-    public boolean updateScore(int score) {
+    public boolean updateScoreMax(int score) {
+        //vérifie si le score actuel est plus élevé ou non que le scoreMax dans la BDD
         boolean res = false;
         try {
             this.openConnexion();
@@ -129,6 +129,7 @@ public class Requete implements ParamBDD {
     }
 
     private void closeConnexion() {
+        //ferme la connexion avec la bdd (deconnexion de la bdd)
         if (this.connect != null) {
             try {
                 this.connect.close();
@@ -139,6 +140,7 @@ public class Requete implements ParamBDD {
     }
 
     private boolean pseudoUtilise(String pseudo) {
+        //vérifie si le pseudo existe déjà ou non dans la bdd
         try {
             boolean res = true;
             PreparedStatement stmt = connect.prepareStatement("SELECT count(*) FROM user WHERE pseudo like ?");
@@ -159,6 +161,7 @@ public class Requete implements ParamBDD {
     }
 
     public void getScoreMax() {
+        //avoir score maximum (en points) de l'utilisateur + set du meilleur score (en points)
         try {
             this.openConnexion();
             PreparedStatement st = connect.prepareStatement("SELECT scoreMax FROM user WHERE pseudo = ?");
@@ -176,6 +179,7 @@ public class Requete implements ParamBDD {
 
     
     public String getClassement() {
+        //donne le classement des 5 meilleurs score (en points)
         String res = "";
         try {
             this.openConnexion();
@@ -184,8 +188,8 @@ public class Requete implements ParamBDD {
             while (rs.next()) {
                 res = res + (rs.getString("pseudo")) + ";" + (rs.getString("scoreMax") + ";");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Requete.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Requete.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             this.closeConnexion();
         }

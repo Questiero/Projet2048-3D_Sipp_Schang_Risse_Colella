@@ -36,16 +36,18 @@ public class PageSetupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //choice box des themes
         choiceBoxTheme.setItems(FXCollections.observableArrayList("Classique", "Frozen", "Rainbow"));
         choiceBoxTheme.getSelectionModel().select(0);
-        
+
+        //affichage du pseudo de l'utilisateur connecté
         labelAffichagePseudoSetup.setText(u.getPseudo());
 
     }
-    
+
     @FXML
     private void cliquerBoutonRetourPageSetup(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
+        //retour à la page d'accueil
         Stage stage;
         Parent root;
 
@@ -56,18 +58,17 @@ public class PageSetupController implements Initializable {
         scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         stage.setScene(scene);
         stage.show();
-
-        
     }
 
     @FXML
     private void cliquerBoutonLancerPartie(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
+        //ouverture page de jeu
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageJeu.fxml"));
         Stage stage = (Stage) boutonLancerPartie.getScene().getWindow();
 
         Scene scene = new Scene(root);
 
+        //sélection du css/style choisi par le joueur
         Object selectedItems = choiceBoxTheme.getSelectionModel().getSelectedItem();
         String theme = String.valueOf(selectedItems);
 

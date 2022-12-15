@@ -506,10 +506,11 @@ public class Grille3D implements Serializable, Parametres {
 
     }
 
-    /**
-     * Sérialise la classe dans fichier {@code donnees.ser}
-     */
+    
+    
     public void serialisation() {
+         //Sérialise la grille dans le fichier donnees.ser
+
         ObjectOutputStream oos = null;
         try {
             FileOutputStream fichier = new FileOutputStream("donnees.ser");

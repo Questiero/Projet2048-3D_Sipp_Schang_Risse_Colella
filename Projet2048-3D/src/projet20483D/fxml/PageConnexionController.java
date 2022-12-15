@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import projet20483D.database.Requete;
-import static projet20483D.database.Utilisateur.u;
 
 /**
  * FXML Controller class
@@ -50,9 +49,7 @@ public class PageConnexionController implements Initializable {
     @FXML
     private void cliquerBoutonOkConnection(MouseEvent event) throws IOException {
         Stage stage;
-        Parent root;
-
-        // affichage message d'erreur 
+        Parent root;       
         
         boolean b = r.connexion(textFieldPseudoConnection.getText(), textFieldMdpConnection.getText());
         
@@ -65,6 +62,7 @@ public class PageConnexionController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } else {
+            //message d'erreur si problème de connexion
             labelErreurConnexion.setVisible(true);
         }
         
@@ -73,7 +71,7 @@ public class PageConnexionController implements Initializable {
     
     @FXML
     private void cliquerBoutonRetourPageConnexion(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
+        //retour à la page d'accueil
         Stage stage;
         Parent root;
 

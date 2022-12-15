@@ -41,12 +41,13 @@ public class PageAccueilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            //créer fichier sérialisation
+            //création fichier sérialisation
             final FileOutputStream fichier = new FileOutputStream("donnees.ser");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PageAccueilController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        //style des boutons pour css
         boutonJouer.getStyleClass().add("boutons");
         boutonCharger.getStyleClass().add("boutons");
         boutonClassement.getStyleClass().add("boutons");
@@ -58,7 +59,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonJouer(MouseEvent event) throws IOException {
-        //ouverture page setup
+        //crétion nouveau fichier sérialisation
         ObjectOutputStream oos = null;
         try {
             FileOutputStream fichier = new FileOutputStream("donnees.ser");
@@ -68,6 +69,7 @@ public class PageAccueilController implements Initializable {
             e.printStackTrace();
         }
 
+        //ouverture page setup
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageSetup.fxml"));
         Stage stage = (Stage) boutonJouer.getScene().getWindow();
 
@@ -95,7 +97,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonClassement(MouseEvent event) throws IOException {
-        //fermeture page
+        //ouverture page classement
         Stage stage;
         Parent root;
 
@@ -110,7 +112,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonInscrire(MouseEvent event) throws IOException {
-
+//ouverture page inscription
         Stage stage;
         Parent root;
 
@@ -124,7 +126,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonSeConnecter(MouseEvent event) throws IOException {
-
+//ouverture page connexion
         Stage stage;
         Parent root;
 
@@ -138,6 +140,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonCharger(MouseEvent event) throws IOException {
+        //ouverture page jeu
         Stage stage;
         Parent root;
 

@@ -1,15 +1,10 @@
 package projet20483D;
 
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Application;
 import projet20483D.Grille3D.Memento;
 import projet20483D.strategies.deplacements.RandomDeplacement;
 import projet20483D.strategies.deplacements.DeplacementContext;
-import javafx.stage.Stage;
 
 public class Projet20483D implements Parametres {
 

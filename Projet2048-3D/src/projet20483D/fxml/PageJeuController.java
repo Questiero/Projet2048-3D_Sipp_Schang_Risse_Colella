@@ -5,13 +5,10 @@
 package projet20483D.fxml;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -34,7 +31,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import projet20483D.Case;
@@ -163,7 +159,7 @@ public class PageJeuController implements Initializable {
 
         if (g.getScore() > u.getMeilleurScore()) {
             u.setMeilleurScore(g.getScore());
-            r.updateScore(g.getScore());
+            r.updateScoreMax(g.getScore());
         }
     }
 

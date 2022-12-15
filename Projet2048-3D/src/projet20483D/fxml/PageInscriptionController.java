@@ -43,21 +43,16 @@ public class PageInscriptionController implements Initializable {
     private TextField textFieldPseudoInscription;
     @FXML
     private Label labelErreurInscription;
-    
+
     private Requete requete = new Requete();
 
     @FXML
     private void cliquerBoutonOkInscription(MouseEvent event) throws IOException {
         Stage stage;
         Parent root;
- 
-        
+
         String erreur = requete.inscription(textFieldPseudoInscription.getText(), textFieldMdpInscription.getText(), textFieldMdpConfirmation.getText());
-        
-        // affichage message d'erreur 
-        
-       
-        
+
         if (erreur.equals("")) {
             stage = (Stage) boutonOkInscription.getScene().getWindow();
             root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
@@ -68,15 +63,16 @@ public class PageInscriptionController implements Initializable {
             stage.show();
             requete.connexion(textFieldPseudoInscription.getText(), textFieldMdpInscription.getText());
         } else {
+            //affichage message d'erreur si problème d'inscription
             labelErreurInscription.setText(erreur);
-            
+
         }
-        
+
     }
-    
+
     @FXML
     private void cliquerBoutonRetourPageInscription(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
+        //retour à la page d'accueil
         Stage stage;
         Parent root;
 
@@ -87,8 +83,6 @@ public class PageInscriptionController implements Initializable {
         scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         stage.setScene(scene);
         stage.show();
-
-        
     }
 
 }

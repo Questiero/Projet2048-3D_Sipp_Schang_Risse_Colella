@@ -24,7 +24,7 @@ import projet20483D.database.Requete;
  * @author Amandine S
  */
 public class PageClassementController implements Initializable {
-    
+
     @FXML
     private Button boutonRetourPageClassement;
     @FXML
@@ -33,29 +33,33 @@ public class PageClassementController implements Initializable {
     private Label labelScoreRang1, labelScoreRang2, labelScoreRang3, labelScoreRang4, labelScoreRang5;
 
     Requete r = new Requete();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
+        //mise dans un tableau grace à split les valeurs des 5 meilleurs scores et leur pseudo associés
         String clas[] = new String[9];
-        String temp = r.getClassement();        
+        String temp = r.getClassement();
         clas = temp.split(";");
-        
+
+        //mise des pseudos du tableau dans l'interface
         labelPseudoRang1.setText(clas[0]);
         labelPseudoRang2.setText(clas[2]);
         labelPseudoRang3.setText(clas[4]);
         labelPseudoRang4.setText(clas[6]);
         labelPseudoRang5.setText(clas[8]);
-        
+
+        //mise des scores du tableau dans l'interface
         labelScoreRang1.setText(clas[1]);
         labelScoreRang2.setText(clas[3]);
         labelScoreRang3.setText(clas[5]);
         labelScoreRang4.setText(clas[7]);
-        labelScoreRang5.setText(clas[9]);        
-    }    
-    
+        labelScoreRang5.setText(clas[9]);
+    }
+
     @FXML
     private void cliquerBoutonRetourPageClassement(MouseEvent event) throws IOException {
-        //ouverture nouvelle page
+        //retour à l'accueil
         Stage stage;
         Parent root;
 
@@ -67,7 +71,6 @@ public class PageClassementController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
-        
     }
-    
+
 }

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
  * @author risse
  */
 public class InterfaceGraphique extends Application {
+    //main interface graphique
 
     @Override
     public void start(Stage stage) throws IOException {
