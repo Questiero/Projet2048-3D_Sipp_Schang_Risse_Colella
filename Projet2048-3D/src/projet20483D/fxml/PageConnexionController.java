@@ -19,14 +19,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import projet20483D.database.Requete;
-import static projet20483D.fxml.Utilisateur.u;
+import static projet20483D.database.Utilisateur.u;
 
 /**
  * FXML Controller class
  *
  * @author Amandine S
  */
-public class PageConnectionController implements Initializable {
+public class PageConnexionController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -69,7 +69,7 @@ public class PageConnectionController implements Initializable {
         stage = (Stage) boutonOkConnection.getScene().getWindow();
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         stage.setScene(scene);
         stage.show();
 

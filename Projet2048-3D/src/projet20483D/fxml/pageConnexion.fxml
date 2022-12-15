@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.fxml.PageConnectionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.fxml.PageConnexionController">
    <children>
       <TextField fx:id="textFieldPseudoConnection" layoutX="131.0" layoutY="107.0" styleClass="choiceBox" />
       <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="107.0" layoutY="43.0" prefHeight="56.0" prefWidth="212.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="Pseudo :">

@@ -46,7 +46,7 @@ import static projet20483D.Projet20483D.addMemento;
 import static projet20483D.Projet20483D.getMemento;
 import static projet20483D.Projet20483D.restoreFromMemento;
 import projet20483D.database.Requete;
-import static projet20483D.fxml.Utilisateur.u;
+import static projet20483D.database.Utilisateur.u;
 import projet20483D.strategies.deplacements.DeplacementContext;
 import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
 
@@ -155,7 +155,7 @@ public class PageJeuController implements Initializable {
         root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         stage.setScene(scene);
         stage.show();
 

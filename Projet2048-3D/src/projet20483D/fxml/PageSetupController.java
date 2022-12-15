@@ -18,7 +18,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import static projet20483D.fxml.Utilisateur.u;
+import static projet20483D.database.Utilisateur.u;
 
 /**
  * FXML Controller class
@@ -53,7 +53,7 @@ public class PageSetupController implements Initializable {
         root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         stage.setScene(scene);
         stage.show();
 
@@ -71,7 +71,7 @@ public class PageSetupController implements Initializable {
         Object selectedItems = choiceBoxTheme.getSelectionModel().getSelectedItem();
         String theme = String.valueOf(selectedItems);
 
-        scene.getStylesheets().add("projet20483D/fxml/theme" + theme + ".css");
+        scene.getStylesheets().add("projet20483D/css/theme" + theme + ".css");
 
         stage.setScene(scene);
         stage.show();

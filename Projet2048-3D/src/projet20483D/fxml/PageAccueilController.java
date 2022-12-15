@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import static projet20483D.fxml.Utilisateur.u;
+import static projet20483D.database.Utilisateur.u;
 
 /**
  * FXML Controller class
@@ -75,7 +75,7 @@ public class PageAccueilController implements Initializable {
         Stage stage = (Stage) boutonJouer.getScene().getWindow();      
         
         Scene scene = new Scene(root); 
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");                
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css");                
         stage.setScene(scene);
         stage.show();  
     } 
@@ -118,7 +118,7 @@ public class PageAccueilController implements Initializable {
         stage = (Stage) boutonInscrire.getScene().getWindow();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageInscription.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
     }
@@ -130,9 +130,9 @@ public class PageAccueilController implements Initializable {
         Parent root;
         
         stage = (Stage) boutonSeConnecter.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageConnection.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageConnexion.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
     }
@@ -145,7 +145,7 @@ public class PageAccueilController implements Initializable {
         stage = (Stage) boutonSeConnecter.getScene().getWindow();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageJeu.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
         

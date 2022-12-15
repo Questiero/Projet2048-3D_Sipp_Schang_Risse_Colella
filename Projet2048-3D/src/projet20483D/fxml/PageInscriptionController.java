@@ -50,7 +50,7 @@ public class PageInscriptionController implements Initializable {
         stage = (Stage) boutonOkInscription.getScene().getWindow();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css"); 
         stage.setScene(scene);
         stage.show();
         
