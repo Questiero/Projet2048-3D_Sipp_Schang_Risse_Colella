@@ -4,9 +4,6 @@
  */
 package projet20483D.database;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,21 +27,21 @@ public class Requete implements ParamBDD {
     }
 
     public String inscription(String pseudo, String mdp, String mdp2) {
+        //permet l'inscription d'un nouvel utilisateur dans la BDD, en vérifiant si le mdp existe déjà ou non et en vérifiant le mdp et sa confirmation
         try {
             this.openConnexion();
             if (pseudo == null) {
                 return "Entrez un pseudo correct";
-                //} else if (dejaPris(pseudo)){
-                //return "Ce pseudo existe déjà";
+                 } else if (pseudoUtilise(pseudo)) {
+                   return "Ce pseudo existe déjà";
             } else if (mdp.length() < 8) {
-                return "Mdp trop court";
+                return "MOt de passe trop court";
             } else if (!mdp.equals(mdp2)) {
-                return "les mdp ne sont pas identiques";
+                return "Les mots de passes ne sont pas identiques";
             } else {
 
                 PreparedStatement stmt = connect.prepareStatement("INSERT INTO user (pseudo, mdp) VALUES (?,?)");
                 stmt.setString(1, pseudo);
-                // stmt.setString(2, hashSha256(mdp));
                 stmt.setString(2, mdp);
 
                 stmt.executeUpdate();
@@ -60,14 +57,15 @@ public class Requete implements ParamBDD {
     }
 
     public boolean connexion(String pseudo, String mdp) {
+        //permet la connexion d'un utilisateur, en vérifiant si le mdp et le pseudo correspondent
+        
         try {
-            this.openConnexion();
+            this.openConnexion();          
+            
 
-            //  mdp = hashSha256(mdp);  //vérif du salage
             PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, mdp FROM user WHERE pseudo like ? AND mdp like ?");
             stmt.setString(1, pseudo);
             stmt.setString(2, mdp);
-            System.out.println("on est passé ici");
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -76,7 +74,7 @@ public class Requete implements ParamBDD {
                 System.out.println("connecté");
                 System.out.println(u.getPseudo());
 
-                this.getMeilleurScore();
+                this.getScoreMax();
                 return true;
             } else {
                 return false;
@@ -91,6 +89,7 @@ public class Requete implements ParamBDD {
     }
 
     private void openConnexion() {
+        //ouvre la connexion (se connecte à la BDD)
         String connectUrl = "jdbc:mysql://" + this.host + "/" + this.dbname;
         if (this.connect != null) {
             this.closeConnexion();
@@ -107,7 +106,8 @@ public class Requete implements ParamBDD {
         }
     }
 
-    public boolean updateScore(int score) {
+    public boolean updateScoreMax(int score) {
+        //vérifie si le score actuel est plus élevé ou non que le scoreMax dans la BDD
         boolean res = false;
         try {
             this.openConnexion();
@@ -129,6 +129,7 @@ public class Requete implements ParamBDD {
     }
 
     private void closeConnexion() {
+        //ferme la connexion avec la bdd (deconnexion de la bdd)
         if (this.connect != null) {
             try {
                 this.connect.close();
@@ -138,14 +139,15 @@ public class Requete implements ParamBDD {
         }
     }
 
-    private boolean dejaPris(String username) {
+    private boolean pseudoUtilise(String pseudo) {
+        //vérifie si le pseudo existe déjà ou non dans la bdd
         try {
             boolean res = true;
-            PreparedStatement stmt = connect.prepareStatement("SELECT count() FROM user WHERE pseudo like ?");
-            stmt.setString(1, username);
+            PreparedStatement stmt = connect.prepareStatement("SELECT count(*) FROM user WHERE pseudo like ?");
+            stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
             rs.first();
-            if (rs.getInt("count()") > 0) {//le nom d'utilisateur existe deja
+            if (rs.getInt("count(*)") > 0) {
                 res = true;
             } else {
                 res = false;
@@ -158,7 +160,8 @@ public class Requete implements ParamBDD {
         return false;
     }
 
-    public void getMeilleurScore() {
+    public void getScoreMax() {
+        //avoir score maximum (en points) de l'utilisateur + set du meilleur score (en points)
         try {
             this.openConnexion();
             PreparedStatement st = connect.prepareStatement("SELECT scoreMax FROM user WHERE pseudo = ?");
@@ -174,22 +177,22 @@ public class Requete implements ParamBDD {
         }
     }
 
-    private String hashSha256(String pwd) {     //salage mdp
+    
+    public String getClassement() {
+        //donne le classement des 5 meilleurs score (en points)
+        String res = "";
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder(2 * hash.length);
-            for (int i = 0; i < hash.length; i++) {
-                String hex = Integer.toHexString(0xff & hash[i]);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
+            this.openConnexion();
+            PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, scoreMax FROM user ORDER BY scoreMax DESC LIMIT 5");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                res = res + (rs.getString("pseudo")) + ";" + (rs.getString("scoreMax") + ";");
             }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-            return "";
+        } catch (SQLException e) {
+            Logger.getLogger(Requete.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            this.closeConnexion();
         }
+        return res;
     }
 }

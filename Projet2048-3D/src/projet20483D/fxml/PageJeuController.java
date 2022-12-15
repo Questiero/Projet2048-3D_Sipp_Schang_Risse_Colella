@@ -5,13 +5,10 @@
 package projet20483D.fxml;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -34,7 +31,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import projet20483D.Case;
@@ -57,9 +53,7 @@ import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
  */
 public class PageJeuController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    
     @FXML
     private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonIA, boutonANNULER;
     @FXML
@@ -163,7 +157,7 @@ public class PageJeuController implements Initializable {
 
         if (g.getScore() > u.getMeilleurScore()) {
             u.setMeilleurScore(g.getScore());
-            r.updateScore(g.getScore());
+            r.updateScoreMax(g.getScore());
         }
     }
 
@@ -174,6 +168,7 @@ public class PageJeuController implements Initializable {
             if (fichierIn.available() != 0) {
                 deserialisation();
             } else {
+                System.out.println("vide");
                 g = jeu(g);
             }
         } catch (java.io.EOFException e) {
@@ -602,6 +597,7 @@ public class PageJeuController implements Initializable {
     }
 
     public void deserialisation() {
+        
         ObjectInputStream ois = null;
         try {
             FileInputStream fichierIn = new FileInputStream("donnees.ser");
@@ -616,7 +612,7 @@ public class PageJeuController implements Initializable {
                     g = jeu(g);
                 }
             } else {
-                System.out.println("NTM");
+                System.out.println("Ca ne fonctionne pas");
                 g = jeu(g);
             }
 
