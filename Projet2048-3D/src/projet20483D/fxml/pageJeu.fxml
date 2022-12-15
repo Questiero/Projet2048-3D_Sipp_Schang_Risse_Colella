@@ -316,6 +316,7 @@
                   </TextField>
                </children>
             </Pane>
+            <Label fx:id="labelAffichagePseudoJeu" layoutX="1159.0" layoutY="23.0" prefHeight="31.0" prefWidth="202.0" styleClass="labelPseudo" textAlignment="RIGHT" />
          </children></Pane>
       <TextField fx:id="titreAcceuil" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="74.0" layoutY="19.0" prefHeight="207.0" prefWidth="702.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="2048 - 3D">
          <cursor>

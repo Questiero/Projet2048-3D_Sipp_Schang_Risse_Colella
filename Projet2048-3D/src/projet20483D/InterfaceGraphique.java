@@ -15,14 +15,14 @@ import javafx.stage.Stage;
  *
  * @author risse
  */
-public class NewFXMain extends Application {
+public class InterfaceGraphique extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
         Scene scene = new Scene(root);
         
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css"); 
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css"); 
         //stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();   

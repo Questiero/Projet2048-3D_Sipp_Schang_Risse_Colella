@@ -19,14 +19,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import projet20483D.database.Requete;
-import static projet20483D.fxml.Utilisateur.u;
+import static projet20483D.database.Utilisateur.u;
 
 /**
  * FXML Controller class
  *
  * @author Amandine S
  */
-public class PageConnectionController implements Initializable {
+public class PageConnexionController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -52,7 +52,7 @@ public class PageConnectionController implements Initializable {
         Stage stage;
         Parent root;
 
-       /* affichage message d'erreur 
+        /* affichage message d'erreur 
         
         if (r.connexion(textFieldPseudoConnection.getText(), textFieldMdpConnection.getText())) {
             stage = (Stage) boutonOkConnection.getScene().getWindow();
@@ -65,12 +65,11 @@ public class PageConnectionController implements Initializable {
         } else {
             labelErreurConnexion.setVisible(true);
         }*/
-
+        root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
         stage = (Stage) boutonOkConnection.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         stage.setScene(scene);
         stage.show();
 

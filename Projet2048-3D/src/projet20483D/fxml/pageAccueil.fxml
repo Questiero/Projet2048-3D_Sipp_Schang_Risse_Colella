@@ -42,6 +42,7 @@
             </Button>
             <Button fx:id="boutonSeConnecter" layoutX="1131.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonSeConnecter" prefHeight="31.0" prefWidth="249.0" styleClass="boutons" text="Se connecter" />
             <Button fx:id="boutonInscrire" layoutX="1131.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonInscrire" prefHeight="31.0" prefWidth="249.0" styleClass="boutons" text="S'inscrire" />
+            <Label fx:id="labelAffichagePseudoAccueil" layoutX="27.0" layoutY="19.0" prefHeight="31.0" prefWidth="202.0" styleClass="labelPseudo" />
          </children>
       </Pane>
    </children>
