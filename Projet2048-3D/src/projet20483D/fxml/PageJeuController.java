@@ -69,7 +69,7 @@ public class PageJeuController implements Initializable {
     @FXML
     private Label label00_G2, label10_G2, label20_G2, label01_G2, label11_G2, label21_G2, label02_G2, label12_G2, label22_G2;
     @FXML
-    private Label labelScore, labelMeilleurScore;
+    private Label labelScore, labelMeilleurScore, labelAffichagePseudoJeu;
     @FXML
     private TextArea texteCommentJouer;
     @FXML
@@ -93,6 +93,8 @@ public class PageJeuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        labelAffichagePseudoJeu.setText(u.getPseudo());
 
         //ajouts des labels dans la liste
         listeLabels.add(label00_G0);

@@ -18,9 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import static projet20483D.fxml.Utilisateur.u;
 
 /**
  * FXML Controller class
@@ -33,6 +35,8 @@ public class PageAccueilController implements Initializable {
     private Button boutonJouer, boutonQuitter, boutonCredits, boutonCharger, boutonInscrire, boutonSeConnecter;
     @FXML
     private SplitPane splitPaneJouer;
+    @FXML
+    private Label labelAffichagePseudoAccueil;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,6 +53,8 @@ public class PageAccueilController implements Initializable {
         boutonCharger.getStyleClass().add("boutons");
         boutonCredits.getStyleClass().add("boutons");
         boutonQuitter.getStyleClass().add("boutons");
+        
+        labelAffichagePseudoAccueil.setText(u.getPseudo());
         
         
     }    
@@ -69,8 +75,7 @@ public class PageAccueilController implements Initializable {
         Stage stage = (Stage) boutonJouer.getScene().getWindow();      
         
         Scene scene = new Scene(root); 
-        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");
-                
+        scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");                
         stage.setScene(scene);
         stage.show();  
     } 

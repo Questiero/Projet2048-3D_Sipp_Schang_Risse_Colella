@@ -52,7 +52,7 @@ public class PageConnectionController implements Initializable {
         Stage stage;
         Parent root;
 
-       /* affichage message d'erreur 
+        /* affichage message d'erreur 
         
         if (r.connexion(textFieldPseudoConnection.getText(), textFieldMdpConnection.getText())) {
             stage = (Stage) boutonOkConnection.getScene().getWindow();
@@ -65,9 +65,8 @@ public class PageConnectionController implements Initializable {
         } else {
             labelErreurConnexion.setVisible(true);
         }*/
-
+        root = FXMLLoader.load(getClass().getResource("pageAccueil.fxml"));
         stage = (Stage) boutonOkConnection.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("projet20483D/fxml/themeClassique.css");

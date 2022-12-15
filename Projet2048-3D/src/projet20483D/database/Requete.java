@@ -44,7 +44,9 @@ public class Requete implements ParamBDD {
 
                 PreparedStatement stmt = connect.prepareStatement("INSERT INTO user (pseudo, mdp) VALUES (?,?)");
                 stmt.setString(1, pseudo);
-                stmt.setString(2, hashSha256(mdp));
+                // stmt.setString(2, hashSha256(mdp));
+                stmt.setString(2, mdp);
+
                 stmt.executeUpdate();
                 return "";
             }
@@ -61,15 +63,19 @@ public class Requete implements ParamBDD {
         try {
             this.openConnexion();
 
-            mdp = hashSha256(mdp);  //vérif du salage
+            //  mdp = hashSha256(mdp);  //vérif du salage
             PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, mdp FROM user WHERE pseudo like ? AND mdp like ?");
             stmt.setString(1, pseudo);
             stmt.setString(2, mdp);
+            System.out.println("on est passé ici");
             ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()){
+
+            if (rs.next()) {
                 u.setPseudo(pseudo);
                 u.setConnecte(true);
+                System.out.println("connecté");
+                System.out.println(u.getPseudo());
+
                 this.getMeilleurScore();
                 return true;
             } else {
@@ -100,7 +106,7 @@ public class Requete implements ParamBDD {
             e.printStackTrace();
         }
     }
-    
+
     public boolean updateScore(int score) {
         boolean res = false;
         try {
@@ -120,7 +126,7 @@ public class Requete implements ParamBDD {
             this.closeConnexion();
         }
         return res;
-    } 
+    }
 
     private void closeConnexion() {
         if (this.connect != null) {
@@ -151,7 +157,7 @@ public class Requete implements ParamBDD {
         }
         return false;
     }
-    
+
     public void getMeilleurScore() {
         try {
             this.openConnexion();
@@ -167,8 +173,7 @@ public class Requete implements ParamBDD {
             this.closeConnexion();
         }
     }
-    
-    
+
     private String hashSha256(String pwd) {     //salage mdp
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

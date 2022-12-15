@@ -14,6 +14,13 @@
     -fx-font-weight : bold;
 }
 
+.labelPseudo{
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
+    -fx-font-size : 15;
+    -fx-font-weight : bold;
+}
+
 .boutons:hover{
     -fx-background-color: #F0945D;
 }
