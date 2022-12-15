@@ -3,6 +3,7 @@ package projet20483D;
 import java.util.Scanner;
 import java.util.*;
 import projet20483D.Grille3D.Memento;
+import projet20483D.strategies.deplacements.Benchmark;
 import projet20483D.strategies.deplacements.RandomDeplacement;
 import projet20483D.strategies.deplacements.DeplacementContext;
 
@@ -28,19 +29,12 @@ public class Projet20483D implements Parametres {
     }
 
     public static void main(String[] args) {
-        Scanner scStart = new Scanner(System.in);
 
-        System.out.println("Comment voulez-vous lancer le jeu ?\nc : Dans la console\ni : Dans l'interface graphique");
-        String start = scStart.nextLine();
-        start.toLowerCase();
-
-        while (!start.equals("c") && !start.equals("i")) {
-            System.out.println("\nEntrez seulement les caractères c ou i.\n\nComment voulez-vous lancer le jeu ?\nc : Dans la console\ni : Dans l'interface graphique");
-            start = scStart.nextLine();
-            start.toLowerCase();
-        }
-
-        if (start.equals("c")) {
+        if (args.length == 0) {
+            InterfaceGraphique.main(args);
+        } else if (args[0].equals("b")) {
+            Benchmark.main(args);
+        } else {
 
             Grille3D g = new Grille3D();
             boolean b = g.nouvelleCase();
@@ -108,13 +102,10 @@ public class Projet20483D implements Parametres {
 
                 }
 
+                System.out.println(g.gameOverMessage());
+
             }
 
-            System.out.println(g.gameOverMessage());
-
-        } else if (start.equals("i")) {             //lancement dans interface graphique
-            InterfaceGraphique.main(args);
         }
     }
-
 }

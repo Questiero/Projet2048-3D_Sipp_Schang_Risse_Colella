@@ -12,28 +12,80 @@ import projet20483D.strategies.deplacements.ExpectimaxDeplacement.ExpectimaxType
 public class Benchmark {
 
     /**
-     * Des trucs
-     * @param args oui 
+     * Fonction permettant le lancement d'un benchmark
+     *
+     * @param args arguments
      */
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\nCombien de tests souhaitez-vous réaliser ?");
+        int input = sc.nextInt();
+        while (input < 1) {
+            System.out.println("\nErreur à l'entrée");
+
+            System.out.println("\nCombien de tests souhaitez-vous réaliser ?");
+
+            input = sc.nextInt();
+
+        }
+        int nbrTests = input;
+
+        System.out.println("\nQuelle profondeur maximum souhaitez-vous utiliser ?");
+        input = sc.nextInt();
+        while (input < 1) {
+            System.out.println("\nErreur à l'entrée");
+            System.out.println("\nQuelle profondeur maximum souhaitez-vous utiliser ?");
+            input = sc.nextInt();
+
+        }
+        int depth = input;
+
+        System.out.println("\nQuelle fonction d'évaluation souhaitez-vous utiliser ?");
+        System.out.println("1. Naive");
+        System.out.println("2. Cases vides uniquement");
+        System.out.println("3. Avancée");
+        input = sc.nextInt();
+        ExpectimaxType type = ExpectimaxType.NAIVE;
+        while (input < 1 && input > 3) {
+            System.out.println("\nErreur à l'entrée");
+
+            System.out.println("\nQuelle fonction d'évaluation souhaitez-vous utiliser ?");
+            System.out.println("1. Naive");
+            System.out.println("2. Cases vides uniquement");
+            System.out.println("3. Avancée");
+
+            input = sc.nextInt();
+
+        }
+        switch (input) {
+            case 2:
+                System.out.println("\nRéalisation de " + nbrTests + " tests sur l'Expectimax utilisant la fonction Cases vides uniquement avec une profondeur de " + depth);
+                type = ExpectimaxType.EMPTYONLY;
+                break;
+            case 3:
+                System.out.println("\nRéalisation de " + nbrTests + " tests sur l'Expectimax utilisant la fonction Avancée avec une profondeur de " + depth);
+                type = ExpectimaxType.ADVANCED;
+                break;
+            default:
+                System.out.println("\nRéalisation de " + nbrTests + " tests sur l'Expectimax utilisant la fonction Naive avec une profondeur de " + depth);
+                type = ExpectimaxType.NAIVE;
+        }
+
         long initTime = System.currentTimeMillis();
 
-        Scanner sc = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("0.00");
 
         int sumOfScores = 0;
         int nbrOfWins = 0;
-
-        int nbrTests = 1000;
 
         for (int i = 0; i < nbrTests; i++) {
 
             Grille3D g = new Grille3D();
             boolean b = g.nouvelleCase();
 
-            // DeplacementContext context = new DeplacementContext(new RandomDeplacement());
-            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, 2, ExpectimaxType.ADVANCED));
+            DeplacementContext context = new DeplacementContext(new ExpectimaxDeplacement(g, depth, type));
 
             int n = 0;
 
