@@ -76,17 +76,45 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     }
 
+    /**
+     * Classe représentant un noeud de l'arbre de décision
+     */
     private abstract class Node implements Parametres {
 
+        /**
+         * Profondeur du noeud
+         */
         protected int depth;
 
+        /**
+         * Grille3D associée à l'état actuel du noeud
+         */
         protected Grille3D grille;
+        /**
+         * List des fils du noeud, c'est-à-dire les états atteignables à partir
+         * de celui-ci
+         */
         protected ArrayList<Node> children = new ArrayList<Node>();
 
+        /**
+         * Génération de {@code children}
+         */
         protected abstract void generateChildren();
 
+        /**
+         * Evaluation de la valeur du noeud récursivement en fonction de ces
+         * fils
+         *
+         * @return Evaluation récursive du noeud
+         */
         protected abstract double evaluateRecursive();
 
+        /**
+         * Evaluation de la valeur d'un noeud en fonction de l'heuristique
+         * définie à la création de la stratégie
+         *
+         * @return Evaluation du noeud
+         */
         protected double selfEvaluate() {
 
             double poidsVide, poidsMax, poidsMonotony, poidsSmoothness;
@@ -123,8 +151,17 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     }
 
+    /**
+     * Classe représentant un noeud maximum dans l'arbre de décision
+     */
     private final class MaxNode extends Node {
 
+        /**
+         * Création d'un noeud maximum
+         *
+         * @param grille Etat représenté par le noeud
+         * @param depth Profondeur actuelle du noeud
+         */
         public MaxNode(Grille3D grille, int depth) {
 
             this.grille = grille;
@@ -197,6 +234,12 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
         }
 
+        /**
+         * Retourne la meilleure direction à choisir, basée sur l'évaluation
+         * récursive des fils du noeud
+         *
+         * @return Meilleure direction à choisir
+         */
         public Direction getBestDirection() {
 
             double evaluation = 0;
@@ -236,10 +279,23 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     }
 
+    /**
+     * Classe représentant un noeud aléatoire dans l'arbre de décision
+     */
     private final class ChanceNode extends Node {
 
+        /**
+         * Direction associée au noeud
+         */
         private Direction direction;
 
+        /**
+         * Création d'un noeud aléatoire
+         *
+         * @param grille Etat représenté par le noeud
+         * @param depth Profondeur actuelle du noeud
+         * @param direction Direction associée au noeud
+         */
         public ChanceNode(Grille3D grille, int depth, Direction direction) {
 
             this.grille = grille;
@@ -251,6 +307,11 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
         }
 
+        /**
+         * Retourne la direction associée au noeud
+         *
+         * @return Direction associée au noeud
+         */
         public Direction getDirection() {
             return this.direction;
         }
@@ -321,9 +382,23 @@ public class ExpectimaxDeplacement implements DeplacementStrategy, Parametres {
 
     }
 
+    /**
+     * Enumération représentant les trois types d'heuristiques disponibles
+     */
     public enum ExpectimaxType {
+        /**
+         * Prends en compte le score
+         */
         NAIVE,
+        /**
+         * Prends en compte la valeur maximale de la grille et son nombre de
+         * cases vides
+         */
         EMPTYONLY,
+        /**
+         * Prends en compte la valeur maximale de la grille, son nombre de cases
+         * vides, sa monotonie et sa régularité
+         */
         ADVANCED
     }
 
