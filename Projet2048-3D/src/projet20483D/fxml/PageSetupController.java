@@ -36,7 +36,7 @@ public class PageSetupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        choiceBoxTheme.setItems(FXCollections.observableArrayList("Classique", "Frozen"));
+        choiceBoxTheme.setItems(FXCollections.observableArrayList("Classique", "Frozen", "Rainbow"));
         choiceBoxTheme.getSelectionModel().select(0);
         
         labelAffichagePseudoSetup.setText(u.getPseudo());

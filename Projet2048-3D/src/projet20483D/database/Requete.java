@@ -34,8 +34,8 @@ public class Requete implements ParamBDD {
             this.openConnexion();
             if (pseudo == null) {
                 return "Entrez un pseudo correct";
-                //} else if (dejaPris(pseudo)){
-                //return "Ce pseudo existe déjà";
+            } else if (dejaPris(pseudo)) {
+                return "Ce pseudo existe déjà";
             } else if (mdp.length() < 8) {
                 return "Mdp trop court";
             } else if (!mdp.equals(mdp2)) {
@@ -63,7 +63,7 @@ public class Requete implements ParamBDD {
         try {
             this.openConnexion();
 
-            //  mdp = hashSha256(mdp);  //vérif du salage
+            //  mdp = hashSha256(mdp);  //vérif du hashing
             PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, mdp FROM user WHERE pseudo like ? AND mdp like ?");
             stmt.setString(1, pseudo);
             stmt.setString(2, mdp);
@@ -138,11 +138,11 @@ public class Requete implements ParamBDD {
         }
     }
 
-    private boolean dejaPris(String username) {
+    private boolean dejaPris(String pseudo) {
         try {
             boolean res = true;
             PreparedStatement stmt = connect.prepareStatement("SELECT count() FROM user WHERE pseudo like ?");
-            stmt.setString(1, username);
+            stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
             rs.first();
             if (rs.getInt("count()") > 0) {//le nom d'utilisateur existe deja
@@ -174,7 +174,7 @@ public class Requete implements ParamBDD {
         }
     }
 
-    private String hashSha256(String pwd) {     //salage mdp
+    private String hashSha256(String pwd) {     //hashing mdp
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));

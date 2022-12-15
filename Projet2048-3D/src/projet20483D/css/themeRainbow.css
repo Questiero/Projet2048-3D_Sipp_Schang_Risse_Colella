@@ -1,0 +1,80 @@
+.boutons{
+    -fx-background-color: #a6b5c1;
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
+    -fx-font-size : 25;
+    -fx-font-weight : bold;
+}
+
+.choiceBox{
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
+    -fx-font-size : 15;
+    -fx-background-color :  #e4dfd7;
+    -fx-font-weight : bold;
+}
+
+.labelPseudo{
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
+    -fx-font-size : 15;
+    -fx-font-weight : bold;
+}
+
+.boutons:hover{
+    -fx-background-color: #6e767a;
+}
+
+.tuiles{
+    -fx-font-size : 25;
+    -fx-font-weight : bold;
+    -fx-text-fill: #64523f;
+    -fx-font-style : Consolas;
+    -fx-border-width : 2px;
+    -fx-border-color : #64523f;
+    -fx-border-radius : 5px;
+    -fx-background-radius:5px;
+}
+
+.tuile2{
+    -fx-background-color:#43d147;
+}
+.tuile4{
+    -fx-background-color:#2aa4ff;
+}
+.tuile8{
+    -fx-background-color:#ff3831;
+}
+.tuile16{
+    -fx-background-color:#f797ab;
+}
+.tuile32{
+    -fx-background-color:#8d31ab;
+}
+.tuile64{
+    -fx-background-color:#f2da60;
+}
+.tuile128{
+    -fx-background-color:#f4d398;
+}
+.tuile256{
+    -fx-background-color:#816d4e;
+}
+.tuile512{
+    -fx-background-color:#98cbf1;
+}
+.tuile1024{
+    -fx-background-color:#a04459;
+}
+.tuile2048{
+    -fx-background-color:#69691f;
+}
+
+.tuilePlus{
+    -fx-background-color:#bc829d;
+}
+
+
+
+
+
