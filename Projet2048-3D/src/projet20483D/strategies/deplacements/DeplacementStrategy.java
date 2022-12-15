@@ -9,7 +9,7 @@ public interface DeplacementStrategy {
     
     /**
      * Exécution de la stratégie
-     * @return 
+     * @return Direction donnée par la stratégie
      */
     public Direction next();
     

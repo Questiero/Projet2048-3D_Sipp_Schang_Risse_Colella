@@ -596,6 +596,9 @@ public class PageJeuController implements Initializable {
 
     }
 
+    /**
+     * Déserialise {@code donnees.ser} dans la Grille3D {@code g}
+     */
     public void deserialisation() {
         
         ObjectInputStream ois = null;

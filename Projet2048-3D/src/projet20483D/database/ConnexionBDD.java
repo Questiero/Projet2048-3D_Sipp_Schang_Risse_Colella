@@ -10,8 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Classe permettant de tester la BDD
+ */
 public class ConnexionBDD {
 
+    /**
+     * Main permettant de tester la BDD
+     * @param args Arguments
+     */
     public static void main(String[] args) {
         Connection connect = null;
         ResultSet rs;

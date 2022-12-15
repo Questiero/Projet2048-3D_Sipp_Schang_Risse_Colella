@@ -7,27 +7,56 @@ import projet20483D.strategies.deplacements.Benchmark;
 import projet20483D.strategies.deplacements.RandomDeplacement;
 import projet20483D.strategies.deplacements.DeplacementContext;
 
+/**
+ * Classe principale
+ */
 public class Projet20483D implements Parametres {
 
+    /**
+     * Liste des derniers états de la partie
+     */
     public static LinkedList savedStates = new LinkedList();
 
-    public static void addMemento(Object m) {      //add de l'objet dans la liste de saves
+    /**
+     * Ajoute un Memento à la liste des états sauvegardés
+     *
+     * @param m Memento à ajouter en mémoire
+     */
+    public static void addMemento(Object m) {
         savedStates.addFirst(m);
         if (savedStates.size() == 6) {
             savedStates.removeLast();
         }
     }
 
-    public static Object getMemento() {   //getter pour avoir notre objet
+    /**
+     * Retourne le dernier Memento sauvegardé en mémoire
+     *
+     * @return Dernier état en mémoire
+     */
+    public static Object getMemento() {
         Object nan = savedStates.getFirst();
         savedStates.removeFirst();
         return nan;
     }
 
+    /**
+     * Retourne l'état sauvegardé en mémoire dans un Memento
+     *
+     * @param memento Memento
+     * @return Etat sauvegardé dans le Memento
+     */
     public static Grille3D restoreFromMemento(Object memento) {
         return ((Memento) memento).getSavedState();
     }
 
+    /**
+     * Fonction main de l'application. Par défault, se lance avec interface
+     * graphique. Si il y a un argument différent de "b", se lance en console.
+     * Si l'argument est "b", lance le Benchmark
+     *
+     * @param args Arguments
+     */
     public static void main(String[] args) {
 
         if (args.length == 0) {

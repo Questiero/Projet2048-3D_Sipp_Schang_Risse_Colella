@@ -22,14 +22,18 @@ public class InterfaceGraphique extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("projet20483D/fxml/pageAccueil.fxml"));
         Scene scene = new Scene(root);
-        
-        scene.getStylesheets().add("projet20483D/css/themeClassique.css"); 
+
+        scene.getStylesheets().add("projet20483D/css/themeClassique.css");
         //stage.setMaximized(true);
         stage.setScene(scene);
-        stage.show();   
+        stage.show();
     }
 
+    /**
+     * Fonction principale permettant de lancer l'interface graphique
+     * @param args Arguments
+     */
     public static void main(String[] args) {
-    launch(args);
+        launch(args);
     }
 }
