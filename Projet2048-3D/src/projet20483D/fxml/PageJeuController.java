@@ -174,6 +174,7 @@ public class PageJeuController implements Initializable {
             if (fichierIn.available() != 0) {
                 deserialisation();
             } else {
+                System.out.println("vide");
                 g = jeu(g);
             }
         } catch (java.io.EOFException e) {
@@ -602,6 +603,7 @@ public class PageJeuController implements Initializable {
     }
 
     public void deserialisation() {
+        
         ObjectInputStream ois = null;
         try {
             FileInputStream fichierIn = new FileInputStream("donnees.ser");
@@ -616,7 +618,7 @@ public class PageJeuController implements Initializable {
                     g = jeu(g);
                 }
             } else {
-                System.out.println("NTM");
+                System.out.println("Ca ne fonctionne pas");
                 g = jeu(g);
             }
 

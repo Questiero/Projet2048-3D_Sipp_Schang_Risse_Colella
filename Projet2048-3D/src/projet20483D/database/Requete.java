@@ -34,8 +34,8 @@ public class Requete implements ParamBDD {
             this.openConnexion();
             if (pseudo == null) {
                 return "Entrez un pseudo correct";
-            } else if (dejaPris(pseudo)) {
-                return "Ce pseudo existe déjà";
+                // } else if (pseudoUtilise(pseudo)) {
+                //   return "Ce pseudo existe déjà";
             } else if (mdp.length() < 8) {
                 return "Mdp trop court";
             } else if (!mdp.equals(mdp2)) {
@@ -44,7 +44,6 @@ public class Requete implements ParamBDD {
 
                 PreparedStatement stmt = connect.prepareStatement("INSERT INTO user (pseudo, mdp) VALUES (?,?)");
                 stmt.setString(1, pseudo);
-                // stmt.setString(2, hashSha256(mdp));
                 stmt.setString(2, mdp);
 
                 stmt.executeUpdate();
@@ -63,7 +62,6 @@ public class Requete implements ParamBDD {
         try {
             this.openConnexion();
 
-            //  mdp = hashSha256(mdp);  //vérif du hashing
             PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, mdp FROM user WHERE pseudo like ? AND mdp like ?");
             stmt.setString(1, pseudo);
             stmt.setString(2, mdp);
@@ -76,7 +74,7 @@ public class Requete implements ParamBDD {
                 System.out.println("connecté");
                 System.out.println(u.getPseudo());
 
-                this.getMeilleurScore();
+                this.getScoreMax();
                 return true;
             } else {
                 return false;
@@ -138,14 +136,14 @@ public class Requete implements ParamBDD {
         }
     }
 
-    private boolean dejaPris(String pseudo) {
+    private boolean pseudoUtilise(String pseudo) {
         try {
             boolean res = true;
             PreparedStatement stmt = connect.prepareStatement("SELECT count() FROM user WHERE pseudo like ?");
             stmt.setString(1, pseudo);
             ResultSet rs = stmt.executeQuery();
             rs.first();
-            if (rs.getInt("count()") > 0) {//le nom d'utilisateur existe deja
+            if (rs.getInt("count()") > 0) {
                 res = true;
             } else {
                 res = false;
@@ -158,7 +156,7 @@ public class Requete implements ParamBDD {
         return false;
     }
 
-    public void getMeilleurScore() {
+    public void getScoreMax() {
         try {
             this.openConnexion();
             PreparedStatement st = connect.prepareStatement("SELECT scoreMax FROM user WHERE pseudo = ?");
@@ -174,22 +172,21 @@ public class Requete implements ParamBDD {
         }
     }
 
-    private String hashSha256(String pwd) {     //hashing mdp
+    
+    public String getClassement() {
+        String res = "";
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder(2 * hash.length);
-            for (int i = 0; i < hash.length; i++) {
-                String hex = Integer.toHexString(0xff & hash[i]);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
+            this.openConnexion();
+            PreparedStatement stmt = connect.prepareStatement("SELECT pseudo, scoreMax FROM user ORDER BY scoreMax DESC LIMIT 5");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                res = res + (rs.getString("pseudo")) + ";" + (rs.getString("scoreMax") + ";");
             }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-            return "";
+        } catch (SQLException ex) {
+            Logger.getLogger(Requete.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnexion();
         }
+        return res;
     }
 }
