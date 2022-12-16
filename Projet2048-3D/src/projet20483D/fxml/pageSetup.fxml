@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="1394.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet20483D.fxml.PageSetupController">
+   <children>
+      <Pane fx:id="fondSetup" prefHeight="873.0" prefWidth="1394.0">
+         <children>
+            <Button fx:id="boutonLancerPartie" layoutX="532.0" layoutY="498.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonLancerPartie" prefHeight="84.0" prefWidth="330.0" styleClass="boutons" text="LANCER PARTIE" />
+            <ChoiceBox fx:id="choiceBoxTheme" layoutX="532.0" layoutY="409.0" prefHeight="31.0" prefWidth="330.0" styleClass="choiceBox" />
+            <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="508.0" layoutY="346.0" prefHeight="66.0" prefWidth="212.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="Thème :">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </TextField>
+            <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="503.0" layoutY="224.0" prefHeight="79.0" prefWidth="337.0" style="-fx-text-fill: #64523f; -fx-background-color: transparent; -fx-border-color: transparent;" text="Mode de jeu : ">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </TextField>
+            <ChoiceBox layoutX="528.0" layoutY="287.0" prefHeight="31.0" prefWidth="337.0" styleClass="choiceBox" />
+            <Label fx:id="labelAffichagePseudoSetup" alignment="TOP_RIGHT" layoutX="1140.0" layoutY="41.0" prefHeight="31.0" prefWidth="202.0" styleClass="labelPseudo" />
+         </children></Pane>
+      <Button fx:id="boutonRetourPageSetup" layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#cliquerBoutonRetourPageSetup" prefHeight="52.0" prefWidth="85.0" styleClass="boutons" text="←">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

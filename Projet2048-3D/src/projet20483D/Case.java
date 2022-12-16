@@ -1,10 +1,29 @@
 package projet20483D;
 
-public class Case implements Parametres {
+import java.io.Serializable;
 
+/**
+ * Adaptation de la classe Casse du TP 2048 de L2 en trois dimensions
+ */
+public class Case implements Parametres, Serializable {
+
+    /**
+     * Coordonnées et valeur
+     */
     private int x, y, z, valeur;
+    /**
+     * Grille à laquelle appartient la Case
+     */
     private Grille3D grille;
 
+    /**
+     * Création d'une case avec ses coordonnées et sa valeur
+     *
+     * @param abs Abscisse
+     * @param ord Ordonnée
+     * @param prof Profondeur
+     * @param val Valeur
+     */
     public Case(int abs, int ord, int prof, int val) {
         this.x = abs;
         this.y = ord;
@@ -12,39 +31,83 @@ public class Case implements Parametres {
         this.valeur = val;
     }
 
+    /**
+     * Configure la grille à laquelle la Case appartient
+     *
+     * @param g Grille3D à laquelle la Case appartient
+     */
     public void setGrille(Grille3D g) {
         this.grille = g;
     }
 
+    /**
+     * Retourne la coordonnée x de la Case
+     *
+     * @return Coordonnée x
+     */
     public int getX() {
         return this.x;
     }
 
+    /**
+     * Retourne la coordonnée y de la Case
+     *
+     * @return Coordonnée y
+     */
     public int getY() {
         return this.y;
     }
 
+    /**
+     * Retourne la coordonnée z de la Case
+     *
+     * @return Coordonnée z
+     */
     public int getZ() {
         return this.z;
     }
-    
+
+    /**
+     * Configure la coordonnée x de la Case
+     *
+     * @param x Coordonnée x
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Configure la coordonnée y de la Case
+     *
+     * @param y Coordonnée y
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * Configure la coordonnée z de la Case
+     *
+     * @param z Coordonnée z
+     */
     public void setZ(int z) {
         this.z = z;
     }
-    
 
+    /**
+     * Configure la valeur de la Case
+     *
+     * @param valeur Valeur de la Case
+     */
     public void setValeur(int valeur) {
         this.valeur = valeur;
     }
 
+    /**
+     * Retourne la valeur de la Case
+     *
+     * @return valeur de la Case
+     */
     public int getValeur() {
         return this.valeur;
     }
@@ -64,6 +127,12 @@ public class Case implements Parametres {
         return this.x * 7 + this.y * 13 + this.z * 29;
     }
 
+    /**
+     * Compare sa valeur à la valeur d'une autre Case c
+     *
+     * @param c Case à comparer
+     * @return égalité entre la valeur de la Case c et celle-ci
+     */
     public boolean valeurEgale(Case c) {
         if (c != null) {
             return this.valeur == c.valeur;
@@ -72,6 +141,13 @@ public class Case implements Parametres {
         }
     }
 
+    /**
+     * Retourne la Case voisine le plus proche dans une Direction donnée si il
+     * existe, {@code null} sinon.
+     *
+     * @param direction Direction du voisin
+     * @return Case voisine la plus proche
+     */
     public Case getVoisinDirect(Direction direction) {
         if (direction == Direction.UP) {
             for (int i = this.y - 1; i >= 0; i--) {
@@ -116,7 +192,7 @@ public class Case implements Parametres {
         } else if (direction == Direction.BACK) {
             for (int i = this.z + 1; i < TAILLE; i++) {
                 for (Case c : grille.getGrille()) {
-                   if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
+                    if (c.getX() == this.x && c.getY() == this.y && c.getZ() == i) {
                         return c;
                     }
                 }
