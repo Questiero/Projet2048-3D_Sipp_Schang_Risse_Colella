@@ -21,7 +21,7 @@ public class Grille3D implements Serializable, Parametres {
      */
     private final HashSet<Case> grille;
     /**
-     * Valeur maximum de la grlle
+     * Valeur maximale atteinte dans la grille
      */
     private int valeurMax = 0;
     /**
@@ -37,7 +37,7 @@ public class Grille3D implements Serializable, Parametres {
      */
     private boolean deplacement;
     /**
-     * Etat de la fin de partie, savoir si c'est une victoire ou non
+     * Etat de la fin de partie, permet de savoir si c'est une victoire ou non
      */
     private boolean victory = false;
 
@@ -82,17 +82,16 @@ public class Grille3D implements Serializable, Parametres {
     }
 
     /**
-     * Retourne le {@code HashSet<Case> grille}
+     * Retourne un HashSet de case représentant la grille
      *
-     * @return le {@code HashSet<Case> grille}
+     * @return La grille
      */
     public HashSet<Case> getGrille() {
         return grille;
     }
 
     /**
-     * Retourne la valeur de la {@code Case} maximale contenue au sein de la
-     * grille
+     * Retourne la valeur de la Case maximale contenue au sein de la grille
      *
      * @return valeur de la Case maximale contenue au sein de la grille
      */
@@ -120,7 +119,7 @@ public class Grille3D implements Serializable, Parametres {
     }
 
     /**
-     * Retourne l'état final de la partie, {@code true} si c'est une victoire,
+     * Retourne l'état final de la partie: {@code true} si c'est une victoire,
      * {@code false} sinon
      *
      * @return Etat final de la partie
@@ -130,7 +129,7 @@ public class Grille3D implements Serializable, Parametres {
     }
 
     /**
-     * Retourne l'état actuel de la partie, {@code true} si elle est finie,
+     * Retourne l'état actuel de la partie: {@code true} si elle est finie,
      * {@code false} false sinon
      *
      * @return Etat actuel de la partie
@@ -185,8 +184,8 @@ public class Grille3D implements Serializable, Parametres {
     }
 
     /**
-     * Augmente la valeur d'une {@code Case} c, augmente le score et change la
-     * {@code valeurMax} si nécessaire.
+     * Augmente la valeur d'une Case c, augmente le score et change la code
+     * valeurMax si nécessaire.
      *
      * @param c La case fusionnée
      */
@@ -368,9 +367,9 @@ public class Grille3D implements Serializable, Parametres {
     }
 
     /**
-     * Création d'une copie profonde de l'instance de {@code Grille3D}
+     * Création d'une copie profonde de l'instance de Grille3D
      *
-     * @return Copie profonde de {@code Grille3D}
+     * @return Copie profonde de Grille3D
      * @throws IOException Si il y a une erreur
      * @throws ClassNotFoundException Si il y a une erreur
      */
@@ -474,7 +473,7 @@ public class Grille3D implements Serializable, Parametres {
     }
 
     /**
-     * Classe permettant la sauvegarde d'une Grille3D en mémoire via un memento
+     * Classe permettant la sauvegarde d'une Grille3D en mémoire via un Memento
      */
     public static class Memento {
 
@@ -505,7 +504,7 @@ public class Grille3D implements Serializable, Parametres {
         }
 
     }
-    
+
     /**
      * Sérialise la grille dans le fichier donnees.ser
      */

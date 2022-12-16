@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
- */
 package projet20483D;
 
 import java.io.IOException;
@@ -12,11 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
- * @author risse
+ * Classe principale permettant le lancement de l'interface graphique
  */
 public class InterfaceGraphique extends Application {
-    //main interface graphique
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -31,6 +25,7 @@ public class InterfaceGraphique extends Application {
 
     /**
      * Fonction principale permettant de lancer l'interface graphique
+     *
      * @param args Arguments
      */
     public static void main(String[] args) {

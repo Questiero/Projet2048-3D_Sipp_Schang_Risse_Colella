@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package projet20483D.fxml;
 
 import java.io.FileNotFoundException;
@@ -25,9 +21,7 @@ import javafx.stage.Stage;
 import static projet20483D.database.Utilisateur.u;
 
 /**
- * FXML Controller class
- *
- * @author risse
+ * Classe Controlleur FXML de la page d'accueil
  */
 public class PageAccueilController implements Initializable {
 
@@ -112,7 +106,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonInscrire(MouseEvent event) throws IOException {
-//ouverture page inscription
+    //ouverture page inscription
         Stage stage;
         Parent root;
 
@@ -126,7 +120,7 @@ public class PageAccueilController implements Initializable {
 
     @FXML
     private void cliquerBoutonSeConnecter(MouseEvent event) throws IOException {
-//ouverture page connexion
+    //ouverture page connexion
         Stage stage;
         Parent root;
 

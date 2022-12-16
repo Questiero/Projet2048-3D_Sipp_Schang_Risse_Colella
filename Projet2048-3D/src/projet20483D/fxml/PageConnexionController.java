@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package projet20483D.fxml;
 
 import java.io.IOException;
@@ -21,9 +17,7 @@ import javafx.stage.Stage;
 import projet20483D.database.Requete;
 
 /**
- * FXML Controller class
- *
- * @author Amandine S
+ * Classe Controlleur FXML de la page de connexion
  */
 public class PageConnexionController implements Initializable {
 
@@ -32,7 +26,6 @@ public class PageConnexionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     Requete r = new Requete();
@@ -49,10 +42,10 @@ public class PageConnexionController implements Initializable {
     @FXML
     private void cliquerBoutonOkConnection(MouseEvent event) throws IOException {
         Stage stage;
-        Parent root;       
-        
+        Parent root;
+
         boolean b = r.connexion(textFieldPseudoConnection.getText(), textFieldMdpConnection.getText());
-        
+
         if (b) {
             //ouverture page accueil
             stage = (Stage) boutonOkConnection.getScene().getWindow();
@@ -66,13 +59,12 @@ public class PageConnexionController implements Initializable {
             //message d'erreur si problème de connexion
             labelErreurConnexion.setVisible(true);
         }
-        
-        
+
     }
-    
+
     @FXML
     private void cliquerBoutonRetourPageConnexion(MouseEvent event) throws IOException {
-        //retour à la page d'accueil
+        // Retour à la page d'accueil
         Stage stage;
         Parent root;
 
@@ -84,7 +76,6 @@ public class PageConnexionController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
-        
     }
 
 }

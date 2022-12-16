@@ -3,7 +3,7 @@ package projet20483D.strategies.deplacements;
 import projet20483D.Direction;
 
 /**
- * Classe de context (schéma de Stratégie) permettant un déplacement
+ * Classe de context (patron de conception) permettant un déplacement
  */
 public class DeplacementContext {
 
@@ -11,6 +11,7 @@ public class DeplacementContext {
 
     /**
      * Crée un context en fonction d'une stratégie
+     *
      * @param s Stratégie
      */
     public DeplacementContext(DeplacementStrategy s) {
@@ -19,6 +20,7 @@ public class DeplacementContext {
 
     /**
      * Exécute la stratégie
+     *
      * @return Direction donnée par la stratégie
      */
     public Direction executeStrategy() {
@@ -27,6 +29,7 @@ public class DeplacementContext {
 
     /**
      * Configure la stratégie
+     *
      * @param s Stratégie
      */
     public void setStrategy(DeplacementStrategy s) {

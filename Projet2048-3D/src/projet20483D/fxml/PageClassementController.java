@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package projet20483D.fxml;
 
 import java.io.IOException;
@@ -19,9 +15,7 @@ import javafx.stage.Stage;
 import projet20483D.database.Requete;
 
 /**
- * FXML Controller class
- *
- * @author Amandine S
+ * Classe Controlleur FXML de la page de classement
  */
 public class PageClassementController implements Initializable {
 

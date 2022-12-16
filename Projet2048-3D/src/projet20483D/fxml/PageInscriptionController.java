@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package projet20483D.fxml;
 
 import java.io.IOException;
@@ -22,9 +18,7 @@ import projet20483D.database.Requete;
 import static projet20483D.database.Utilisateur.u;
 
 /**
- * FXML Controller class
- *
- * @author Amandine S
+ * Classe Controlleur FXML de la page d'inscription
  */
 public class PageInscriptionController implements Initializable {
 
@@ -35,6 +29,7 @@ public class PageInscriptionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
+    
     @FXML
     private Button boutonOkInscription, boutonRetourPageInscription;
     @FXML

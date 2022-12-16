@@ -3,7 +3,7 @@ package projet20483D;
 import java.util.Random;
 
 /**
- * Enumération représentant une direction dans la grille
+ * Enumération représentant uen direction dans la grille
  */
 public enum Direction {
     /**
@@ -58,7 +58,7 @@ public enum Direction {
     }
 
     /**
-     * Retourne une direction aléatoire
+     * Retourne une Direction aléatoire
      *
      * @return Direction aléatoire
      */

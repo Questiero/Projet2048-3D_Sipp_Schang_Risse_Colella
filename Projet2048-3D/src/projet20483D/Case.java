@@ -129,6 +129,7 @@ public class Case implements Parametres, Serializable {
 
     /**
      * Compare sa valeur à la valeur d'une autre Case c
+     *
      * @param c Case à comparer
      * @return égalité entre la valeur de la Case c et celle-ci
      */
@@ -141,7 +142,9 @@ public class Case implements Parametres, Serializable {
     }
 
     /**
-     * Retourne la Case voisine le plus proche dans une Direction donnée si il existe, {@code null} sinon.
+     * Retourne la Case voisine le plus proche dans une Direction donnée si il
+     * existe, {@code null} sinon.
+     *
      * @param direction Direction du voisin
      * @return Case voisine la plus proche
      */

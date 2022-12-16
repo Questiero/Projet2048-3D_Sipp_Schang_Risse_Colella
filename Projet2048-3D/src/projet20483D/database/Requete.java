@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package projet20483D.database;
 
 import java.sql.Connection;
@@ -14,7 +10,7 @@ import java.util.logging.Logger;
 import static projet20483D.database.Utilisateur.u;
 
 /**
- * Classe permettant l'envoie de requête à la base de donnée
+ * Classe permettant l'envoi de requête à la base de donnée
  */
 public class Requete implements ParamBDD {
 
@@ -24,7 +20,7 @@ public class Requete implements ParamBDD {
     private Connection connect = null;
 
     /**
-     * permet l'inscription d'un nouvel utilisateur dans la BDD, en vérifiant si
+     * Permet l'inscription d'un nouvel utilisateur dans la BDD, en vérifiant si
      * le mdp existe déjà ou non et en vérifiant le mdp et sa confirmation
      *
      * @param pseudo Pseudo de l'utilisateur
@@ -120,9 +116,12 @@ public class Requete implements ParamBDD {
     }
 
     /**
-     * Vérifie si le score actuel est plus élevé ou non que le scoreMax dans la BDD
+     * Vérifie si le score actuel est plus élevé ou non que le scoreMax dans la
+     * BDD
+     *
      * @param score Score actuel
-     * @return {@code true} si le score actuel est plus élevé, {@code false} sinon
+     * @return {@code true} si le score actuel est plus élevé, {@code false}
+     * sinon
      */
     public boolean updateScoreMax(int score) {
         boolean res = false;
@@ -160,6 +159,7 @@ public class Requete implements ParamBDD {
 
     /**
      * Vérifie si le pseudonyme existe déjà dans la BDD
+     *
      * @param pseudo Pseudonyme
      * @return {@code true} si il existe déjà, {@code false} sinon
      */
@@ -185,7 +185,8 @@ public class Requete implements ParamBDD {
     }
 
     /**
-     * Permet d'obtenir le score maximum (en point) de l'utilisateur et de l'actualiser
+     * Permet d'obtenir le score maximum (en point) de l'utilisateur et de
+     * l'actualiser
      */
     public void getScoreMax() {
         try {
@@ -205,6 +206,7 @@ public class Requete implements ParamBDD {
 
     /**
      * Retourne le classement des 5 meilleurs scores
+     *
      * @return Classement des 5 meilleurs utilisateurs en fonction du score
      */
     public String getClassement() {

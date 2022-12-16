@@ -43,7 +43,7 @@ public class Projet20483D implements Parametres {
     /**
      * Retourne l'état sauvegardé en mémoire dans un Memento
      *
-     * @param memento Memento
+     * @param memento Memento contenant l'état à restaurer
      * @return Etat sauvegardé dans le Memento
      */
     public static Grille3D restoreFromMemento(Object memento) {

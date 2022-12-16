@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package projet20483D.fxml;
 
 import java.io.FileInputStream;
@@ -47,13 +43,10 @@ import projet20483D.strategies.deplacements.DeplacementContext;
 import projet20483D.strategies.deplacements.ExpectimaxDeplacement;
 
 /**
- * FXML Controller class
- *
- * @author Amandine S
+ * Classe Controlleur FXML de la page de jeu
  */
 public class PageJeuController implements Initializable {
 
-    
     @FXML
     private Button boutonRetourPageJeu, boutonJouerJeu, boutonUP, boutonDOWN, boutonRIGHT, boutonLEFT, boutonFRONT, boutonBACK, boutonRANDOM, boutonIA, boutonANNULER;
     @FXML
@@ -72,22 +65,22 @@ public class PageJeuController implements Initializable {
     private ChoiceBox choiceBoxScore;
 
     private Grille3D g = new Grille3D();
-    boolean annuler = true;
-    int nbAnnuler = 5;
-    boolean continuer = false;
-    long initTimeScore;
-    long minutes = 0;
-    boolean b = false; //utile pour le chrono
-    DeplacementContext context;
-    boolean stop = true;
-    Requete r = new Requete();
+    private boolean annuler = true;
+    private int nbAnnuler = 5;
+    private boolean continuer = false;
+    private long initTimeScore;
+    private long minutes = 0;
+    private boolean b = false; //utile pour le chrono
+    private DeplacementContext context;
+    private boolean stop = true;
+    private Requete r = new Requete();
 
     //création d'une liste pour les labels de nos grilles
     private ArrayList<Label> listeLabels = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         labelAffichagePseudoJeu.setText(u.getPseudo());
 
         //ajouts des labels dans la liste
@@ -495,6 +488,9 @@ public class PageJeuController implements Initializable {
         stop = !stop;
     }
 
+    /**
+     * Création d'un thread permettant l'affichage des mouvements de l'IA
+     */
     private void createAIThread() {
 
         // Création d'un Runnable et d'un thread secondaire afin d'obtenir une animation de déplacement du monstre
@@ -600,7 +596,7 @@ public class PageJeuController implements Initializable {
      * Déserialise {@code donnees.ser} dans la Grille3D {@code g}
      */
     public void deserialisation() {
-        
+
         ObjectInputStream ois = null;
         try {
             FileInputStream fichierIn = new FileInputStream("donnees.ser");

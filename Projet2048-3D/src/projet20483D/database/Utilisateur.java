@@ -19,7 +19,7 @@ public class Utilisateur {
     private int meilleurScore;
 
     /**
-     * Singleton (?)
+     * Singleton
      */
     public static Utilisateur u = new Utilisateur();
 
@@ -33,6 +33,7 @@ public class Utilisateur {
 
     /**
      * Retourne le meilleur score de l'utilisateur
+     *
      * @return meilleur score
      */
     public int getMeilleurScore() {
@@ -41,6 +42,7 @@ public class Utilisateur {
 
     /**
      * Change le meilleur score de l'utilisateur
+     *
      * @param meilleurScore Meilleur score
      */
     public void setMeilleurScore(int meilleurScore) {
@@ -49,6 +51,7 @@ public class Utilisateur {
 
     /**
      * Retourne le pseudonyme de l'utilisateur
+     *
      * @return Pseudonyme
      */
     public String getPseudo() {
@@ -57,6 +60,7 @@ public class Utilisateur {
 
     /**
      * Change le pseudonyme de l'utilisateur
+     *
      * @param pseudo Pseudonyme
      */
     public void setPseudo(String pseudo) {
@@ -65,6 +69,7 @@ public class Utilisateur {
 
     /**
      * Renvoie l'état de la connection
+     *
      * @return Etat de la connection
      */
     public boolean isConnecte() {
@@ -73,6 +78,7 @@ public class Utilisateur {
 
     /**
      * Change l'état de la connection
+     *
      * @param connecte Etat de la connection
      */
     public void setConnecte(boolean connecte) {
@@ -80,4 +86,3 @@ public class Utilisateur {
     }
 
 }
-
