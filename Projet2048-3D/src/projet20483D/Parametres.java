@@ -4,7 +4,6 @@ package projet20483D;
  * Paramètres globaux
  */
 public interface Parametres {
-
     /**
      * Taille de la grille
      */
